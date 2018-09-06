@@ -1,3 +1,4 @@
+"""Kitchen Dialogue"""
 print("Welcome to the kitchen.")
 name = input("What is your name?")
 print("Hi there, " + name + "!")
