@@ -38,3 +38,4 @@ BMI2 = round(BMI1, ymardamine_a)
 # ümardamine n kohani pärast punkti.
 
 print(str(BMI2) + ", " + conclusion)
+# adding a useless comment because I can not figure git out.
