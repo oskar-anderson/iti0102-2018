@@ -39,6 +39,3 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
     else:
         print(pos1)
         # meet
-
-
-meet_me(0, 1, 1, 1, 1, 1)
