@@ -45,4 +45,4 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
 # jump_distance2 = int(input("jump_distance2:"))
 # sleep2 = int(input("sleep2:"))
 
-meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2)
+meet_me(1, 2, 1, 2, 1, 1)
