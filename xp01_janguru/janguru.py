@@ -38,4 +38,11 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
         # meet
 
 
-# meet_me(10, 7, 7, 5, 8, 6)
+pos1 = int(input("pos1:"))
+jump_distance1 = int(input("jump_distance1:"))
+sleep1 = int(input("sleep1:"))
+pos2 = int(input("pos2:"))
+jump_distance2 = int(input("jump_distance2:"))
+sleep2 = int(input("sleep2:"))
+
+meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2)
