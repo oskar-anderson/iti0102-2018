@@ -2,8 +2,7 @@
 
 
 def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
-    """Arvutab jängurude kohtumisasukoha"""
-
+    """Arvutab jängurude kohtumisasukoha."""
     max_sleep1 = sleep1
     max_sleep2 = sleep2
     run_times = 100000
