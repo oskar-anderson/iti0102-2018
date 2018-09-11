@@ -35,11 +35,11 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
             sleep2 = sleep2 - 1
 
     if run_time == 0:
-        print("-1")
+        return -1
         # don't meet
 
     else:
-        print(pos1)
+        return pos1
         # meet
 
 
@@ -52,9 +52,3 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
 
 # meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2)
 
-meet_me(1, 2, 1, 2, 1, 1)
-meet_me(1, 2, 3, 4, 5, 5)
-meet_me(10, 7, 7, 5, 8, 6)
-meet_me(100, 7, 4, 300, 8, 6)
-meet_me(1, 7, 1, 15, 5, 1)
-meet_me(0, 1, 1, 1, 1, 1)
