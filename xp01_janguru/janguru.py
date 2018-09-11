@@ -13,7 +13,7 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
     # First jump
 
     while pos1 != pos2 and run_time > 0:
-        run_times = run_time - 1
+        run_time = run_time - 1
 
         # Jumping
         if sleep1 == 0:
