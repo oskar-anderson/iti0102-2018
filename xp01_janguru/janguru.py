@@ -5,22 +5,22 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
     """Arvutab jängurude kohtumisasukoha."""
     max_sleep1 = sleep1
     max_sleep2 = sleep2
-    run_times = 100000
+    run_time = 100000
     # the higher the better, but takes more time
 
-    pos1 = pos1 + jump_distance1
-    pos2 = pos2 + jump_distance2
+    pos1 += jump_distance1
+    pos2 += jump_distance2
     # First jump
 
-    while pos1 != pos2 and run_times > 0:
-        run_times = run_times - 1
+    while pos1 != pos2 and run_time > 0:
+        run_times = run_time - 1
 
         # Jumping
         if sleep1 == 0:
-            pos1 = pos1 + jump_distance1
+            pos1 += jump_distance1
             sleep1 = max_sleep1
         if sleep2 == 0:
-            pos2 = pos2 + jump_distance2
+            pos2 += jump_distance2
             sleep2 = max_sleep2
 
         # Sleep pass turn
@@ -29,7 +29,7 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
         if sleep2 > 0:
             sleep2 = sleep2 - 1
 
-    if run_times == 0:
+    if run_time == 0:
         print("-1")
         # don't meet
 
@@ -45,4 +45,6 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
 # jump_distance2 = int(input("jump_distance2:"))
 # sleep2 = int(input("sleep2:"))
 
-meet_me(1, 2, 1, 2, 1, 1)
+# meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2)
+
+# meet_me(100, 7, 4, 300, 8, 6)
