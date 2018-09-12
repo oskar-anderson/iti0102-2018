@@ -29,10 +29,11 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
             sleep2 = max_sleep2
 
         # Sleep pass turn
-        if sleep1 > 0:
-            sleep1 = sleep1 - 1
-        if sleep2 > 0:
-            sleep2 = sleep2 - 1
+        if sleep1 > 0 and sleep2 > 0:
+            sleep1_simultaneous_reduction = sleep1
+            # allows to reduce both sleep timers simultaneously.
+            sleep1 = sleep1 - min(sleep1, sleep2)
+            sleep2 = sleep2 - min(sleep1_simultaneous_reduction, sleep2)
 
     if run_time == 0:
         return -1
@@ -43,11 +44,11 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
         # meet
 
 
-# pos1 = int(input("pos1:"))
-# jump_distance1 = int(input("jump_distance1:"))
-# sleep1 = int(input("sleep1:"))
-# pos2 = int(input("pos2:"))
-# jump_distance2 = int(input("jump_distance2:"))
-# sleep2 = int(input("sleep2:"))
+# print(meet_me(1, 2, 1, 2, 1, 1))
+# print(meet_me(1, 2, 3, 4, 5, 5))
+# print(meet_me(10, 7, 7, 5, 8, 6))
+# print(meet_me(100, 7, 4, 300, 8, 6))
+# print(meet_me(1, 7, 1, 15, 5, 1))
+# print(meet_me(0, 1, 1, 1, 1, 1))
 
 # meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2)
