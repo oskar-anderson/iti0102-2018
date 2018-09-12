@@ -12,17 +12,16 @@ def find_circle_info(d, x, y):
     on its {place}".
     :return: None
     """
-
     perimeter = d * math.pi
     area = pow((d / 2), 2) * math.pi
-    if d > math.sqrt(x**2 + y**2):
+    if d / 2 > math.sqrt(x**2 + y**2):
         place = "inside"
-    elif d == math.sqrt(x**2 + y**2):
+    elif d / 2 == math.sqrt(x**2 + y**2):
         place = "perimeter"
     else:
         place = "outside"
     print(f"Circle with perimeter of {perimeter} units and area of {area} units has point ({x}, {y}) on its {place}.")
-# push failed- added comment to push again.
+
 
 if __name__ == "__main__":  # <- This line is needed for automatic testing
     find_circle_info(10, 9, 8)
