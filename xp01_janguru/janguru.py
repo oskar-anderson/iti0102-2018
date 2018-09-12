@@ -5,7 +5,7 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2):
     """Arvutab jängurude kohtumisasukoha."""
     max_sleep1 = sleep1
     max_sleep2 = sleep2
-    run_time = 10000000
+    run_time = 100000
     # The higher the better, but takes more time -100000 has gotten best results
     starting_pos1 = pos1
     starting_pos2 = pos2
