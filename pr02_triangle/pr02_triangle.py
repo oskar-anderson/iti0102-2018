@@ -11,11 +11,11 @@ def find_triangle_info(a, b, c):
     :return: None
     """
     if a == b == c:
-        type_by_lenght = "Equilateral"
+        type_by_length = "Equilateral"
     elif a == b or a == c or b == c:
-        type_by_lenght = "Isoceles"
+        type_by_length = "Isosceles"
     elif a != b != c:
-        type_by_lenght = "Scalene"
+        type_by_length = "Scalene"
 
     if a**2 + b**2 == c**2:
         type_by_angle = "right"
@@ -24,13 +24,10 @@ def find_triangle_info(a, b, c):
     elif a**2 + b**2 > c**2:
         type_by_angle = "acute"
 
-    if a == b or a == c or b == c and a**2 + b**2 > c**2:
-        print(a, b, c)
-    else:
-        perimeter = a + b + c
-        half_perimeter = (perimeter / 2)
-        area = math.sqrt(half_perimeter * (half_perimeter - a) * (half_perimeter - b) * (half_perimeter - c))
-        print(f"{type_by_lenght} {type_by_angle} triangle with perimeter of {perimeter} units and area of {area} units")
+    perimeter = a + b + c
+    half_perimeter = (perimeter / 2)
+    area = math.sqrt(half_perimeter * (half_perimeter - a) * (half_perimeter - b) * (half_perimeter - c))
+    print(f"{type_by_length} {type_by_angle} triangle with perimeter of {perimeter} units and area of {area} units")
 
 
 if __name__ == "__main__":  # <- This line is needed for automatic testing
