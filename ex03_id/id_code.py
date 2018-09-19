@@ -254,10 +254,10 @@ def get_data_from_id(id_code: str):
     :return: str
     """
     if check_control_number(id_code) is True:
-        return "This is a " + get_gender(int(id_code[0])) + " born on " + str(10 * int(id_code[5]) + int(id_code[6])) +\
-               "." + str(10 * int(id_code[3]) + int(id_code[4])) + "." + str(get_full_year(int(id_code[0]),
-                                                                                           ((10 * int(id_code[1]))
-                                                                                            + (int(id_code[2])))))
+        print("This is a " + get_gender(int(id_code[0])) + " born on " + str(10 * int(id_code[5]) + int(id_code[6])) +\
+              "." + str(10 * int(id_code[3]) + int(id_code[4])) + "." + str(get_full_year(int(id_code[0]),
+                                                                                          ((10 * int(id_code[1]))
+                                                                                          + (int(id_code[2]))))))
     else:
         return "Given invalid ID code!"
 
