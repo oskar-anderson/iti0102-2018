@@ -23,15 +23,15 @@ def check_your_id(id_code: str):
     :return: boolean
     """
 
-    if int(id_code) in range(100000000000) and check_gender_number(int(id_code[0])) == "True" and \
-            check_control_number(id_code) == "True" and check_day_number(10 * int(id_code[1]) + int(id_code[2]),
+    if int(id_code) in range(100000000000) and check_gender_number(int(id_code[0])) == True and \
+            check_control_number(id_code) == True and check_day_number(10 * int(id_code[1]) + int(id_code[2]),
                                                                          10 * int(id_code[3]) + int(id_code[4]),
                                                                          10 * int(id_code[5]) + int(id_code[6])):
         # Checking year number and born order is useless.
         # check_day_number also checks months and leap years
-        return "True"
+        return True
     else:
-        return "False"
+        return False
 
 
 def check_gender_number(gender_number: int):
@@ -42,9 +42,9 @@ def check_gender_number(gender_number: int):
     :return: boolean
     """
     if gender_number == 0 or gender_number == 7 or gender_number == 8 or gender_number == 9:
-        return "False"
+        return False
     else:
-        return "True"
+        return True
 
 
 def check_year_number_two_digits(year_number: int):
@@ -55,9 +55,9 @@ def check_year_number_two_digits(year_number: int):
     :return: boolean
     """
     if year_number in range(100):
-        return "True"
+        return True
     else:
-        return "False"
+        return False
 
 
 def check_month_number(month_number: int):
@@ -68,9 +68,9 @@ def check_month_number(month_number: int):
     :return: boolean
     """
     if month_number in range(13):
-        return "True"
+        return True
     else:
-        return "False"
+        return False
 
 
 def check_day_number(year_number: int, month_number: int, day_number: int):
@@ -98,7 +98,7 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
         and month_number == 10\
         or day_number <= 31\
             and month_number == 12:
-        return "True"
+        return True
     # Note to self: "or" condition does not take previous "and" conditions along.
 
     elif day_number <= 30\
@@ -109,7 +109,7 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
         and month_number == 9\
         or day_number <= 30\
             and month_number == 11:
-        return "True"
+        return True
 
 #    Same thing different style
 #    elif day_number <= 30\
@@ -128,20 +128,20 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
     elif month_number == 2\
         and year_number % 400 == 0\
             and day_number <= 29:
-        return "True"
+        return True
 
     elif month_number == 2\
         and year_number % 100 == 0\
             and day_number <= 28:
-        return "True"
+        return True
 
     elif month_number == 2\
         and year_number % 4 == 0\
             and day_number <= 29:
-        return "True"
+        return True
 
     else:
-        return "False"
+        return False
 
 
 def check_leap_year(year_number: int):
@@ -152,13 +152,13 @@ def check_leap_year(year_number: int):
     :return: boolean
     """
     if year_number % 400 == 0:
-        return "True"
+        return True
 
     elif year_number % 100 == 0:
-        return "False"
+        return False
 
     elif year_number % 4 == 0:
-        return "True"
+        return True
 
 
 def check_born_order(born_order: int):
@@ -169,9 +169,9 @@ def check_born_order(born_order: int):
     :return: boolean
     """
     if born_order in range(1000):
-        return "True"
+        return True
     else:
-        return "False"
+        return False
 
 
 def check_control_number(id_code: str):
@@ -187,13 +187,13 @@ def check_control_number(id_code: str):
             int(id_code[0]) * 1) % 11) == 10 and int(id_code[10]) == 0 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2 + int(id_code[7]) * 1 + int(id_code[6]) * 9 + int(id_code[5]) * 8
           + int(id_code[4]) * 7 + int(id_code[3]) * 6 + int(id_code[2]) * 5 + int(id_code[1]) * 4 +
           int(id_code[0]) * 3) % 11) == int(id_code[10]):
-        return "True"
+        return True
     elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6
             + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2 +
             int(id_code[0]) * 1) % 11) == int(id_code[10]):
-        return "True"
+        return True
     else:
-        return "False"
+        return False
 
 
 if __name__ == '__main__':
