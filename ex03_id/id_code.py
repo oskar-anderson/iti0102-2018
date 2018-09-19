@@ -1,18 +1,5 @@
 """Check if given ID code is valid."""
-
-
-def introduce_yourself(your_name):
-    """
-    Insert given name into the template to get the greeting.
-
-    :param your_name: string
-    :return: string
-    """
-    return f"Hello everyone, my name is {your_name}"
-
-
-if __name__ == '__main__':
-    print(introduce_yourself("Oskar"))  # Hello everyone, my name is Bob
+import re
 
 
 def check_your_id(id_code: str):
@@ -24,7 +11,7 @@ def check_your_id(id_code: str):
     """
     if int(id_code) in range(100000000000) and int(id_code) not in range(10000000000)\
             and check_gender_number(int(id_code[0])) is True and check_control_number(id_code) is True \
-            and check_day_number(10 * int(id_code[1]) + int(id_code[2]), 10 * int(id_code[3]) + int(id_code[4]),
+            and re.search('[a-zA-Z]', id_code) is False and check_day_number(10 * int(id_code[1]) + int(id_code[2]), 10 * int(id_code[3]) + int(id_code[4]),
                                  10 * int(id_code[5]) + int(id_code[6])):
         # Checking year number and born order is useless.
         # check_day_number also checks months and leap years
@@ -248,10 +235,10 @@ def get_data_from_id(id_code: str):
     :param id_code: str
     :return: str
     """
-    if check_control_number(id_code) == "True":
+    if check_control_number(id_code) is True:
         return "This is a " + get_gender(int(id_code[0])) + " born on " + str(10 * int(id_code[5]) + int(id_code[6])) +\
                "." + str(10 * int(id_code[3]) + int(id_code[4])) + "." + str(get_full_year(int(id_code[0]),
-                                                                                           int(1 * id_code[1] +
+                                                                                           int(id_code[1] +
                                                                                                id_code[2])))
     else:
         return "Given invalid ID code!"
@@ -291,23 +278,17 @@ def get_full_year(gender_number: int, year: int):
     :return: int
     """
     if gender_number == 1:
-        century = 18
-        return century * 100 + year
+        return 1800 + year
     elif gender_number == 2:
-        century = 18
-        return century * 100 + year
+        return 1800 + year
     elif gender_number == 3:
-        century = 19
-        return century * 100 + year
+        return 1900 + year
     elif gender_number == 4:
-        century = 19
-        return century * 100 + year
+        return 1900 + year
     elif gender_number == 5:
-        century = 20
-        return century * 100 + year
+        return 2000 + year
     elif gender_number == 6:
-        century = 20
-        return century * 100 + year
+        return 2000 + year
     else:
         print("Given invalid ID code!")
 
