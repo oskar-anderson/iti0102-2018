@@ -173,7 +173,14 @@ def check_control_number(id_code: str):
     :param id_code: string
     :return: boolean
     """
-    if ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6 + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2 + int(id_code[0]) * 1) % 11) == 10 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2 + int(id_code[7]) * 1 + int(id_code[6]) * 9 + int(id_code[5]) * 8 + int(id_code[4]) * 7 + int(id_code[3]) * 6 + int(id_code[2]) * 5 + int(id_code[1]) * 4 + int(id_code[0]) * 3) % 11) == 10 and int(id_code[10]) == 0:
+    if ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6
+         + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2
+         + int(id_code[0]) * 1) % 11) == 10 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2
+                                                  + int(id_code[7]) * 1 + int(id_code[6]) * 9
+                                                  + int(id_code[5]) * 8 + int(id_code[4]) * 7
+                                                  + int(id_code[3]) * 6 + int(id_code[2]) * 5
+                                                  + int(id_code[1]) * 4 + int(id_code[0]) * 3) % 11) == 10\
+            and int(id_code[10]) == 0:
         return True
     elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6
            + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2
@@ -259,17 +266,9 @@ def get_gender(gender_number: int):
     :param gender_number: int
     :return: str
     """
-    if gender_number == 1:
+    if gender_number in (1, 3, 5):
         return "male"
-    elif gender_number == 3:
-        return "male"
-    elif gender_number == 5:
-        return "male"
-    elif gender_number == 2:
-        return "female"
-    elif gender_number == 4:
-        return "female"
-    elif gender_number == 6:
+    elif gender_number in (2, 4, 6):
         return "female"
     else:
         print("Given invalid ID code!")
