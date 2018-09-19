@@ -11,7 +11,7 @@ def check_your_id(id_code: str):
     """
     if int(id_code) in range(100000000000) and int(id_code) not in range(10000000000)\
             and check_gender_number(int(id_code[0])) is True and check_control_number(id_code) is True \
-            and re.search('[a-zA-Z]', id_code) is False and check_day_number(10 * int(id_code[1]) + int(id_code[2]),
+            and "k" not in id_code and check_day_number(10 * int(id_code[1]) + int(id_code[2]),
                                                                              10 * int(id_code[3]) + int(id_code[4]),
                                                                              10 * int(id_code[5]) + int(id_code[6])):
         # Checking year number and born order is useless.
@@ -170,27 +170,30 @@ def check_control_number(id_code: str):
     :param id_code: string
     :return: boolean
     """
-    if ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6
-        + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2 +
-            int(id_code[0]) * 1) % 11) == 10 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2
-                                                   + int(id_code[7]) * 1 + int(id_code[6])
-                                                   * 9 + int(id_code[5]) * 8
-                                                   + int(id_code[4]) * 7 + int(id_code[3]) *
-                                                   6 + int(id_code[2]) * 5 + int(id_code[1])
-                                                   * 4 + int(id_code[0]) * 3) % 11) == int(id_code[10]):
+    if ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6 +
+         int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2 +
+         int(id_code[0]) * 1) % 11) == 10 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2 +
+                                                int(id_code[7]) * 1 + int(id_code[6]) * 9 +
+                                                int(id_code[5]) * 8 + int(id_code[4]) * 7 +
+                                                int(id_code[3]) * 6 + int(id_code[2]) * 5 +
+                                                int(id_code[1]) * 4 + int(id_code[0]) * 3) % 11) == 10\
+            and int(id_code[10]) == 0:
         return True
-    elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6
-        + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2 +
-            int(id_code[0]) * 1) % 11) == 10 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2
-                                                   + int(id_code[7]) * 1 + int(id_code[6])
-                                                   * 9 + int(id_code[5]) * 8
-                                                   + int(id_code[4]) * 7 + int(id_code[3]) *
-                                                   6 + int(id_code[2]) * 5 + int(id_code[1])
-                                                   * 4 + int(id_code[0]) * 3) % 11) == 10 and int(id_code[10]) == 0:
+    elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6 +
+           int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2 +
+           int(id_code[0]) * 1) % 11) == 10 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2 +
+                                                  int(id_code[7]) * 1 + int(id_code[6]) * 9 +
+                                                  int(id_code[5]) * 8 + int(id_code[4]) * 7 +
+                                                  int(id_code[3]) * 6 + int(id_code[2]) * 5 +
+                                                  int(id_code[1]) * 4 + int(id_code[0]) * 3) % 11) == int(id_code[10]):
         return True
-    elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6
-            + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2 +
-            int(id_code[0]) * 1) % 11) == int(id_code[10]):
+    elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6 +
+           int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2 +
+           int(id_code[0]) * 1) % 11) == 10 and int(id_code[10]) == 0:
+        return True
+    elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6 +
+           int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2 +
+           int(id_code[0]) * 1) % 11) == int(id_code[10]):
         return True
     else:
         return False
@@ -247,8 +250,8 @@ def get_data_from_id(id_code: str):
     if check_control_number(id_code) is True:
         return "This is a " + get_gender(int(id_code[0])) + " born on " + str(10 * int(id_code[5]) + int(id_code[6])) +\
                "." + str(10 * int(id_code[3]) + int(id_code[4])) + "." + str(get_full_year(int(id_code[0]),
-                                                                                           int(id_code[1] +
-                                                                                               id_code[2])))
+                                                                                           ((10 * int(id_code[1])) +
+                                                                                            (int(id_code[2])))))
     else:
         return "Given invalid ID code!"
 
@@ -310,4 +313,4 @@ if __name__ == '__main__':
     print(get_full_year(4, 85))  # -> 1985
     print(get_full_year(5, 1))  # -> 2001
     print(get_gender(2))  # -> "female"
-    print(get_gender(5))  # -> "male"'
+    print(get_gender(5))  # -> "male"
