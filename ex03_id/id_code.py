@@ -22,8 +22,7 @@ def check_your_id(id_code: str):
     :param id_code: str
     :return: boolean
     """
-
-    if int(id_code) in range(100000000000) and int(id_code) not in range (10000000000)\
+    if int(id_code) in range(100000000000) and int(id_code) not in range(10000000000)\
             and check_gender_number(int(id_code[0])) == True and check_control_number(id_code) == True \
             and check_day_number(10 * int(id_code[1]) + int(id_code[2]), 10 * int(id_code[3]) + int(id_code[4]),
                                  10 * int(id_code[5]) + int(id_code[6])):
@@ -83,7 +82,6 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
     :param day_number: int
     :return: boolean
     """
-
     if day_number <= 31\
         and month_number == 1\
         or day_number <= 31\
