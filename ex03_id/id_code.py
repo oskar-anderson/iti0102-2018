@@ -9,9 +9,11 @@ def check_your_id(id_code: str):
     :param id_code: str
     :return: boolean
     """
-    if int(id_code) in range(100000000000) and int(id_code) not in range(10000000000)\
+    if id_code.isupper() or id_code.islower():
+        return False
+    elif int(id_code) in range(100000000000) and int(id_code) not in range(10000000000)\
             and check_gender_number(int(id_code[0])) is True and check_control_number(id_code) is True \
-            and "k" not in id_code and check_day_number(10 * int(id_code[1]) + int(id_code[2]),
+            and check_day_number(10 * int(id_code[1]) + int(id_code[2]),
                                                                              10 * int(id_code[3]) + int(id_code[4]),
                                                                              10 * int(id_code[5]) + int(id_code[6])):
         # Checking year number and born order is useless.
@@ -201,6 +203,7 @@ def check_control_number(id_code: str):
 
 if __name__ == '__main__':
     print("Overall ID check:")
+    print(check_your_id("4980827k244"))  # this is mine
     print(check_your_id("49808270244"))  # -> True
     personal_id = "39809200287"  # type your own id in command prompt
     print(check_your_id(personal_id))  # -> True
