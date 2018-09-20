@@ -1,6 +1,7 @@
 """Nominee setup system."""
 import time
 
+
 def ask_name():
     """Ask the user's name."""
     while True:
