@@ -151,27 +151,23 @@ def check_control_number(id_code: str):
     :param id_code: string
     :return: boolean
     """
-    if ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6\
-         + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2\
-         + int(id_code[0]) * 1) % 11) == 10 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2\
-                                                  + int(id_code[7]) * 1 + int(id_code[6]) * 9\
-                                                  + int(id_code[5]) * 8 + int(id_code[4]) * 7\
-                                                  + int(id_code[3]) * 6 + int(id_code[2]) * 5\
-                                                  + int(id_code[1]) * 4 + int(id_code[0]) * 3) % 11) == 10\
-            and int(id_code[10]) == 0:
+    if ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(
+            id_code[5]) * 6 + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(
+            id_code[1]) * 2 + int(id_code[0]) * 1) % 11) == 10 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2 + int(
+            id_code[7]) * 1 + int(id_code[6]) * 9 + int(id_code[5]) * 8 + int(id_code[4]) * 7 + int(
+            id_code[3]) * 6 + int(id_code[2]) * 5 + int(id_code[1]) * 4 + int(id_code[0]) * 3) % 11) == 10 and int(
+            id_code[10]) == 0:
         return True
-    elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6\
-           + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2\
-           + int(id_code[0]) * 1) % 11) == 10 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2\
-                                                    + int(id_code[7]) * 1 + int(id_code[6]) * 9\
-                                                    + int(id_code[5]) * 8 + int(id_code[4]) * 7\
-                                                    + int(id_code[3]) * 6 + int(id_code[2]) * 5\
-                                                    + int(id_code[1]) * 4 + int(id_code[0]) * 3) % 11)\
-            == int(id_code[10]):
+    elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(
+            id_code[5]) * 6 + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(
+            id_code[1]) * 2 + int(id_code[0]) * 1) % 11) == 10 and ((int(id_code[9]) * 3 + int(id_code[8]) * 2 + int(
+            id_code[7]) * 1 + int(id_code[6]) * 9 + int(id_code[5]) * 8 + int(id_code[4]) * 7 + int(
+            id_code[3]) * 6 + int(id_code[2]) * 5 + int(id_code[1]) * 4 + int(id_code[0]) * 3) % 11) == int(
+            id_code[10]):
         return True
-    elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(id_code[5]) * 6\
-           + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(id_code[1]) * 2\
-           + int(id_code[0]) * 1) % 11) == int(id_code[10]):
+    elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(
+        id_code[5]) * 6 + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(
+        id_code[1]) * 2 + int(id_code[0]) * 1) % 11) == int(id_code[10]):
         return True
     else:
         return False
@@ -228,10 +224,10 @@ def get_data_from_id(id_code: str):
     :return: str
     """
     if check_control_number(id_code) is True:
-        print("This is a " + get_gender(int(id_code[0])) + " born on " + str(str(10 * int(id_code[5]) +\
-                                                                             int(id_code[6]))).zfill(2) +\
-              "." + str(str(10 * int(id_code[3]) + int(id_code[4]))).zfill(2) + "." +\
-              str(get_full_year(int(id_code[0]), ((10 * int(id_code[1])) + (int(id_code[2]))))))
+        print("This is a " + get_gender(int(id_code[0])) + " born on " + str(
+            str(10 * int(id_code[5]) + int(id_code[6]))).zfill(2) + "." + str(
+            str(10 * int(id_code[3]) + int(id_code[4]))).zfill(2) + "." + str(
+            get_full_year(int(id_code[0]), ((10 * int(id_code[1])) + (int(id_code[2]))))))
     else:
         return "Given invalid ID code!"
 
