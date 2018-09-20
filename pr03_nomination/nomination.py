@@ -6,7 +6,6 @@ def ask_name():
     """Ask the user's name."""
     while True:
         name = input("What is your full name, dear fellow?").strip()
-
         is_spaced = " " in name
         is_alpha = name.replace(" ", "").replace("-", "").isalpha()
         # is_alpha = name.find(" ") != -1
@@ -17,7 +16,7 @@ def ask_name():
 
 
 def progress_bar(process_name, seconds):
-    """Show the progressbar."""
+    """Show the progress bar."""
     cycle_time = seconds / 20
 
     chr_limit = 25
@@ -26,7 +25,7 @@ def progress_bar(process_name, seconds):
         process_name = f"{process_name[:20]}..."
 
     for i in range(21):
-        print(f"\r[{'|' * i:-<20}] | Process: {process_name!r} {0.05 * i:4.0%}", end='')
+        print(f"\r[{'|' * i:-<20}] | Process: {process_name!r} {0.05 * i:%}", end='')
         time.sleep(cycle_time)
 
     print()
