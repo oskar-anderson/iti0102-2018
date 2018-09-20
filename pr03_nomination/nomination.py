@@ -11,7 +11,7 @@ def ask_name():
         is_alpha = name.replace(" ", "").replace("-", "").isalpha()
         # is_alpha = name.find(" ") != -1
         if name.istitle() and is_spaced and is_alpha:
-            return name
+            return
         else:
             print("Sorry, try again.")
 
