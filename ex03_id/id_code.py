@@ -53,7 +53,7 @@ def check_month_number(month_number: int):
     :param month_number: int
     :return: boolean
     """
-    if month_number in range(13):
+    if month_number in range(1, 13, 1):
         return True
     else:
         return False
