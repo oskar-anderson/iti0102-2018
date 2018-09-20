@@ -11,9 +11,7 @@ def check_your_id(id_code: str):
     if id_code.isupper() or id_code.islower():
         return False
     elif len(id_code) == 11 and check_gender_number(int(id_code[0])) is True and check_control_number(id_code) is True \
-            and check_day_number(int(id_code[1:3]),
-                                 int(id_code[3:5]),
-                                 int(id_code[5:7])):
+            and check_day_number(int(id_code[1:3]), int(id_code[3:5]), int(id_code[5:7])) is True:
         # int(id_code) in range(100000000000) and int(id_code) not in range(10000000000)\
         # Checking year number and born order is useless.
         # check_day_number also checks months and leap years
