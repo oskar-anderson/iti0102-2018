@@ -10,11 +10,11 @@ def check_your_id(id_code: str):
     """
     if id_code.isupper() or id_code.islower():
         return False
-    elif int(id_code) in range(100000000000) and int(id_code) not in range(10000000000)\
-            and check_gender_number(int(id_code[0])) is True and check_control_number(id_code) is True \
+    elif len(id_code) == 11 and check_gender_number(int(id_code[0])) is True and check_control_number(id_code) is True \
             and check_day_number(10 * int(id_code[1]) + int(id_code[2]),
                                  10 * int(id_code[3]) + int(id_code[4]),
                                  10 * int(id_code[5]) + int(id_code[6])):
+        # int(id_code) in range(100000000000) and int(id_code) not in range(10000000000)\
         # Checking year number and born order is useless.
         # check_day_number also checks months and leap years
         return True
@@ -72,31 +72,11 @@ def check_day_number(year_number: int, month_number: int, day_number: int):
     :param day_number: int
     :return: boolean
     """
-    if day_number <= 31\
-        and month_number == 1\
-        or day_number <= 31\
-        and month_number == 3\
-        or day_number <= 31\
-        and month_number == 5\
-        or day_number <= 31\
-        and month_number == 7\
-        or day_number <= 31\
-        and month_number == 8\
-        or day_number <= 31\
-        and month_number == 10\
-        or day_number <= 31\
-            and month_number == 12:
+    if day_number <= 31 and month_number in (1, 3, 5, 7, 8, 10, 12):
         return True
     # Note to self: "or" condition does not take previous "and" conditions along.
 
-    elif day_number <= 30\
-        and month_number == 4\
-        or day_number <= 30\
-        and month_number == 6\
-        or day_number <= 30\
-        and month_number == 9\
-        or day_number <= 30\
-            and month_number == 11:
+    elif day_number <= 30 and month_number in (4, 6, 9, 11):
         return True
 
 #    Same thing different style
