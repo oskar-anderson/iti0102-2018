@@ -166,8 +166,8 @@ def check_control_number(id_code: str):
             id_code[10]):
         return True
     elif ((int(id_code[9]) * 1 + int(id_code[8]) * 9 + int(id_code[7]) * 8 + int(id_code[6]) * 7 + int(
-        id_code[5]) * 6 + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(
-        id_code[1]) * 2 + int(id_code[0]) * 1) % 11) == int(id_code[10]):
+            id_code[5]) * 6 + int(id_code[4]) * 5 + int(id_code[3]) * 4 + int(id_code[2]) * 3 + int(
+            id_code[1]) * 2 + int(id_code[0]) * 1) % 11) == int(id_code[10]):
         return True
     else:
         return False
