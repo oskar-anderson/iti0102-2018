@@ -40,5 +40,5 @@ if __name__ == "__main__":
     ask_name()
     progress_bar("Setting up the nominee", 5)
     print_ok()
-    # pushing again
+    # pushing again 2
     # progress_bar("abcdef" * 10, 3)
