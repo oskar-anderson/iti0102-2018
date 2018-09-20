@@ -5,7 +5,7 @@ import time
 def ask_name():
     """Ask the user's name."""
     while True:
-        name = input("What is your full name, dear fellow?")
+        name = input("What is your full name, dear fellow?").strip()
 
         is_spaced = " " in name
         is_alpha = name.replace(" ", "").replace("-", "").isalpha()
