@@ -11,9 +11,9 @@ def check_your_id(id_code: str):
     if id_code.isupper() or id_code.islower():
         return False
     elif len(id_code) == 11 and check_gender_number(int(id_code[0])) is True and check_control_number(id_code) is True \
-            and check_day_number(10 * int(id_code[1]) + int(id_code[2]),
-                                 10 * int(id_code[3]) + int(id_code[4]),
-                                 10 * int(id_code[5]) + int(id_code[6])):
+            and check_day_number(int(id_code[1:3]),
+                                 int(id_code[3:5]),
+                                 int(id_code[5:7])):
         # int(id_code) in range(100000000000) and int(id_code) not in range(10000000000)\
         # Checking year number and born order is useless.
         # check_day_number also checks months and leap years
@@ -29,7 +29,7 @@ def check_gender_number(gender_number: int):
     :param gender_number: int
     :return: boolean
     """
-    if gender_number == 0 or gender_number == 7 or gender_number == 8 or gender_number == 9:
+    if gender_number in (0, 7, 8, 9):
         return False
     else:
         return True
