@@ -175,7 +175,7 @@ def check_control_number(id_code: str):
 
 if __name__ == '__main__':
     print("Overall ID check:")
-    print(check_your_id("4980827k244"))  # this is mine
+    # print(check_your_id("4980827k244"))  # this is mine
     print(check_your_id("49808270244"))  # -> True
     personal_id = "39809200287"  # type your own id in command prompt
     print(check_your_id(personal_id))  # -> True
@@ -244,7 +244,7 @@ def get_gender(gender_number: int):
     elif gender_number in (2, 4, 6):
         return "female"
     else:
-        print("Given invalid ID code!")
+        return "Given invalid ID code!"
 
 
 def get_full_year(gender_number: int, year: int):
@@ -271,7 +271,7 @@ def get_full_year(gender_number: int, year: int):
     elif gender_number == 6:
         return 2000 + year
     else:
-        print("Given invalid ID code!")
+        return "Given invalid ID code!"
 
 
 if __name__ == '__main__':
