@@ -49,25 +49,25 @@ def decode(message: str, shift: int, alphabet: str = "abcdefghijklmnopqrstuvwxyz
         if ord(c) in range(65, 91):
             alphabet = ord(c) - shift
             while alphabet > ord("Z"):
-                alphabet += 26
-            while alphabet < ord("A"):
                 alphabet -= 26
+            while alphabet < ord("A"):
+                alphabet += 26
             final_letter = chr(alphabet)
             un_ciphered_message += final_letter
         elif ord(c) in range(97, 123):
             alphabet = ord(c) - shift
             while alphabet > ord("z"):
-                alphabet += 26
-            while alphabet < ord("a"):
                 alphabet -= 26
+            while alphabet < ord("a"):
+                alphabet += 26
             final_letter = chr(alphabet)
             un_ciphered_message += final_letter
     return un_ciphered_message
 
 
 if __name__ == "__main__":
-    print(encode("hello HELLO", 53))  # ifmmp
-    print(decode("ifmmp", 1))  # hello
+    print(encode("hello HELLO", 27))  # ifmmp
+    print(decode("ifmmp", 28))  # hello
     print(encode("Large Shift", 83))
     print(encode("Negative", -3))
     print(encode("symbols !.,:;", 1))
