@@ -30,6 +30,8 @@ def encode(message: str, shift: int, alphabet: str = "abcdefghijklmnopqrstuvwxyz
                 alphabet += 26
             final_letter = chr(alphabet)
             ciphered_message += final_letter
+        else:
+            ciphered_message += c
     return ciphered_message
 
 
@@ -62,6 +64,8 @@ def decode(message: str, shift: int, alphabet: str = "abcdefghijklmnopqrstuvwxyz
                 alphabet += 26
             final_letter = chr(alphabet)
             un_ciphered_message += final_letter
+        else:
+            un_ciphered_message += c
     return un_ciphered_message
 
 
