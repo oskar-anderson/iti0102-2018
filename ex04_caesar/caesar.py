@@ -10,26 +10,16 @@ def encode(message: str, shift: int, alphabet: str = "abcdefghijklmnopqrstuvwxyz
     :param alphabet: Determines the symbols in use. Defaults to the standard latin alphabet.
     :return: Encoded string.
     """
-    if alphabet:
-        pass
     ciphered_message = ""
     for c in message:
-        if ord(c) in range(65, 91):
-            alphabet = ord(c) + shift
-            while alphabet > ord("Z"):
-                alphabet -= 26
-            while alphabet < ord("A"):
-                alphabet += 26
-            final_letter = chr(alphabet)
-            ciphered_message += final_letter
-        elif ord(c) in range(97, 123):
-            alphabet = ord(c) + shift
-            while alphabet > ord("z"):
-                alphabet -= 26
-            while alphabet < ord("a"):
-                alphabet += 26
-            final_letter = chr(alphabet)
-            ciphered_message += final_letter
+        if c in alphabet.upper():
+            alphabet = alphabet.upper()
+            shifted_index = alphabet.index(c) + shift
+            ciphered_message += alphabet[shifted_index % len(alphabet)]
+        elif c in alphabet.lower():
+            alphabet = alphabet.lower()
+            shifted_index = alphabet.index(c) + shift
+            ciphered_message += alphabet[shifted_index % len(alphabet)]
         else:
             ciphered_message += c
     return ciphered_message
@@ -48,31 +38,23 @@ def decode(message: str, shift: int, alphabet: str = "abcdefghijklmnopqrstuvwxyz
         pass
     un_ciphered_message = ""
     for c in message:
-        if ord(c) in range(65, 91):
-            alphabet = ord(c) - shift
-            while alphabet > ord("Z"):
-                alphabet -= 26
-            while alphabet < ord("A"):
-                alphabet += 26
-            final_letter = chr(alphabet)
-            un_ciphered_message += final_letter
-        elif ord(c) in range(97, 123):
-            alphabet = ord(c) - shift
-            while alphabet > ord("z"):
-                alphabet -= 26
-            while alphabet < ord("a"):
-                alphabet += 26
-            final_letter = chr(alphabet)
-            un_ciphered_message += final_letter
+        if c in alphabet.upper():
+            alphabet = alphabet.upper()
+            shifted_index = alphabet.index(c) - shift
+            un_ciphered_message += alphabet[shifted_index % len(alphabet)]
+        elif c in alphabet.lower():
+            alphabet = alphabet.lower()
+            shifted_index = alphabet.index(c) - shift
+            un_ciphered_message += alphabet[shifted_index % len(alphabet)]
         else:
             un_ciphered_message += c
     return un_ciphered_message
 
 
 if __name__ == "__main__":
-    print(encode("hello HELLO", 27))  # ifmmp
-    print(decode("ifmmp", 28))  # hello
-    print(encode("Large Shift", 83))
+    print(encode("hello HELLO", 1))  # ifmmp
+    print(decode("ifmmp", 1))  # hello
+    print(encode("Labc", 52))
     print(encode("Negative", -3))
     print(encode("symbols !.,:;", 1))
     # WRITE THE REMAINING EXAMPLES YOURSELF!
