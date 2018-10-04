@@ -32,7 +32,7 @@ def in1to10(n, outside_mode):
     :param outside_mode: Whether we use outside mode.
     :return: Whether the number follows the given rules.
     """
-    if n in range(1-11):
+    if n in range(1 - 11):
         return True
     elif outside_mode is True:
         return True
@@ -72,10 +72,8 @@ def remove_nth_symbol(s, n):
     :param n: Which element to remove.
     :return: String where n-th symbol is removed.
     """
-    if n == 1:
-        return s[n:]
-    elif n - 1 < len(s):
-        return s[0:n-1] + s[n:]
+    if n - 1 < len(s):
+        return s[0: n-1] + s[n:]
     else:
         return s
 
