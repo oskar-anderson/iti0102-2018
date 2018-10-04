@@ -32,9 +32,9 @@ def in1to10(n, outside_mode):
     :param outside_mode: Whether we use outside mode.
     :return: Whether the number follows the given rules.
     """
-    if n in range(11):
+    if 1 <= n <= 10:
         return True
-    elif outside_mode is True:
+    elif outside_mode is True and 10 <= n or outside_mode is True and n <= 1:
         return True
     else:
         return False
