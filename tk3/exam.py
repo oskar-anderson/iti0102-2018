@@ -73,7 +73,7 @@ def remove_nth_symbol(s, n):
     :return: String where n-th symbol is removed.
     """
     if n - 1 < len(s):
-        return s[0: n-1] + s[n:]
+        return s[0: n - 1] + s[n:]
     else:
         return s
 
