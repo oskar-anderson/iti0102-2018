@@ -20,7 +20,6 @@ def create_dictionary(file):
     :param file: original file path
     :return: dict
     """
-    #
     dict1 = {}
     for i in create_list_from_file(file):
         n = i.find(":")
