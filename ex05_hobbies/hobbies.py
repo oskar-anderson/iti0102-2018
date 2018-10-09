@@ -21,7 +21,6 @@ def create_dictionary(file):
     :return: dict
     """
     dict1 = {}
-    # print(create_list_from_file(file))
     for i in create_list_from_file(file):
         n = i.find(":")
         m = i.find("\n")
