@@ -64,6 +64,7 @@ def find_person_with_most_hobbies(file):
     """
     if file:
         pass
+    # ignore the parameter
     d_number_of_hobbies_for_person = {}
     for name in dic:
         number_of_hobbies = (len(dic[name]))
