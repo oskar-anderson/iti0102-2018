@@ -13,8 +13,8 @@ def create_list_from_file(file):
 
 
 if __name__ == '__main__':
-    print(len(create_list_from_file("hobbies_database.txt")))  # -> 100
     dic = create_dictionary("hobbies_database.txt")
+    print(len(create_list_from_file("hobbies_database.txt")))  # -> 100
     print("Check presence of hobbies for chosen person:")
     print("shopping" in dic["Wendy"])  # -> True
     print("fitness" in dic["Sophie"])  # -> False
@@ -22,12 +22,12 @@ if __name__ == '__main__':
     print("Check if hobbies - person relation is correct:")
     print("Check if a person(people) with the biggest amount of hobbies is(are) correct:")
     print(find_person_with_most_hobbies("hobbies_database.txt"))  # -> ['Jack']
-    print(len(dic["Jack"]))  # ->  12
-    print(len(dic["Carmen"]))  # -> 10
+    print(len(dic["Jack"])) # ->  12
+    print(len(dic["Carmen"])) # -> 10
     print("Check if a person(people) with the smallest amount of hobbies is(are) correct:")
     print(find_person_with_least_hobbies("hobbies_database.txt"))  # -> ['Molly']
-    print(len(dic["Molly"]))  # -> 5
-    print(len(dic["Sophie"]))  # -> 7
+    print(len(dic["Molly"])) # -> 5
+    print(len(dic["Sophie"])) # -> 7
     print("Check if the most popular hobby(ies) is(are) correct")
     print(find_most_popular_hobby("hobbies_database.txt"))  # -> ['gaming', 'sport', 'football']
     print("Check if the least popular hobby(ies) is(are) correct")
