@@ -20,15 +20,36 @@ def create_dictionary(file):
     :param file: original file path
     :return: dict
     """
-#    dict1 = {}
-#    print(create_list_from_file(file))
-#    for i in create_list_from_file(file):
-#        k = i.find(":")
-#        v = i.find("\n")
-#        name = (i[0:k])
-#        hobby = (i[k + 1:v])
-#        dict1.setdefault(name, {})[hobby] = 1
-#    return dict1
+    pre_dic_dict = {}
+    # print(create_list_from_file(file))
+    l_of_hobbies_for_current_person = []
+    old_name = ""
+
+    for lines in sorted(create_list_from_file(file)):
+        number_of_characters_in_key = lines.find(":")
+        name = (lines[0:number_of_characters_in_key])
+
+        if old_name != name:
+            l_of_hobbies_for_current_person = []
+            old_name = name
+        # empties list if person changes
+
+        if lines.find("\n") != -1:
+            hobby = (lines[number_of_characters_in_key + 1:lines.find("\n")])
+        # all keys' values except last
+        else:
+            hobby = (lines[number_of_characters_in_key + 1:len(lines)])
+        # key's value from line 100
+
+        if hobby not in l_of_hobbies_for_current_person:
+            pre_dic_dict.setdefault(name, []).append(hobby)
+            l_of_hobbies_for_current_person.append(hobby)
+
+    # tests:
+    # print("jack's hobbies: " + str(pre_dic_dict.get("Jack")))
+    # print("pre_dic_dict: " + str(pre_dic_dict))
+
+    return pre_dic_dict
 
 
 def find_person_with_most_hobbies(file):
@@ -38,16 +59,17 @@ def find_person_with_most_hobbies(file):
     :param file: original file path
     :return: list
     """
-    d_number_of_hobbies = {}
+    d_number_of_hobbies_for_person = {}
     for name in dic:
         number_of_hobbies = (len(dic[name]))
-        d_number_of_hobbies.update({name: number_of_hobbies})
-    print(d_number_of_hobbies)
+        d_number_of_hobbies_for_person.update({name: number_of_hobbies})
+    print(d_number_of_hobbies_for_person)
+    
     l_names_of_people_with_most_hobbies = []
-    for i in d_number_of_hobbies:
-        if d_number_of_hobbies[i] == max(d_number_of_hobbies.values()):
-            # print(i, d_number_of_hobbies[i])
-            l_names_of_people_with_most_hobbies.append(i)
+    for name in d_number_of_hobbies_for_person:
+        if d_number_of_hobbies_for_person[name] == max(d_number_of_hobbies_for_person.values()):
+            # print(name, d_number_of_hobbies_for_person[name])
+            l_names_of_people_with_most_hobbies.append(name)
     return l_names_of_people_with_most_hobbies
 
 
@@ -58,16 +80,17 @@ def find_person_with_least_hobbies(file):
     :param file: original file path
     :return: list
     """
-    d_number_of_hobbies = {}
+    d_number_of_hobbies_for_person = {}
     for name in dic:
         number_of_hobbies = (len(dic[name]))
-        d_number_of_hobbies.update({name: number_of_hobbies})
-    print(d_number_of_hobbies)
+        d_number_of_hobbies_for_person.update({name: number_of_hobbies})
+    print(d_number_of_hobbies_for_person)
+
     l_names_of_people_with_least_hobbies = []
-    for i in d_number_of_hobbies:
-        if d_number_of_hobbies[i] == min(d_number_of_hobbies.values()):
-            # print(i, d_number_of_hobbies[i])
-            l_names_of_people_with_least_hobbies.append(i)
+    for name in d_number_of_hobbies_for_person:
+        if d_number_of_hobbies_for_person[name] == min(d_number_of_hobbies_for_person.values()):
+            # print(name, d_number_of_hobbies_for_person[name])
+            l_names_of_people_with_least_hobbies.append(name)
     return l_names_of_people_with_least_hobbies
 
 
@@ -128,4 +151,4 @@ if __name__ == '__main__':
     print(find_most_popular_hobby("hobbies_database.txt"))  # -> ['gaming', 'sport', 'football']
     print("Check if the least popular hobby(ies) is(are) correct")
     print(find_least_popular_hobby("hobbies_database.txt"))  # -> ['tennis', 'dance', 'puzzles', 'flowers']
-    write_corrected_database("hobbies_database.txt", 'correct_hobbies_database.csv')
+#    write_corrected_database("hobbies_database.txt", 'correct_hobbies_database.csv')
