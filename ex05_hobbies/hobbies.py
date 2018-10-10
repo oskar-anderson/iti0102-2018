@@ -20,15 +20,15 @@ def create_dictionary(file):
     :param file: original file path
     :return: dict
     """
-    dict1 = {}
-    print(create_list_from_file(file))
-    for i in create_list_from_file(file):
-        k = i.find(":")
-        v = i.find("\n")
-        name = (i[0:k])
-        hobby = (i[k + 1:v])
-        dict1.setdefault(name, {})[hobby] = 1
-    return dict1
+#    dict1 = {}
+#    print(create_list_from_file(file))
+#    for i in create_list_from_file(file):
+#        k = i.find(":")
+#        v = i.find("\n")
+#        name = (i[0:k])
+#        hobby = (i[k + 1:v])
+#        dict1.setdefault(name, {})[hobby] = 1
+#    return dict1
 
 
 def find_person_with_most_hobbies(file):
