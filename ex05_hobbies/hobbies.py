@@ -1,5 +1,6 @@
 """Hobbies."""
 import csv
+file = open("hobbies_database.txt", "r")
 
 
 def create_list_from_file(file):
@@ -9,7 +10,7 @@ def create_list_from_file(file):
     :param file: original file path
     :return: list of lines
     """
-    file = open(f"{file}", "r")
+    file = open(file, "r")
     return file.readlines()
 
 
