@@ -12,9 +12,10 @@ def create_list_from_file(file):
     file = open(file, "r")
     return file.readlines()
 
+
 if __name__ == '__main__':
-    dic = create_dictionary("hobbies_database.txt")
     print(len(create_list_from_file("hobbies_database.txt")))  # -> 100
+    dic = create_dictionary("hobbies_database.txt")
     print("Check presence of hobbies for chosen person:")
     print("shopping" in dic["Wendy"])  # -> True
     print("fitness" in dic["Sophie"])  # -> False
