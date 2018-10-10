@@ -58,6 +58,8 @@ def find_person_with_most_hobbies(file):
     :param file: original file path
     :return: list
     """
+    if file:
+        pass
     d_number_of_hobbies_for_person = {}
     for name in dic:
         number_of_hobbies = (len(dic[name]))
@@ -79,6 +81,8 @@ def find_person_with_least_hobbies(file):
     :param file: original file path
     :return: list
     """
+    if file:
+        pass
     d_number_of_hobbies_for_person = {}
     for name in dic:
         number_of_hobbies = (len(dic[name]))
