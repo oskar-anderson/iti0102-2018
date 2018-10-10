@@ -9,8 +9,7 @@ def create_list_from_file(file):
     :param file: original file path
     :return: list of lines
     """
-    file = open("hobbies_database.txt", "r")
-    return file.readlines()
+    return (open(file, "r")).readlines()
 
 
 def create_dictionary(file):
@@ -151,4 +150,4 @@ if __name__ == '__main__':
     print(find_most_popular_hobby("hobbies_database.txt"))  # -> ['gaming', 'sport', 'football']
     print("Check if the least popular hobby(ies) is(are) correct")
     print(find_least_popular_hobby("hobbies_database.txt"))  # -> ['tennis', 'dance', 'puzzles', 'flowers']
-#    write_corrected_database("hobbies_database.txt", 'correct_hobbies_database.csv')
+    write_corrected_database("hobbies_database.txt", 'correct_hobbies_database.csv')
