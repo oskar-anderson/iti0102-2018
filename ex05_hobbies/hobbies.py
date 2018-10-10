@@ -24,7 +24,7 @@ def create_dictionary(file):
     l_of_hobbies_for_current_person = []
     old_name = ""
 
-    for lines in sorted(create_list_from_file(file)):
+    for lines in sorted(create_list_from_file("hobbies_database.txt")):
         number_of_characters_in_key = lines.find(":")
         name = (lines[0:number_of_characters_in_key])
 
