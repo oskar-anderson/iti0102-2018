@@ -27,26 +27,7 @@ def create_dictionary(file):
         v = i.find("\n")
         name = (i[0:k])
         hobby = (i[k + 1:v])
-        dict1.setdefault(name, []).append(hobby)  # takes duplicates
-        # dict1.setdefault(name, {})[hobby] = 1   # does not take duplicates
-
-    print(dict1.get("Jack"))
-
-    result = {"Jack": ['crafting', 'skateboarding', 'drawing', 'drawing', 'origami', 'pets', 'skateboarding',
-                       'hiking', 'baking', 'crafting', 'football', 'cooking', 'gaming', 'sport',  'fitness'],
-              "Peter": [2]}
-    print(result.get("Jack"))
-
-    for name, hobby in dict1.items():
-        if hobby not in result.values():
-            print(hobby)
-            result[name] = hobby
-        else:
-            print("This should be printed couple of times.")
-    print("result:")
-    print(result)
-    print("dict1:")
-    print(dict1)
+        dict1.setdefault(name, {})[hobby] = 1
     return dict1
 
 
