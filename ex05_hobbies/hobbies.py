@@ -1,6 +1,5 @@
 """Hobbies."""
 import csv
-file = open("hobbies_database.txt", "r")
 
 
 def create_list_from_file(file):
