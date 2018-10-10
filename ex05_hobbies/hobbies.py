@@ -1,5 +1,4 @@
 """Hobbies."""
-import csv
 
 
 def create_list_from_file(file):
