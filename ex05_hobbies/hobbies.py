@@ -21,13 +21,31 @@ def create_dictionary(file):
     :return: dict
     """
     dict1 = {}
+    print(create_list_from_file(file))
     for i in create_list_from_file(file):
-        n = i.find(":")
-        m = i.find("\n")
-        name = (i[0:n])
-        hobby = (i[n + 1:m])
-        # dict1.setdefault(name, []).append(hobby)  # takes duplicates
-        dict1.setdefault(name, {})[hobby] = 1   # does not take duplicates
+        k = i.find(":")
+        v = i.find("\n")
+        name = (i[0:k])
+        hobby = (i[k + 1:v])
+        dict1.setdefault(name, []).append(hobby)  # takes duplicates
+        # dict1.setdefault(name, {})[hobby] = 1   # does not take duplicates
+
+    print(dict1.get("Jack"))
+
+    result = {"Jack": ['crafting', 'skateboarding', 'drawing', 'drawing', 'origami', 'pets', 'skateboarding',
+                       'hiking', 'baking', 'crafting', 'football', 'cooking', 'gaming', 'sport',  'fitness'],
+              "Peter": [2]}
+    print(result.get("Jack"))
+
+    for name, hobby in dict1.items():
+        if hobby not in result.values():
+            print(hobby)
+            result[name] = hobby
+        else:
+            print("This should be printed couple of times.")
+    print("result:")
+    print(result)
+    print("dict1:")
     print(dict1)
     return dict1
 
@@ -129,4 +147,4 @@ if __name__ == '__main__':
     print(find_most_popular_hobby("hobbies_database.txt"))  # -> ['gaming', 'sport', 'football']
     print("Check if the least popular hobby(ies) is(are) correct")
     print(find_least_popular_hobby("hobbies_database.txt"))  # -> ['tennis', 'dance', 'puzzles', 'flowers']
-#    write_corrected_database("hobbies_database.txt", 'correct_hobbies_database.csv')
+    write_corrected_database("hobbies_database.txt", 'correct_hobbies_database.csv')
