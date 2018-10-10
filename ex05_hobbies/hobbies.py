@@ -19,6 +19,8 @@ def create_dictionary(file):
     :param file: original file path
     :return: dict
     """
+    if file:
+        pass
     pre_dic_dict = {}
     # print(create_list_from_file(file))
     l_of_hobbies_for_current_person = []
