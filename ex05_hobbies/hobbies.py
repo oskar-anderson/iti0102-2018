@@ -64,7 +64,7 @@ def find_person_with_most_hobbies(file):
         number_of_hobbies = (len(dic[name]))
         d_number_of_hobbies_for_person.update({name: number_of_hobbies})
     print(d_number_of_hobbies_for_person)
-    
+
     l_names_of_people_with_most_hobbies = []
     for name in d_number_of_hobbies_for_person:
         if d_number_of_hobbies_for_person[name] == max(d_number_of_hobbies_for_person.values()):
