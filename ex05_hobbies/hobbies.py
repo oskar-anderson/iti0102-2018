@@ -63,7 +63,7 @@ def find_person_with_most_hobbies(file):
     """
     if file:
         pass
-    # ignore the parameter
+    dic = create_dictionary("hobbies_database.txt")
     d_number_of_hobbies_for_person = {}
     for name in dic:
         number_of_hobbies = (len(dic[name]))
@@ -87,6 +87,7 @@ def find_person_with_least_hobbies(file):
     """
     if file:
         pass
+    dic = create_dictionary("hobbies_database.txt")
     d_number_of_hobbies_for_person = {}
     for name in dic:
         number_of_hobbies = (len(dic[name]))
