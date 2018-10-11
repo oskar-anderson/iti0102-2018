@@ -64,10 +64,10 @@ def find_person_with_most_hobbies(file):
     """
     if file:
         pass
-    dic = create_dictionary("hobbies_database.txt")
+    dict1 = create_dictionary("hobbies_database.txt")
     d_number_of_hobbies_for_person = {}
-    for name in dic:
-        number_of_hobbies = (len(dic[name]))
+    for name in dict1:
+        number_of_hobbies = (len(dict1[name]))
         d_number_of_hobbies_for_person.update({name: number_of_hobbies})
     print(d_number_of_hobbies_for_person)
 
@@ -88,10 +88,10 @@ def find_person_with_least_hobbies(file):
     """
     if file:
         pass
-    dic = create_dictionary("hobbies_database.txt")
+    dict1 = create_dictionary("hobbies_database.txt")
     d_number_of_hobbies_for_person = {}
-    for name in dic:
-        number_of_hobbies = (len(dic[name]))
+    for name in dict1:
+        number_of_hobbies = (len(dict1[name]))
         d_number_of_hobbies_for_person.update({name: number_of_hobbies})
     print(d_number_of_hobbies_for_person)
 
@@ -112,7 +112,26 @@ def find_most_popular_hobby(file):
     """
     if file:
         pass
+    dict1 = create_dictionary("hobbies_database.txt")
+    dict1_reversed = {}
+    for name in dict1:
+        for hobby in dict1[name]:
+            # dict1_reversed[hobby] = name  # does not work, overwrites
+            dict1_reversed.setdefault(hobby, []).append(name)
+#    print(dict1_reversed)
 
+    d_hobbies_popularity = {}
+    for hobby in dict1_reversed:
+        number_of_names_per_hobby = (len(dict1_reversed[hobby]))
+        d_hobbies_popularity.update({hobby: number_of_names_per_hobby})
+    print(d_hobbies_popularity)
+
+    l_hobbies_with_most_people = []
+    for hobby in d_hobbies_popularity:
+        if d_hobbies_popularity[hobby] == max(d_hobbies_popularity.values()):
+            # print(name, d_hobbies_popularity[name])
+            l_hobbies_with_most_people.append(hobby)
+    return l_hobbies_with_most_people
 
 
 def find_least_popular_hobby(file):
@@ -122,7 +141,28 @@ def find_least_popular_hobby(file):
     :param file: original file path
     :return: list
     """
-    pass
+    if file:
+        pass
+    dict1 = create_dictionary("hobbies_database.txt")
+    dict1_reversed = {}
+    for name in dict1:
+        for hobby in dict1[name]:
+            # dict1_reversed[hobby] = name  # does not work, overwrites
+            dict1_reversed.setdefault(hobby, []).append(name)
+    #    print(dict1_reversed)
+
+    d_hobbies_popularity = {}
+    for hobby in dict1_reversed:
+        number_of_names_per_hobby = (len(dict1_reversed[hobby]))
+        d_hobbies_popularity.update({hobby: number_of_names_per_hobby})
+    print(d_hobbies_popularity)
+
+    l_hobbies_with_least_people = []
+    for hobby in d_hobbies_popularity:
+        if d_hobbies_popularity[hobby] == min(d_hobbies_popularity.values()):
+            # print(name, d_hobbies_popularity[name])
+            l_hobbies_with_least_people.append(hobby)
+    return l_hobbies_with_least_people
 
 
 def write_corrected_database(file, file_to_write):
