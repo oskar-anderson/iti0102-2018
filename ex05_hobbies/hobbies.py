@@ -1,6 +1,5 @@
 """Hobbies."""
 import csv
-file = open("hobbies_database.txt")
 
 
 def create_list_from_file(file):
@@ -28,7 +27,7 @@ def create_dictionary(file):
     l_of_hobbies_for_current_person = []
     old_name = ""
 
-    for lines in sorted(create_list_from_file("hobbies_database.txt")):
+    for lines in sorted(create_list_from_file(file)):
         number_of_characters_in_key = lines.find(":")
         name = (lines[0:number_of_characters_in_key])
 
@@ -64,7 +63,7 @@ def find_person_with_most_hobbies(file):
     """
     if file:
         pass
-    dict1 = create_dictionary("hobbies_database.txt")
+    dict1 = create_dictionary(file)
     d_number_of_hobbies_for_person = {}
     for name in dict1:
         number_of_hobbies = (len(dict1[name]))
@@ -88,7 +87,7 @@ def find_person_with_least_hobbies(file):
     """
     if file:
         pass
-    dict1 = create_dictionary("hobbies_database.txt")
+    dict1 = create_dictionary(file)
     d_number_of_hobbies_for_person = {}
     for name in dict1:
         number_of_hobbies = (len(dict1[name]))
@@ -112,7 +111,7 @@ def find_most_popular_hobby(file):
     """
     if file:
         pass
-    dict1 = create_dictionary("hobbies_database.txt")
+    dict1 = create_dictionary(file)
     dict1_reversed = {}
     for name in dict1:
         for hobby in dict1[name]:
@@ -143,7 +142,7 @@ def find_least_popular_hobby(file):
     """
     if file:
         pass
-    dict1 = create_dictionary("hobbies_database.txt")
+    dict1 = create_dictionary(file)
     dict1_reversed = {}
     for name in dict1:
         for hobby in dict1[name]:
