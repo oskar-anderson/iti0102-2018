@@ -1,5 +1,6 @@
 """Hobbies."""
 import csv
+file = open("hobbies_database.txt")
 
 
 def create_list_from_file(file):
@@ -109,7 +110,9 @@ def find_most_popular_hobby(file):
     :param file: original file path
     :return: list
     """
-    pass
+    if file:
+        pass
+
 
 
 def find_least_popular_hobby(file):
@@ -140,7 +143,7 @@ def write_corrected_database(file, file_to_write):
 
 
 if __name__ == '__main__':
-    dic = create_dictionary("hobbies_database.txt")
+    dic = create_dictionary("hobbies_database.txt")  # Do not use
     print(len(create_list_from_file("hobbies_database.txt")))  # -> 100
     print("Check presence of hobbies for chosen person:")
     print("shopping" in dic["Wendy"])  # -> True
