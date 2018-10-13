@@ -25,11 +25,8 @@ def get_clean_text(messy_text: str) -> str:
         "?": "!",
         "!": "?",
         "/": ",",
-        " ": " "  # for capitalization
     }
     removables = "1234567890&@#$%^()_+|><~"
-#    removables = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "&", "@", "#", "$", "%", "^", "(", ")", "_", "+",
-#                  "|", ">", "<", "~"]
     result = ""
     capitalize = True
     previous_letter = ""
