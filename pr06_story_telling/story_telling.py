@@ -9,8 +9,8 @@ def read_file(file) -> str:
     :return: string
     """
     file = open(file, "r")
-    file = f"{file}"
-    return file
+    list1 = "".join(file.readlines())
+    return get_clean_text(list1)
 
 
 def get_clean_text(messy_text: str) -> str:
@@ -20,7 +20,6 @@ def get_clean_text(messy_text: str) -> str:
     :param messy_text: string
     :return: clean string
     """
-
     dict_replace = {
         "*": "\"",
         "?": "!",
@@ -40,12 +39,13 @@ def get_clean_text(messy_text: str) -> str:
         if c in dict_replace:
             c = dict_replace[c]
         if c not in removables:
-            if previous_letter == " " and second_previous_letter in [".", "!", "?"]:
+            if second_previous_letter in [".", "!", "?"]:
                 capitalize = True
                 # print("cond1: " + second_previous_letter + previous_letter + c)
-            if previous_letter == "\"" and second_previous_letter == " " and third_previous_letter in [".", "!", "?",
-                                                                                                       ":"]:
+            if previous_letter == "\"" and third_previous_letter in [".", "!", "?", ":"]:
                 # print("cond2: " + third_previous_letter + second_previous_letter + previous_letter + c)
+                capitalize = True
+            if second_previous_letter == "\n" and previous_letter == "\"":
                 capitalize = True
             third_previous_letter = second_previous_letter
             second_previous_letter = previous_letter
@@ -59,6 +59,7 @@ def get_clean_text(messy_text: str) -> str:
 
 
 if __name__ == "__main__":
+    print(read_file("spooky_story_messy.txt"))
     print(get_clean_text("82jo2e$ _wa9^&it3ed _^f6o^+&r^(7|0 ~t>h_e4 21&614t)r(34a00(i|n.1_ t<3he@$36) "
                          ">t0(+>>rai1n7^ w_a#65s l~a4t<(e><?6 d&2((|i6_9d 5Ma7r>@++y #an04(@@3d "
                          "<9Samantha t#ake6>8 9t_h#e@ )b77#5+12<us! *)ye9s|/4 80t8hey|^38 1(_##&di++18#d<)?69*/ "
