@@ -1,5 +1,4 @@
 """Collect story parts from a messy text."""
-file = open("spooky_story_messy.txt")
 
 
 def read_file(file) -> str:
@@ -35,18 +34,23 @@ def get_clean_text(messy_text: str) -> str:
     result = ""
     capitalize = True
     previous_letter = ""
+    second_previous_letter = ""
+    third_previous_letter = ""
     for c in messy_text:
-        if previous_letter == "." and c != "\"" and c not in removables or previous_letter == "!" and c != "\"" \
-                and c not in removables or previous_letter == "?" and c != "\"" and c not in removables:
-            # print(previous_letter + c)
-            capitalize = True
-            # "!" and "?" are not replaced but it does not matter- they just swich
-        previous_letter = c
         if c in dict_replace:
-            result += dict_replace[c]
             c = dict_replace[c]
-        elif c not in removables:
-            if capitalize is True:
+        if c not in removables:
+            if previous_letter == " " and second_previous_letter in [".", "!", "?"]:
+                capitalize = True
+                # print("cond1: " + second_previous_letter + previous_letter + c)
+            if previous_letter == "\"" and second_previous_letter == " " and third_previous_letter in [".", "!", "?",
+                                                                                                       ":"]:
+                # print("cond2: " + third_previous_letter + second_previous_letter + previous_letter + c)
+                capitalize = True
+            third_previous_letter = second_previous_letter
+            second_previous_letter = previous_letter
+            previous_letter = c
+            if capitalize is True and c != "\"":
                 result += c.upper()
                 capitalize = False
             else:
