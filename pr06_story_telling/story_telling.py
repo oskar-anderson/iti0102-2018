@@ -41,11 +41,11 @@ def get_clean_text(messy_text: str) -> str:
         if c not in removables:
             if second_previous_letter in [".", "!", "?"]:
                 capitalize = True
-                # print("cond1: " + second_previous_letter + previous_letter + c)
-            if previous_letter == "\"" and third_previous_letter in [".", "!", "?", ":"]:
-                # print("cond2: " + third_previous_letter + second_previous_letter + previous_letter + c)
+            elif previous_letter == "\"" and third_previous_letter in [".", "!", "?", ":"]:
                 capitalize = True
-            if second_previous_letter == "\n" and previous_letter == "\"":
+            elif previous_letter == "\"" and second_previous_letter == "\n":
+                capitalize = True
+            elif second_previous_letter not in [".", "!", "?"] and previous_letter == "\n":
                 capitalize = True
             third_previous_letter = second_previous_letter
             second_previous_letter = previous_letter
