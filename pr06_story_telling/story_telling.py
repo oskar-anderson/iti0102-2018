@@ -45,8 +45,6 @@ def get_clean_text(messy_text: str) -> str:
                 capitalize = True
             elif previous_letter == "\"" and second_previous_letter == "\n":
                 capitalize = True
-            elif second_previous_letter not in [".", "!", "?"] and previous_letter == "\n":
-                capitalize = True
             third_previous_letter = second_previous_letter
             second_previous_letter = previous_letter
             previous_letter = c
