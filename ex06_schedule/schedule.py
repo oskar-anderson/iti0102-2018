@@ -61,7 +61,7 @@ def sort_time_list(dict1):
 
 
 def create_value_list(dict1):
-    """Put dictionary values into proper format for schedule"""
+    """Put dictionary values into proper format for schedule."""
     old_value_list = list(dict1.values())
     value_list = []
     for i in range(len(old_value_list)):
@@ -70,7 +70,7 @@ def create_value_list(dict1):
 
 
 def find_max_lenght(list_of_values):
-    """Find lenght of longest value"""
+    """Find lenght of longest value."""
     max_lenght = 0
     for value in list_of_values:
         current_lenght = len(value)
@@ -83,7 +83,7 @@ def find_max_lenght(list_of_values):
 
 
 def no_items_found():
-    """print "No items found" if dict is empty"""
+    """print "No items found" if dict is empty."""
     separator_line = "------------------"
     title_line = f"|  time | items  |"
     main_content = f"| No items found |"
