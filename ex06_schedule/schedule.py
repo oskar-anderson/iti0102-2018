@@ -30,7 +30,7 @@ def create_schedule_string(input_string: str) -> str:
     sorted_time_list = sort_time_list(dict1)
     max_value_lenght = find_max_lenght(proper_value_list)
     new_line = "\n"
-    separator = (max_value_lenght + 13) * "-"   # 13 == 8+2 for time + 3 for "|"
+    separator = (max_value_lenght + 13) * "-"   # 13 == 8 + 2 for time + 3 for "|"
     title_line = f"|" + (5 * " ") + "time | items" + ((max_value_lenght - 6) * " ") + "|"
     main_content = create_main_schedule_content(max_value_lenght, sorted_time_list, dict1)
     result = f"""{separator}\n{title_line}\n{separator}\n{new_line.join(main_content)}\n{separator}"""
