@@ -12,11 +12,10 @@ def create_schedule_file(input_filename: str, output_filename: str) -> None:
 
 def create_schedule_string(input_string: str) -> str:
     """Create schedule string from the given input string."""
-    regex = r"\s(\d+)[\D](\d+)\s+([a-zA-Z]+)"
+    regex = r"\s([\d]{1,2})[\D]([\d]{1,2})\s+([a-zA-Z]+)"
     dict1 = {}
     for match in re.finditer(regex, input_string):
-        if int(match.group(1)) in range(24) and len(match.group(1)) in [1, 2] and int(match.group(2)) in range(60) \
-                and len(match.group(2)) in [1, 2]:
+        if int(match.group(1)) in range(24) and int(match.group(2)) in range(60):
             if int(match.group(1)) == 0:
                 time = str(int(match.group(1)) + 12) + ":" + match.group(2).zfill(2) + " AM"
             elif int(match.group(1)) < 12:
@@ -45,13 +44,14 @@ def create_schedule_string(input_string: str) -> str:
     main_content = create_main_schedule_content(max_time_lenght, max_value_lenght, sorted_time_list, dict2)
     result = f"""{separator}\n{title_line}\n{separator}\n{new_line.join(main_content)}\n{separator}"""
     print(result)
+    print("result type: " + str(type(result)))
     return result
 
 
 def get_dict2(input_string):
     """Make a new list with no zfill for hours."""
     dict2 = {}
-    regex = r"\s(\d+)[\D](\d+)\s+([a-zA-Z]+)"
+    regex = r"\s([\d]{1,2})[\D]([\d]{1,2})\s+([a-zA-Z]+)"
     for match in re.finditer(regex, input_string):
         if int(match.group(1)) in range(24) and len(match.group(1)) in [1, 2] and int(match.group(2)) in range(60) \
                 and len(match.group(2)) in [1, 2]:
