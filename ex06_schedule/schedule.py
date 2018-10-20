@@ -19,7 +19,7 @@ def create_schedule_string(input_string: str) -> str:
                 and len(match.group(2)) in [1, 2]:
             if int(match.group(1)) == 0:
                 time = str(int(match.group(1)) + 12) + ":" + match.group(2).zfill(2) + " AM"
-            elif int(match.group(1)) < 12 or int(match.group(1)) == 12 and int(match.group(2)) == 0:
+            elif int(match.group(1)) < 12:
                 time = match.group(1).zfill(2) + ":" + match.group(2).zfill(2) + " AM"
             else:
                 time = str(int(match.group(1)) - 12).zfill(2) + ":" + match.group(2).zfill(2) + " PM"
@@ -57,7 +57,7 @@ def get_dict2(input_string):
                 and len(match.group(2)) in [1, 2]:
             if int(match.group(1)) == 0:
                 time = str(int(match.group(1)) + 12) + ":" + match.group(2).zfill(2) + " AM"
-            elif int(match.group(1)) < 12 or int(match.group(1)) == 12 and int(match.group(2)) == 0:
+            elif int(match.group(1)) < 12:
                 if (match.group(1)[0]) == "0":
                     # print("match.group with zero: " + str(match.group(1)))
                     remove_first_digit_zero = []
