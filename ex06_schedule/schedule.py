@@ -31,7 +31,27 @@ def create_schedule_string(input_string: str) -> str:
         return no_items_found()
     # print("Dict1: " + str(dict1))
 
+    dict2 = get_dict2(input_string)
+    print(dict2)
+    proper_value_list = create_value_list(dict1)
+    sorted_time_list = sort_time_list(dict1)
+    print("sorted_time_list: " + str(sorted_time_list))
+    max_time_lenght = find_max_time_lenght(sorted_time_list)
+    print("max_time_lenght: " + str(max_time_lenght))
+    max_value_lenght = find_max_lenght(proper_value_list)
+    new_line = "\n"
+    separator = (max_time_lenght + max_value_lenght + 3) * "-"
+    title_line = f"|" + ((max_time_lenght - 5) * " ") + "time | items" + ((max_value_lenght - 6) * " ") + "|"
+    main_content = create_main_schedule_content(max_time_lenght, max_value_lenght, sorted_time_list, dict2)
+    result = f"""{separator}\n{title_line}\n{separator}\n{new_line.join(main_content)}\n{separator}"""
+    print(result)
+    return result
+
+
+def get_dict2(input_string):
+    """Make a new list with no zfill for hours."""
     dict2 = {}
+    regex = r"\s(\d+)[\D](\d+)\s+([a-zA-Z]+)"
     for match in re.finditer(regex, input_string):
         if int(match.group(1)) in range(24) and len(match.group(1)) in [1, 2] and int(match.group(2)) in range(60) \
                 and len(match.group(2)) in [1, 2]:
@@ -67,21 +87,7 @@ def create_schedule_string(input_string: str) -> str:
             dict2.setdefault(time, [])
             if string not in dict2[time]:
                 dict2.setdefault(time, []).append(string)
-
-    print(dict2)
-    proper_value_list = create_value_list(dict1)
-    sorted_time_list = sort_time_list(dict1)
-    print("sorted_time_list: " + str(sorted_time_list))
-    max_time_lenght = find_max_time_lenght(sorted_time_list)
-    print("max_time_lenght: " + str(max_time_lenght))
-    max_value_lenght = find_max_lenght(proper_value_list)
-    new_line = "\n"
-    separator = (max_time_lenght + max_value_lenght + 3) * "-"
-    title_line = f"|" + ((max_time_lenght - 5) * " ") + "time | items" + ((max_value_lenght - 6) * " ") + "|"
-    main_content = create_main_schedule_content(max_time_lenght, max_value_lenght, sorted_time_list, dict2)
-    result = f"""{separator}\n{title_line}\n{separator}\n{new_line.join(main_content)}\n{separator}"""
-    print(result)
-    return result
+    return dict2
 
 
 def sort_time_list(dict1):
