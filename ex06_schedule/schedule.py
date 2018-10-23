@@ -8,12 +8,12 @@ def create_schedule_file(input_filename: str, output_filename: str) -> None:
     output_file = open(output_filename, "w")
     output_file.write(create_schedule_string(input_data))
     output_file.close()
-# test1
+# test2
 
 
 def create_schedule_string(input_string: str) -> str:
     """Create schedule string_lower from the given input string_lower."""
-    regex = r"\s([\d]{1,2})[\D]([\d]{1,2})\s+([a-zA-Z]+)"
+    regex = r"\s+([\d]{1,2})[\D]([\d]{1,2})\s+([a-zA-Z]+)"
     dict_time_and_str_w_zfill = {}
     for match in re.finditer(regex, input_string):
         if int(match.group(1)) in range(24) and int(match.group(2)) in range(60):
