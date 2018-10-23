@@ -8,7 +8,7 @@ def create_schedule_file(input_filename: str, output_filename: str) -> None:
     output_file = open(output_filename, "w")
     output_file.write(create_schedule_string(input_data))
     output_file.close()
-# test4
+# test6
 
 
 def create_schedule_string(input_string: str) -> str:
