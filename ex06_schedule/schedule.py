@@ -91,17 +91,20 @@ def get_dict_time_and_str_wo_zfill(input_string):
 def sort_time_list(dict_time_and_name_w_zfill):
     """Create sorted time list from given dictionary."""
     twelve_am = []
+    twelve_pm = []
     time_am = []
     time_pm = []
     print(f"Sorted dict: {sorted(dict_time_and_name_w_zfill)}")
     for time in sorted(dict_time_and_name_w_zfill):
-        if "12:" in time:
+        if "12:" in time and "PM" in time:
+            twelve_pm.append(time)
+        elif "12:" in time and "AM" in time:
             twelve_am.append(time)
         elif "AM" in time:
             time_am.append(time)
         elif "PM" in time:
             time_pm.append(time)
-    list_of_sorted_times = twelve_am + time_am + time_pm
+    list_of_sorted_times = twelve_am + time_am + twelve_pm + time_pm
     # print("list_of_sorted_times: " + str(list_of_sorted_times))
     remove_first_digit_zero = []
     for i in range(len(list_of_sorted_times)):
