@@ -22,17 +22,14 @@ def move_to_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list):
 
 def get_new_world_map(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map, x, y):
     """Get new world map after movement, Shippy not in map."""
-    if new_world_map[y_pos_of_x_in_list + y][x_pos_of_x_in_list] == "#" or new_world_map[y_pos_of_x_in_list][
-            x_pos_of_x_in_list + x] == "#":
+    if new_world_map[y_pos_of_x_in_list + y][x_pos_of_x_in_list + x] == "#":
         return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    elif new_world_map[y_pos_of_x_in_list + y][x_pos_of_x_in_list] == "W" or new_world_map[y_pos_of_x_in_list][
-            x_pos_of_x_in_list + x] == "W":
+    elif new_world_map[y_pos_of_x_in_list + y][x_pos_of_x_in_list + x] == "W":
         y_pos_of_x_in_list = y_pos_of_x_in_list + y
         x_pos_of_x_in_list = x_pos_of_x_in_list + x
         new_world_map = move_to_capital_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list)
         return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    elif new_world_map[y_pos_of_x_in_list + y][x_pos_of_x_in_list] == "w" or new_world_map[y_pos_of_x_in_list][
-            x_pos_of_x_in_list + x] == "w":
+    elif new_world_map[y_pos_of_x_in_list + y][x_pos_of_x_in_list + x] == "w":
         y_pos_of_x_in_list = y_pos_of_x_in_list + y
         x_pos_of_x_in_list = x_pos_of_x_in_list + x
         new_world_map = move_to_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list)
