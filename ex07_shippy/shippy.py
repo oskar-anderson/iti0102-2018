@@ -3,7 +3,7 @@ from typing import Tuple
 from copy import deepcopy
 
 
-# test4
+# test5
 def move_to_capital_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list):
     """Shippy moves to "W"."""
     row_string = new_world_map[y_pos_of_x_in_list]
