@@ -3,7 +3,6 @@ from typing import Tuple
 from copy import deepcopy
 
 
-# test7
 def move_to_capital_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list):
     """Shippy moves to "W"."""
     row_string = new_world_map[y_pos_of_x_in_list]
@@ -20,71 +19,26 @@ def move_to_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list):
     return new_world_map
 
 
-def get_new_world_map_n(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map):
-    """Get new world map for direction "N"."""
-    if new_world_map[y_pos_of_x_in_list - 1][x_pos_of_x_in_list] == "#":
+def get_new_world_map(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map, x, y):
+    """Get new world map after movement, Shippy not in map."""
+    if new_world_map[y_pos_of_x_in_list + y][x_pos_of_x_in_list] == "#" or new_world_map[y_pos_of_x_in_list][
+            x_pos_of_x_in_list + x] == "#":
         return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    elif new_world_map[y_pos_of_x_in_list - 1][x_pos_of_x_in_list] == "W":
-        y_pos_of_x_in_list -= 1
+    elif new_world_map[y_pos_of_x_in_list + y][x_pos_of_x_in_list] == "W" or new_world_map[y_pos_of_x_in_list][
+            x_pos_of_x_in_list + x] == "W":
+        y_pos_of_x_in_list = y_pos_of_x_in_list + y
+        x_pos_of_x_in_list = x_pos_of_x_in_list + x
         new_world_map = move_to_capital_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list)
         return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    elif new_world_map[y_pos_of_x_in_list - 1][x_pos_of_x_in_list] == "w":
-        y_pos_of_x_in_list -= 1
+    elif new_world_map[y_pos_of_x_in_list + y][x_pos_of_x_in_list] == "w" or new_world_map[y_pos_of_x_in_list][
+            x_pos_of_x_in_list + x] == "w":
+        y_pos_of_x_in_list = y_pos_of_x_in_list + y
+        x_pos_of_x_in_list = x_pos_of_x_in_list + x
         new_world_map = move_to_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list)
         return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
     else:
-        y_pos_of_x_in_list -= 1
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-
-
-def get_new_world_map_s(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map):
-    """Get new world map for direction "S"."""
-    if new_world_map[y_pos_of_x_in_list + 1][x_pos_of_x_in_list] == "#":
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    elif new_world_map[y_pos_of_x_in_list + 1][x_pos_of_x_in_list] == "W":
-        y_pos_of_x_in_list += 1
-        new_world_map = move_to_capital_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list)
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    elif new_world_map[y_pos_of_x_in_list + 1][x_pos_of_x_in_list] == "w":
-        y_pos_of_x_in_list += 1
-        new_world_map = move_to_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list)
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    else:
-        y_pos_of_x_in_list += 1
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-
-
-def get_new_world_map_e(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map):
-    """Get new world map for direction "E"."""
-    if new_world_map[y_pos_of_x_in_list][x_pos_of_x_in_list + 1] == "#":
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    elif new_world_map[y_pos_of_x_in_list][x_pos_of_x_in_list + 1] == "W":
-        x_pos_of_x_in_list += 1
-        new_world_map = move_to_capital_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list)
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    elif new_world_map[y_pos_of_x_in_list][x_pos_of_x_in_list + 1] == "w":
-        x_pos_of_x_in_list += 1
-        new_world_map = move_to_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list)
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    else:
-        x_pos_of_x_in_list += 1
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-
-
-def get_new_world_map_w(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map):
-    """Get new world map for direction "W"."""
-    if new_world_map[y_pos_of_x_in_list][x_pos_of_x_in_list - 1] == "#":
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    elif new_world_map[y_pos_of_x_in_list][x_pos_of_x_in_list - 1] == "W":
-        x_pos_of_x_in_list -= 1
-        new_world_map = move_to_capital_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list)
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    elif new_world_map[y_pos_of_x_in_list][x_pos_of_x_in_list - 1] == "w":
-        x_pos_of_x_in_list -= 1
-        new_world_map = move_to_w(new_world_map, x_pos_of_x_in_list, y_pos_of_x_in_list)
-        return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
-    else:
-        x_pos_of_x_in_list -= 1
+        y_pos_of_x_in_list = y_pos_of_x_in_list + y
+        x_pos_of_x_in_list = x_pos_of_x_in_list + x
         return x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map
 
 
@@ -118,25 +72,25 @@ def simulate(world_map: list, flight_plan: list) -> list:
     new_world_map[y_pos_of_x_in_list] = row_string
 
     for i in range(len(flight_plan)):
-        print(flight_plan[i])
+        # print(flight_plan[i])
         if flight_plan[i] == "N" and y_pos_of_x_in_list - 1 != -1:
             x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map = \
-                get_new_world_map_n(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map)
+                get_new_world_map(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map, 0, -1)
         elif flight_plan[i] == "S" and y_pos_of_x_in_list + 1 != len(new_world_map):
             x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map = \
-                get_new_world_map_s(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map)
+                get_new_world_map(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map, 0, 1)
         elif flight_plan[i] == "E" and x_pos_of_x_in_list + 1 != len(new_world_map[0]):
             x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map = \
-                get_new_world_map_e(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map)
+                get_new_world_map(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map, 1, 0)
         elif flight_plan[i] == "W" and x_pos_of_x_in_list - 1 != -1:
             x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map = \
-                get_new_world_map_w(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map)
+                get_new_world_map(x_pos_of_x_in_list, y_pos_of_x_in_list, new_world_map, -1, 0)
         else:
             print("Out of bounds.")
     row_string = new_world_map[y_pos_of_x_in_list]
     row_string = str(row_string[:x_pos_of_x_in_list]) + "X" + str(row_string[1 + x_pos_of_x_in_list:])
     new_world_map[y_pos_of_x_in_list] = row_string
-    # print(f"World map after replacements: {new_world_map}")
+    print(f"World map after replacements: {new_world_map}")
     return new_world_map
 
 
