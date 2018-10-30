@@ -16,7 +16,7 @@ def test_one_directional_movement():
 
 
 def test_remove_duplicates():
-    """Test with opposite directions"""
+    """Test with opposite directions."""
     assert shortest_way_back("NNSSWWE") == "E"
     assert shortest_way_back("NSEW") == ""
 
@@ -53,5 +53,6 @@ def solution(path):
 
 def test_random():
     """Test randomly generated directions variable."""
-    path = "".join(random.choices("NSWE", k=random.randint(0, 10)))
-    assert shortest_way_back(path) == solution(path)
+    alphabet = "SNWE"
+    path = "".join(random.choices("NSWE", k=random.randint(5, 10)))
+    assert sorted(shortest_way_back(path), key=lambda word: [alphabet.index(c) for c in word] == solution(path))
