@@ -16,7 +16,8 @@ def read(read_file: str):
     try:
         read_file = open(read_file, "r")
     except FileNotFoundError:
-        print("File not found")
+        print("File not found!")
+        raise SystemExit
 #    print(read_file.readline())    # print messes files up
     read_file = read_file.readlines()
     read_file = [line.strip() for line in read_file]    # removes whitespace
@@ -26,6 +27,7 @@ def read(read_file: str):
         pony_value_list.append(extract_information(decode(read_file[i])))
     print(f"pony value list: {pony_value_list}")
     return pony_value_list
+
 #     todo add exception for file not found
 
 
