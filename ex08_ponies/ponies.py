@@ -76,7 +76,7 @@ def decode(line: str) -> str:
     """Decode string in base64."""
     # "gICA" is separator.
     line = base64.b64decode(line)
-    # print(f"decoded line: {line}")
+    line = line.decode("utf-8")
     return line
 
 
@@ -189,4 +189,6 @@ def sort_by_points(ponies: list) -> list:
 
 
 if __name__ == '__main__':
+    print(decode('TWF1ZCBQb21tZWwgICAgICAgICBVbmljb3JuICAgICAgICAgICAgIHBpbmsgICAgICAgICAgICAgICAgZ3JlZW4gICAgICAgICA'
+                 + 'gICAgICBjeWFuICAgICAgICAgICAgICAgIENhc3RsZSBvZiBGcmllbmRzaGlw'))
     print(write("näidis_sisendfail.txt", "Alicorn"))
