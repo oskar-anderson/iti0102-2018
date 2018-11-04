@@ -23,16 +23,16 @@ def write(input_file: str, kind: str):
     print(f"output filename: {output_filename}")
     output_file = open(output_filename, "w")
     separator = ("-" * 128)
-    title_line = ("PLACE" + " " * 5 + "POINTS" + " " * 4 + "NAME" + " " * 16 + "KIND" + " " * 16 + "COAT COLOR" + " " *
-                  10 + "MANE COLOR" + " " * 10 + "EYE COLOR" + " " * 11 + "LOCATION")
+    title_line = ("PLACE" + " " * 5 + "POINTS" + " " * 4 + "NAME" + " " * 16 + "KIND" + " " * 16 + "COAT COLOR" + (" " *
+                  10) + "MANE COLOR" + " " * 10 + "EYE COLOR" + " " * 11 + "LOCATION")
     new_line = "\n"
-    table_contents = f"{title_line}\n{separator}\n{new_line.join(get_main_content(unformatted_table_content))}"
+    table_contents = f"{title_line}\n{separator}\n{new_line.join(format_line(unformatted_table_content))}"
     output_file.write(table_contents)
     output_file.close()
 
 
-def get_main_content(unformatted_table_content):
-    """Create main table content."""
+def format_line(unformatted_table_content):
+    """Format main table content."""
     main_content = []
     for i in range(len(unformatted_table_content)):
         main_content.append(f"""{i + 1}{
@@ -72,7 +72,7 @@ def read(read_file: str) -> list:
 
 
 def decode(line: str) -> str:
-    """Decodes string in base64."""
+    """Decode string in base64."""
     # "gICA" is separator.
     line = base64.b64decode(line)
     # print(f"decoded line: {line}")
