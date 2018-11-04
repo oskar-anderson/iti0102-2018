@@ -26,30 +26,31 @@ def write(input_file: str, kind: str):
     title_line = ("PLACE" + " " * 5 + "POINTS" + " " * 4 + "NAME" + " " * 16 + "KIND" + " " * 16 + "COAT COLOR"
                   + " " * 10 + "MANE COLOR" + " " * 10 + "EYE COLOR" + " " * 11 + "LOCATION")
     new_line = "\n"
-    table_contents = f"{title_line}\n{separator}\n{new_line.join(format_line(unformatted_table_content))}"
+    formatted_table = []
+    for i in range(len(unformatted_table_content)):
+        formatted_table.append(format_line(unformatted_table_content, i))
+    table_contents = f"{title_line}\n{separator}\n{new_line.join(formatted_table)}"
     output_file.write(table_contents)
     output_file.close()
 
 
-def format_line(unformatted_table_content):
+def format_line(unformatted_table_content, i):
     """Format main table content."""
-    main_content = []
-    for i in range(len(unformatted_table_content)):
-        main_content.append(f"""{i + 1}{
-        " " * (10 - len(str(i + 1)))}{
-        unformatted_table_content[i].get("points")}{
-        " " * (10 - len(str(unformatted_table_content[i].get("points"))))}{
-        unformatted_table_content[i].get("name")}{
-        " " * (20 - len(str(unformatted_table_content[i].get("name"))))}{
-        unformatted_table_content[i].get("kind")}{
-        " " * (20 - len(str(unformatted_table_content[i].get("kind"))))}{
-                unformatted_table_content[i].get("coat color")}{
-        " " * (20 - len(str(unformatted_table_content[i].get("coat color"))))}{
-                unformatted_table_content[i].get("mane color")}{
-        " " * (20 - len(str(unformatted_table_content[i].get("mane color"))))}{
-                unformatted_table_content[i].get("eye color")}{
-        " " * (20 - len(str(unformatted_table_content[i].get("eye color"))))}{
-                unformatted_table_content[i].get("location")}""")
+    main_content = (f"""{str(i + 1)}{
+    str(" " * (10 - len(str(i + 1))))}{
+    str(unformatted_table_content[i].get("points"))}{
+    " " * (10 - len(str(unformatted_table_content[i].get("points"))))}{
+    unformatted_table_content[i].get("name")}{
+    " " * (20 - len(str(unformatted_table_content[i].get("name"))))}{
+    unformatted_table_content[i].get("kind")}{
+    " " * (20 - len(str(unformatted_table_content[i].get("kind"))))}{
+            unformatted_table_content[i].get("coat color")}{
+    " " * (20 - len(str(unformatted_table_content[i].get("coat color"))))}{
+            unformatted_table_content[i].get("mane color")}{
+    " " * (20 - len(str(unformatted_table_content[i].get("mane color"))))}{
+            unformatted_table_content[i].get("eye color")}{
+    " " * (20 - len(str(unformatted_table_content[i].get("eye color"))))}{
+            unformatted_table_content[i].get("location")}""")
     return main_content
 
 
