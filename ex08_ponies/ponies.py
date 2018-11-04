@@ -28,29 +28,29 @@ def write(input_file: str, kind: str):
     new_line = "\n"
     formatted_table = []
     for i in range(len(unformatted_table_content)):
-        formatted_table.append(format_line(unformatted_table_content, i))
+        formatted_table.append(format_line(unformatted_table_content[i], i))
     table_contents = f"{title_line}\n{separator}\n{new_line.join(formatted_table)}"
     output_file.write(table_contents)
     output_file.close()
 
 
-def format_line(unformatted_table_content, i):
+def format_line(pony: dict, place: int) -> str:
     """Format main table content."""
-    main_content = (f"""{str(i + 1)}{
-    str(" " * (10 - len(str(i + 1))))}{
-    str(unformatted_table_content[i].get("points"))}{
-    " " * (10 - len(str(unformatted_table_content[i].get("points"))))}{
-    unformatted_table_content[i].get("name")}{
-    " " * (20 - len(str(unformatted_table_content[i].get("name"))))}{
-    unformatted_table_content[i].get("kind")}{
-    " " * (20 - len(str(unformatted_table_content[i].get("kind"))))}{
-            unformatted_table_content[i].get("coat color")}{
-    " " * (20 - len(str(unformatted_table_content[i].get("coat color"))))}{
-            unformatted_table_content[i].get("mane color")}{
-    " " * (20 - len(str(unformatted_table_content[i].get("mane color"))))}{
-            unformatted_table_content[i].get("eye color")}{
-    " " * (20 - len(str(unformatted_table_content[i].get("eye color"))))}{
-            unformatted_table_content[i].get("location")}""")
+    main_content = (f"""{str(place + 1)}{
+    str(" " * (10 - len(str(place + 1))))}{
+    str(pony.get("points"))}{
+    " " * (10 - len(str(pony.get("points"))))}{
+    pony.get("name")}{
+    " " * (20 - len(str(pony.get("name"))))}{
+    pony.get("kind")}{
+    " " * (20 - len(str(pony.get("kind"))))}{
+    pony.get("coat color")}{
+    " " * (20 - len(str(pony.get("coat color"))))}{
+    pony.get("mane color")}{
+    " " * (20 - len(str(pony.get("mane color"))))}{
+    pony.get("eye color")}{
+    " " * (20 - len(str(pony.get("eye color"))))}{
+    pony.get("location")}""")
     return main_content
 
 
