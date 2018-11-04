@@ -44,12 +44,12 @@ def format_line(pony: dict, place: int) -> str:
     " " * (20 - len(str(pony.get("name"))))}{
     pony.get("kind")}{
     " " * (20 - len(str(pony.get("kind"))))}{
-    pony.get("coat color")}{
-    " " * (20 - len(str(pony.get("coat color"))))}{
-    pony.get("mane color")}{
-    " " * (20 - len(str(pony.get("mane color"))))}{
-    pony.get("eye color")}{
-    " " * (20 - len(str(pony.get("eye color"))))}{
+    pony.get("coat_color")}{
+    " " * (20 - len(str(pony.get("coat_color"))))}{
+    pony.get("mane_color")}{
+    " " * (20 - len(str(pony.get("mane_color"))))}{
+    pony.get("eye_color")}{
+    " " * (20 - len(str(pony.get("eye_color"))))}{
     pony.get("location")}""")
     return main_content
 
@@ -88,7 +88,7 @@ def extract_information(line: str) -> dict:
         # print(match.group())
         l_pony_attribute_values.append(match.group())
     # print(l_pony_attribute_values)
-    l_pony_dict_keys = ["name", "kind", "coat color", "mane color", "eye color", "location"]
+    l_pony_dict_keys = ["name", "kind", "coat_color", "mane_color", "eye_color", "location"]
     dict_pony_attributes = {}
     for i in range(len(l_pony_attribute_values)):
         dict_pony_attributes.setdefault(l_pony_dict_keys[i], l_pony_attribute_values[i])
@@ -124,7 +124,7 @@ def filter_by_location(ponies: list) -> list:
 
 def filter_by_kind(ponies: list, kind: str) -> list:
     """Filter all ponies leaving the ones with matching kinds."""
-    filtered_ponies_by_kind = []        # uses append instead of del like in filter_by_location
+    filtered_ponies_by_kind = []
     for i in range(2, (len(ponies))):
         if ponies[i].get("kind") == kind:
             filtered_ponies_by_kind.append(ponies[i])
@@ -137,6 +137,8 @@ def get_points_for_color(color: str):
     try:
         number = 10 - color_list.index(color)
     except ValueError:
+        print(color)
+        print("help")
         return None
     if number < 5:
         return None
@@ -151,11 +153,11 @@ def add_points(pony: dict) -> dict:
         'eye_color': ['Train station', 'Castle of Friendship', 'Retirement Village']
     }
     if pony.get("location") in evaluation_locations.get("coat_color"):
-        points = get_points_for_color(pony.get("coat color"))
+        points = get_points_for_color(pony.get("coat_color"))
     elif pony.get("location") in evaluation_locations.get("mane_color"):
-        points = get_points_for_color(pony.get("mane color"))
+        points = get_points_for_color(pony.get("mane_color"))
     elif pony.get("location") in evaluation_locations.get("eye_color"):
-        points = get_points_for_color(pony.get("eye color"))
+        points = get_points_for_color(pony.get("eye_color"))
     else:
         print("Wrong location: " + pony.get("location"))
         points = None
