@@ -23,8 +23,8 @@ def write(input_file: str, kind: str):
     print(f"output filename: {output_filename}")
     output_file = open(output_filename, "w")
     separator = ("-" * 128)
-    title_line = ("PLACE" + " " * 5 + "POINTS" + " " * 4 + "NAME" + " " * 16 + "KIND" + " " * 16 + "COAT COLOR" + (" " *
-                  10) + "MANE COLOR" + " " * 10 + "EYE COLOR" + " " * 11 + "LOCATION")
+    title_line = ("PLACE" + " " * 5 + "POINTS" + " " * 4 + "NAME" + " " * 16 + "KIND" + " " * 16 + "COAT COLOR"
+                  + " " * 10 + "MANE COLOR" + " " * 10 + "EYE COLOR" + " " * 11 + "LOCATION")
     new_line = "\n"
     table_contents = f"{title_line}\n{separator}\n{new_line.join(format_line(unformatted_table_content))}"
     output_file.write(table_contents)
