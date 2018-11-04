@@ -8,18 +8,49 @@ def write(input_file: str, kind: str):
     """Write."""
     pony_value_list = read(input_file)
     print(f"Pony value list:    {pony_value_list}")
-    print(f"Filter by kind:     {(filter_by_kind(pony_value_list, kind))}")
-    filtered_value_list = filter_by_location(pony_value_list)
-    print(f"Filter by location: {filtered_value_list}")
-    print(f"Evaluate ponies:    {evaluate_ponies(filtered_value_list)}")
-    print(f"Sort by name:       {sort_by_name(filtered_value_list)}")
-    print(f"Sort by points:     {sort_by_points(filtered_value_list)}")
-    double_filtered_value_list = filter_by_kind(filtered_value_list, kind)
+    filtered_by_location = filter_by_location(pony_value_list)
+    print(f"Filter by location: {filtered_by_location}")
+    double_filtered_value_list = filter_by_kind(filtered_by_location, kind)
+    print(f"Filter by kind:     {double_filtered_value_list}")
     evaluated_ponies = evaluate_ponies(double_filtered_value_list)
-    sort_by_points(sort_by_name(evaluated_ponies))
+    print(f"Evaluate ponies:    {evaluated_ponies}")
+    sorted_by_name = sort_by_name(evaluated_ponies)
+    print(f"Sort by name:       {sorted_by_name}")
+    unformatted_table_content = sort_by_points(sorted_by_name)
+    print(f"Sort by points:     {unformatted_table_content}")
+
     output_filename = f"result_for_{kind}.txt"
     print(f"output filename: {output_filename}")
     output_file = open(output_filename, "w")
+    separator = ("-" * 128)
+    title_line = ("PLACE" + " " * 5 + "POINTS" + " " * 4 + "NAME" + " " * 16 + "KIND" + " " * 16 + "COAT COLOR" + " " *
+                  10 + "MANE COLOR" + " " * 10 + "EYE COLOR" + " " * 11 + "LOCATION")
+    new_line = "\n"
+    table_contents = f"{title_line}\n{separator}\n{new_line.join(get_main_content(unformatted_table_content))}"
+    output_file.write(table_contents)
+    output_file.close()
+
+
+def get_main_content(unformatted_table_content):
+    """Create main table content."""
+    main_content = []
+    for i in range(len(unformatted_table_content)):
+        main_content.append(f"""{i + 1}{
+        " " * (10 - len(str(i + 1)))}{
+        unformatted_table_content[i].get("points")}{
+        " " * (10 - len(str(unformatted_table_content[i].get("points"))))}{
+        unformatted_table_content[i].get("name")}{
+        " " * (20 - len(str(unformatted_table_content[i].get("name"))))}{
+        unformatted_table_content[i].get("kind")}{
+        " " * (20 - len(str(unformatted_table_content[i].get("kind"))))}{
+                unformatted_table_content[i].get("coat color")}{
+        " " * (20 - len(str(unformatted_table_content[i].get("coat color"))))}{
+                unformatted_table_content[i].get("mane color")}{
+        " " * (20 - len(str(unformatted_table_content[i].get("mane color"))))}{
+                unformatted_table_content[i].get("eye color")}{
+        " " * (20 - len(str(unformatted_table_content[i].get("eye color"))))}{
+                unformatted_table_content[i].get("location")}""")
+    return main_content
 
 
 def read(read_file: str) -> list:
@@ -27,8 +58,7 @@ def read(read_file: str) -> list:
     try:
         read_file = open(read_file, "r")
     except FileNotFoundError:
-        print("File not found!")
-        raise SystemExit
+        raise SystemExit("File not found!")
 #    print(read_file.readline())    # print messes files up, why?
     read_file = read_file.readlines()
     read_file = [line.strip() for line in read_file]    # removes whitespace
@@ -114,7 +144,6 @@ def get_points_for_color(color: str):
 
 def add_points(pony: dict) -> dict:
     """Add points from function get_points_for_color to pony attribute dictionary."""
-    points = 0
     evaluation_locations = {
         'coat_color': ['Town Hall', 'Theater', 'School of Friendship'],
         'mane_color': ['Schoolhouse', 'Crusaders Clubhouse', 'Golden Oak Library'],
