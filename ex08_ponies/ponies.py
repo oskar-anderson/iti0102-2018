@@ -2,7 +2,7 @@
 import base64
 import re
 import operator
-# 5
+# 6
 
 
 def write(input_file: str, kind: str):
