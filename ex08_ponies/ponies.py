@@ -1,12 +1,11 @@
-"""Ponies."""
+"""Make a ranked table of ponies."""
 import base64
 import re
 import operator
-# 25 still not loading, 16 was an improvement.
 
 
 def write(input_file: str, kind: str):
-    """Write."""
+    """Main function for making pony table"""
     pony_value_list = read(input_file)
     print(f"Pony value list:    {pony_value_list}")
     filtered_by_location = filter_by_location(pony_value_list)
