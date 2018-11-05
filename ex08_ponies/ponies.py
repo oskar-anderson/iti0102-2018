@@ -126,7 +126,7 @@ def filter_by_kind(ponies: list, kind: str) -> list:
     """Filter all ponies leaving the ones with matching kinds."""
     filtered_ponies_by_kind = []
     print(ponies)
-    for i in range(len(ponies)):
+    for i in range(2, len(ponies)):
         if ponies[i].get("kind") == kind:
             filtered_ponies_by_kind.append(ponies[i])
     return filtered_ponies_by_kind
