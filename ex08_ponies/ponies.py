@@ -99,7 +99,7 @@ def extract_information(line: str) -> dict:
 def filter_by_location(ponies: list) -> list:
     """Remove ponies with location value "None"."""
     filtered_ponies_by_loc = []
-    for i in range(0, len(ponies)):
+    for i in range(len(ponies)):
         if ponies[i].get("location") == "None":
             pass
         else:
@@ -126,7 +126,7 @@ def filter_by_kind(ponies: list, kind: str) -> list:
     """Filter all ponies leaving the ones with matching kinds."""
     filtered_ponies_by_kind = []
     print(ponies)
-    for i in range(2, len(ponies)):
+    for i in range(0, len(ponies)):
         if ponies[i].get("kind") == kind:
             filtered_ponies_by_kind.append(ponies[i])
     return filtered_ponies_by_kind
