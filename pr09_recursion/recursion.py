@@ -37,9 +37,9 @@ def loop_reverse(s: str) -> str:
     :return: reverse of s
     """
     reversed_string_list = []
-    string_lenght = (len(s)) - 1
+    string_lenght_minus_one = len(s) - 1
     for i in range(len(s)):
-        reversed_string_list.append(s[string_lenght - i])
+        reversed_string_list.append(s[string_lenght_minus_one - i])
     new_string = "".join(reversed_string_list)
     return new_string
 
