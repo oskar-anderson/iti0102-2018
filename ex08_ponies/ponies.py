@@ -19,7 +19,7 @@ def write(input_file: str, kind: str):
     unformatted_table_content = sort_by_points(sorted_by_name)
     print(f"Sort by points:     {unformatted_table_content}")
 
-    output_filename = f"result_for_{kind}.txt"
+    output_filename = f"results_for_{kind}.txt"
     print(f"output filename: {output_filename}")
     output_file = open(output_filename, "w")
     separator = ("-" * 128)
@@ -58,18 +58,18 @@ def read(read_file: str) -> list:
     """Read file and return list of decoded dictionaries."""
     try:
         read_file = open(read_file, "r")
+        #    print(read_file.readline())    # print messes files up, why?
+        read_file = read_file.readlines()
+        read_file = [line.strip() for line in read_file]  # removes whitespace
+        #    return extract_information(decode(read_file[2]))   # 0 and 1 are title line and separator
+        pony_value_list = []
+        for i in range(2, len(read_file)):
+            decoded_line = decode(read_file[i])
+            attribute_dict = extract_information(decoded_line)
+            pony_value_list.append(attribute_dict)
+        return pony_value_list
     except FileNotFoundError:
         raise SystemExit("File not found!")
-#    print(read_file.readline())    # print messes files up, why?
-    read_file = read_file.readlines()
-    read_file = [line.strip() for line in read_file]    # removes whitespace
-#    return extract_information(decode(read_file[2]))   # 0 and 1 are title line and separator
-    pony_value_list = []
-    for i in range(2, len(read_file)):
-        decoded_line = decode(read_file[i])
-        attribute_dict = extract_information(decoded_line)
-        pony_value_list.append(attribute_dict)
-    return pony_value_list
 
 
 def decode(line: str) -> str:
@@ -193,4 +193,4 @@ def sort_by_points(ponies: list) -> list:
 if __name__ == '__main__':
     print(decode('TWF1ZCBQb21tZWwgICAgICAgICBVbmljb3JuICAgICAgICAgICAgIHBpbmsgICAgICAgICAgICAgICAgZ3JlZW4gICAgICAgICA'
                  + 'gICAgICBjeWFuICAgICAgICAgICAgICAgIENhc3RsZSBvZiBGcmllbmRzaGlw'))
-    print(write("näidis_sisendfail.txt", "Alicorn"))
+    print(write("näidis_sisendfail.txt", "Earth"))
