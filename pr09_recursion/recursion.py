@@ -10,9 +10,8 @@ def recursive_sum(numbers: list) -> int:
     """
     if not numbers:
         return 0
-    place_in_list = 0
-    if numbers[place_in_list] % 2 == 0:
-        return recursive_sum(numbers[1:]) + numbers[place_in_list]
+    if numbers[0] % 2 == 0:
+        return recursive_sum(numbers[1:]) + numbers[0]
     else:
         return recursive_sum(numbers[1:])
 
@@ -53,8 +52,8 @@ def recursive_reverse(s: str) -> str:
     """
     if s == "":
         return ""
-    string_lenght = len(s) - 1
-    return s[string_lenght] + recursive_reverse(s[:string_lenght])
+    string_lenght_minus_one = len(s) - 1
+    return s[string_lenght_minus_one] + recursive_reverse(s[:string_lenght_minus_one])
 
 
 if __name__ == '__main__':
