@@ -5,7 +5,7 @@ import operator
 
 
 def write(input_file: str, kind: str):
-    """Main function for making pony table"""
+    """Main function for making pony table."""
     pony_value_list = read(input_file)
     print(f"Pony value list:    {pony_value_list}")
     filtered_by_location = filter_by_location(pony_value_list)
@@ -99,7 +99,7 @@ def extract_information(line: str) -> dict:
 def filter_by_location(ponies: list) -> list:
     """Remove ponies with location value "None"."""
     filtered_ponies_by_loc = []
-    for i in range(len(ponies)):
+    for i in range(0, len(ponies)):
         if ponies[i].get("location") == "None":
             pass
         else:
