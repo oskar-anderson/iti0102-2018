@@ -2,7 +2,7 @@
 import base64
 import re
 import operator
-# 20 still not loading
+# 21 still not loading, 16 was an improvement.
 
 
 def write(input_file: str, kind: str):
