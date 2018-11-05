@@ -28,7 +28,7 @@ def write(input_file: str, kind: str):
     new_line = "\n"
     formatted_table = []
     for i in range(len(unformatted_table_content)):
-        formatted_table.append(format_line(unformatted_table_content[i], i))
+        formatted_table.append(format_line(unformatted_table_content[i], i + 1))
     table_contents = f"{title_line}\n{separator}\n{new_line.join(formatted_table)}"
     output_file.write(table_contents)
     output_file.close()
@@ -36,8 +36,8 @@ def write(input_file: str, kind: str):
 
 def format_line(pony: dict, place: int) -> str:
     """Format main table content."""
-    main_content = (f"""{str(place + 1)}{
-    str(" " * (10 - len(str(place + 1))))}{
+    main_content = (f"""{str(place)}{
+    str(" " * (10 - len(str(place))))}{
     str(pony.get("points"))}{
     " " * (10 - len(str(pony.get("points"))))}{
     pony.get("name")}{
@@ -126,7 +126,7 @@ def filter_by_kind(ponies: list, kind: str) -> list:
     """Filter all ponies leaving the ones with matching kinds."""
     filtered_ponies_by_kind = []
     print(ponies)
-    for i in range(1, len(ponies)):
+    for i in range(len(ponies)):
         if ponies[i].get("kind") == kind:
             filtered_ponies_by_kind.append(ponies[i])
     return filtered_ponies_by_kind
@@ -194,4 +194,4 @@ def sort_by_points(ponies: list) -> list:
 if __name__ == '__main__':
     print(decode('TWF1ZCBQb21tZWwgICAgICAgICBVbmljb3JuICAgICAgICAgICAgIHBpbmsgICAgICAgICAgICAgICAgZ3JlZW4gICAgICAgICA'
                  + 'gICAgICBjeWFuICAgICAgICAgICAgICAgIENhc3RsZSBvZiBGcmllbmRzaGlw'))
-    print(write("näidis_sisendfail.txt", "Earth"))
+    print(write("näidis_sisendfail.txt", "Alicorn"))
