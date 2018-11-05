@@ -4,6 +4,7 @@
 def recursive_sum(numbers: list) -> int:
     """
     Find out the sum of all the even numbers using recursion.
+
     :param numbers: list of randomly ordered numbers
     :return: sum of even numbers
     """
