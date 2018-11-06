@@ -48,7 +48,7 @@ def count_portions(number_of_participants: int, day: int) -> int:
 #        number_of_participants -= 1
 
 
-def names_to_be_eliminated(points_dict: dict, names: set=None, lowest_score: int=None) -> set:
+def names_to_be_eliminated(points_dict: dict, names: set = None, lowest_score: int = None) -> set:
     """
     Recursively find the names that are to be eliminated.
 
@@ -93,7 +93,7 @@ def names_to_be_eliminated(points_dict: dict, names: set=None, lowest_score: int
     return names_to_be_eliminated(new_dict, names, lowest_score)
 
 
-def people_in_the_know(hours_passed, cache: dict=None) -> int:
+def people_in_the_know(hours_passed, cache: dict = None) -> int:
     """
     Return the number of people who know a rumor given the hours passed from the initial release.
 
@@ -125,7 +125,7 @@ def people_in_the_know(hours_passed, cache: dict=None) -> int:
     return people_in_the_know(hours_passed - 1) + people_in_the_know(hours_passed - 2)
 
 
-def traversable_coordinates(world_map: list, coord: tuple=(0, 0), traversable_coords: set=None) -> set:
+def traversable_coordinates(world_map: list, coord: tuple = (0, 0), traversable_coords: set = None) -> set:
     """
     Return the coordinates that are traversable by humans or adjacent to traversable coordinates.
 
@@ -225,11 +225,13 @@ if __name__ == '__main__':
     print(traversable_coordinates([["", "", ""]], (5, 2)) == set())
     print(traversable_coordinates([["1", "1", ""]], (-4, -9)) == set())
     print(traversable_coordinates([["1", [], "1"]], (0, 1)) == set())
-    world = [["1", "1", "1", "1", "1"],
-             ["1", "1", "1",  "", "1"],
-             ["1", "1",  "", "1", "1"],
-             ["1", "1",  "", "1", "1"],
-             ["1", "1", "1", "1", "1"]]
+    world = [
+            ["1", "1", "1", "1", "1"],
+            ["1", "1", "1",  "", "1"],
+            ["1", "1",  "", "1", "1"],
+            ["1", "1",  "", "1", "1"],
+            ["1", "1", "1", "1", "1"]
+    ]
 
     traversable = {(0, 2), (0, 3), (0, 4),
                    (1, 1), (1, 2), (1, 3), (1, 4),
