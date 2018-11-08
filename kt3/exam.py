@@ -1,6 +1,5 @@
 """KT3."""
 import re
-# push failed
 
 
 def duplicate_last(nums: list) -> list:
@@ -42,7 +41,8 @@ def list_query(data: list, query_set: set) -> dict:
     for key in query_set:
         # print(key)
         # print(data.count(key))
-        counting_dict[key] = int(data.count(key) - data.count(True) * 0.5 - data.count(False) * 0.5)
+        number_of_true_false = str(data).count("True") + (str(data).count("False"))
+        counting_dict[key] = int(data.count(key)) - number_of_true_false
     return counting_dict
 
 
@@ -71,11 +71,13 @@ if __name__ == '__main__':
     # print(duplicate_last([1, 2, 3]))
     # print(duplicate_last([7]))
     # print(duplicate_last([]))
+
     # print(list_query(["a", "b", "b", "c"], {"a", "b"}))  # {"a": 1, "b": 2}
     # print(list_query(["a", "b", "b", "c"], {"a", "d"}))  # {"a": 1, "d": 0}
     # print(list_query(["a", "b", "b", "c"], set()))  # {}
-    # print(list_query([], {"a", "b"}))  # {"a": 1, "b": 2}
-    # print(list_query([1, True], {1}))  # {1: 1}
-    print(sum_numbers("abc123xyz"))  # 123
-    print(sum_numbers("aa11b33"))  # 44
-    print(sum_numbers("7 11"))  # 18
+    print(list_query([], {"a", "b"}))  # {"a": 1, "b": 2}
+    print(list_query([1, True], {1}))  # {1: 1}
+
+    # print(sum_numbers("abc123xyz"))  # 123
+    # print(sum_numbers("aa11b33"))  # 44
+    # print(sum_numbers("7 11"))  # 18
