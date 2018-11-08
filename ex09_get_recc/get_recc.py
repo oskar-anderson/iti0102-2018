@@ -1,6 +1,5 @@
 """Make life easier whilst volunteering in a French language camp."""
 import math
-# from math import sqrt
 
 
 def count_portions(number_of_participants: int, day: int) -> int:
@@ -83,14 +82,14 @@ def names_to_be_eliminated(points_dict: dict, names: set = None, lowest_score: i
         names = set()
         names.add(keys[0])
     else:
-        print("This line should not be reached!")
+        print("This should not be reached!")
     if values[0] < lowest_score:
         lowest_score = values[0]
     del keys[0]
     del values[0]
-    new_dict = dict(zip(keys, values))
-    print(f"New dict: {new_dict}, Names: {names}, Lowest score: {lowest_score}")
-    return names_to_be_eliminated(new_dict, names, lowest_score)
+    new_points_dict = dict(zip(keys, values))
+    print(f"New dict: {new_points_dict}, Names: {names}, Lowest score: {lowest_score}")
+    return names_to_be_eliminated(new_points_dict, names, lowest_score)
 
 
 def people_in_the_know(hours_passed, cache: dict = None) -> int:
@@ -168,31 +167,53 @@ def traversable_coordinates(world_map: list, coord: tuple = (0, 0), traversable_
             coordinate tuples with respect to starting coord
     """
     try:
-        if world_map[coord[0]][coord[1]] != "":
+        if world_map[coord[0]][coord[1]] != "check this" and world_map[coord[0]][coord[1]] != "":
             return set()
     except IndexError:
         return set()
 
+    possible_moves = [
+        [-1, -1], [-1, 0], [-1, 1],
+        [0, -1], [0, 1],
+        [1, -1], [1, 0], [1, 1]
+    ]
+    print(f"Given world map: {world_map}")
+    row, column = coord
+    print(f"row: {row}, column: {column}")
+    print(f"row length: {len(world_map[row])}, column length: {len(world_map)}")
+    if traversable_coords is None:
+        traversable_coords = set()
+    for i in range(8):
+        if world_map[row + possible_moves[i][0]][column + possible_moves[i][1]] == "" or\
+                world_map[row + possible_moves[i][0]][column + possible_moves[i][1]] == "1" and not\
+                column + possible_moves[i][1] == -1 or not row + possible_moves[i][0] == -1 or not\
+                column + possible_moves[i][1] == len(world_map[row][column]) or not\
+                row + possible_moves[i][0] == len(world_map[row]):                  # last 3 lines are OoB check
+            if world_map[row + possible_moves[i][0]][column + possible_moves[i][1]] == "" or\
+                    world_map[row + possible_moves[i][0]][column + possible_moves[i][1]] == "check this":
+                world_map[row + possible_moves[i][0]][column + possible_moves[i][1]] = "check this"
+                traversable_coords.add((row + possible_moves[i][0], column + possible_moves[i][1]))
+            elif world_map[row + possible_moves[i][0]][column + possible_moves[i][1]] == "1":
+                world_map[row + possible_moves[i][0]][column + possible_moves[i][1]] = "border"
+            else:
+                pass
+    print(f"traversable coords: {traversable_coords}")
+    world_map[row][column] = "been here"
+    print(world_map)
+    new_coord = None    # This will not be used.
     if traversable_coords:
-        pass
-    traversable_coords = set()
-    centers = set()
-    for y in range(len(world_map)):
-        for x in range(len(world_map[y])):
-            if world_map[y][x] == "":
-                centers.add((y, x))
-    print(f"centers: {centers}")
+        for new_coord in traversable_coords:
+            pass
+    traversable_coords.discard(new_coord)
+    if new_coord is not None:
+        return traversable_coordinates(world_map, new_coord, traversable_coords)
+    print(f"final world map: {world_map}")
+    for row2 in range(len(world_map)):
+        for column2 in range(len(world_map[row2])):
+            if world_map[row2][column2] == "been here" or world_map[row2][column2] == "border":
+                traversable_coords.add((row2, column2))
+    print(traversable_coords)
     return traversable_coords
-#    y, x = coord[0], coord[1]
-#    for y in range(len(world_map)):
-#        for x in range(len(world_map)):
-#            if y + 1 != len(world_map) and world_map[y + 1][x] == "":
-#            if y + 1 != len(world_map) and x + 1 != len(world_map[y]) and world_map[y + 1][x + 1] == "":
-#            if x + 1 != len(world_map[y]) and world_map[y][x + 1] == "":
-#    for y in range(len(world_map)):
-#        traversable_coords.add()
-#        for x in range(len(world_map[y])):
-#            (world_map[y][x])
 
 
 if __name__ == '__main__':
@@ -220,8 +241,21 @@ if __name__ == '__main__':
     print(people_in_the_know(7) == 13)
     print()
     """
+    world = [["1", "1", "1", "1", "1"],
+             ["1", "1", "1",  "", "1"],
+             ["1", "1",  "", "1", "1"],
+             ["1", "1",  "", "1", "1"],
+             ["1", "1", "1", "1", "1"]]
+
+    traversable = {(0, 2), (0, 3), (0, 4),
+                   (1, 1), (1, 2), (1, 3), (1, 4),
+                   (2, 1), (2, 2), (2, 3), (2, 4),
+                   (3, 1), (3, 2), (3, 3),
+                   (4, 1), (4, 2), (4, 3)}
     print(traversable_coordinates([]) == set())
     print(traversable_coordinates([[]]) == set())
     print(traversable_coordinates([["", "", ""]], (5, 2)) == set())
     print(traversable_coordinates([["1", "1", ""]], (-4, -9)) == set())
     print(traversable_coordinates([["1", [], "1"]], (0, 1)) == set())
+    print("the real test:")
+    print(traversable_coordinates(world, (2, 2)) == traversable)
