@@ -49,6 +49,7 @@ def list_query(data: list, query_set: set) -> dict:
 def sum_numbers(s):
     """
     Given a string, return the sum of the numbers appearing in the string, ignoring all other characters.
+
     A number is a series of 1 or more digit chars in a row.
 
     sum_numbers("abc123xyz") => 123
