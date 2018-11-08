@@ -172,13 +172,15 @@ def traversable_coordinates(world_map: list, coord: tuple = (0, 0), traversable_
     except IndexError:
         return set()
 
+    coord = turn_negative_coord_positive(world_map, coord)
+
     traversable_coords, world_map = create_set_of_coords_to_check(world_map, coord, traversable_coords)
 
-    print(f"traversable coords: {traversable_coords}")
     current_row, current_column = coord
+    print(f"traversable coords: {traversable_coords}")
     world_map[current_row][current_column] = "been here"
-    print(world_map)
-    new_coord = None    # This will not be used.
+    print(f"current world map: {world_map}")
+    new_coord = None
     if traversable_coords:
         new_coord = traversable_coords.pop()
     if new_coord is not None:
@@ -192,8 +194,19 @@ def traversable_coordinates(world_map: list, coord: tuple = (0, 0), traversable_
     return traversable_coords
 
 
+def turn_negative_coord_positive(world_map, coord):
+    """Turn negative list position in coord to positive."""
+    current_row, current_column = coord
+    while current_row < 0:
+        current_row = len(world_map) + current_row
+    while current_column < 0:
+        current_column = len(world_map[current_row]) + current_column
+    coord = (current_row, current_column)
+    return coord
+
+
 def create_set_of_coords_to_check(world_map, coord, traversable_coords):
-    """Modify world map and give ccordinates of ""."""
+    """Modify world map and give coordinates of ""."""
     possible_moves = [
         [-1, -1], [-1, 0], [-1, 1],
         [0, -1], [0, 1],
@@ -206,12 +219,16 @@ def create_set_of_coords_to_check(world_map, coord, traversable_coords):
     print(f"current_row: {current_row}, current_column: {current_column}")
     print(f"row length: {len(world_map[current_row])}, column length: {len(world_map)}")
 
+    error_check = str(0)
+
     if traversable_coords is None:
         traversable_coords = set()
     for i in range(8):
-        if current_column + possible_moves[i][1] != -1 and current_row + possible_moves[i][0] != -1 and\
-                current_column + possible_moves[i][1] != len(world_map[current_row]) and\
-                current_row + possible_moves[i][0] != len(world_map):  # OoB check
+        if current_column + possible_moves[i][1] != -1 and current_row + possible_moves[i][0] != -1:
+            try:
+                error_check += str(world_map[current_row + possible_moves[i][0]][current_column + possible_moves[i][1]])
+            except IndexError:
+                continue
             if world_map[current_row + possible_moves[i][0]][current_column + possible_moves[i][1]] == "" or\
                     world_map[current_row + possible_moves[i][0]][current_column + possible_moves[i][1]] == "1":
                 if world_map[current_row + possible_moves[i][0]][current_column + possible_moves[i][1]] == "" or\
@@ -283,4 +300,16 @@ if __name__ == '__main__':
                    (2, 0), (2, 1), (2, 2), (2, 3), (2, 4),
                    (3, 0), (3, 1), (3, 2), (3, 3), (3, 4),
                    (4, 0), (4, 1), (4, 2), (4, 3), (4, 4)}
-    print(traversable_coordinates(world2, (1, 1)) == traversable)
+    print(traversable_coordinates(world2, (-4, -4)) == traversable)
+    print()
+
+    world3 = [
+        ["", "1", "1", "1", "1"],
+        ["", "1", "", "1", "1"],
+        ["1", ""],
+    ]
+    traversable = {(0, 0), (0, 1), (0, 2), (0, 3),
+                   (1, 0), (1, 1), (1, 2), (1, 3),
+                   (2, 0), (2, 1)}
+
+    print(traversable_coordinates(world3, (0, 0)) == traversable)
