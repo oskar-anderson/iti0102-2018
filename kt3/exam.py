@@ -1,5 +1,6 @@
 """KT3."""
 import re
+# push failed
 
 
 def duplicate_last(nums: list) -> list:
