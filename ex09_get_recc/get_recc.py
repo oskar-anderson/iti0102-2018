@@ -210,8 +210,8 @@ def create_set_of_coords_to_check(world_map, coord, traversable_coords):
         traversable_coords = set()
     for i in range(8):
         if current_column + possible_moves[i][1] != -1 and current_row + possible_moves[i][0] != -1 and\
-                    current_column + possible_moves[i][1] != len(world_map[current_row][current_column]) and\
-                    current_row + possible_moves[i][0] != len(world_map[current_row]):  # OoB check
+                current_column + possible_moves[i][1] != len(world_map[current_row]) and\
+                current_row + possible_moves[i][0] != len(world_map):  # OoB check
             if world_map[current_row + possible_moves[i][0]][current_column + possible_moves[i][1]] == "" or\
                     world_map[current_row + possible_moves[i][0]][current_column + possible_moves[i][1]] == "1":
                 if world_map[current_row + possible_moves[i][0]][current_column + possible_moves[i][1]] == "" or\
@@ -252,9 +252,9 @@ if __name__ == '__main__':
     """
     world = [
         ["1", "1", "1", "1", "1"],
-        ["1", "1", "1",  "", "1"],
-        ["1", "1",  "", "1", "1"],
-        ["1", "1",  "", "1", "1"],
+        ["1", "1", "1", "", "1"],
+        ["1", "1", "", "1", "1"],
+        ["1", "1", "", "1", "1"],
         ["1", "1", "1", "1", "1"]
     ]
 
@@ -273,7 +273,7 @@ if __name__ == '__main__':
     print()
     world2 = [
         ["1", "1", "1", "1", "1"],
-        ["1", "", "1",  "1", "1"],
+        ["1", "", "1", "1", "1"],
         ["1", "", "1", "1", ""],
         ["", "1", "1", "", "1"],
         ["1", "", "", "1", "1"]
