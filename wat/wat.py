@@ -3,7 +3,7 @@
 first_special_ans3 = [6, 4]
 first_special_ans4 = [4, 6]
 first_special_ans5 = [4, 6]
-first_general_ans = [8, 11, 12, 14, 16, 18]
+first_general_ans = [0, 8, 11, 12, 14, 16, 18]
 
 
 def first(n: int):
@@ -36,3 +36,4 @@ def last(n: int):
 if __name__ == '__main__':
     print(first(3))
     print(first(3))
+    print(first(2))
