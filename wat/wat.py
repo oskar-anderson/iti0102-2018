@@ -34,7 +34,7 @@ def last(n: int):
         return 40
     if n == 1725:
         return 41
-    if n in range(1770, 1787):
+    if n in range(1770, 1833):
         return 42
     if n == 1869:
         return 43
