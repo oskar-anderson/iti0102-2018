@@ -40,4 +40,4 @@ if __name__ == '__main__':
     print(first(-489))  # Expected: 12
     print(first(-1))  # Expected: 14
     print(first(0))  # Expected: 16
-    print(first(2505))
+    print(first(2505))  # Expected 18
