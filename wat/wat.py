@@ -26,7 +26,7 @@ def last(n: int):
         return 39
     if n == 1600:
         return 40
-    if n in range(1770, 1778):
+    if n in range(1770, 1779):
         return 42
 
 
