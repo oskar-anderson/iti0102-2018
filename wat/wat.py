@@ -18,26 +18,9 @@ def first(n: int):
 
 def last(n: int):
     """Last."""
-    if n == 1224:
-        return 34
-    if n == 1253:
-        return 35
-    if n == 1296:
-        return 36
-    if n == 1431:
-        return 37
-    if n in range(1445, 1487):
-        return 38
-    if n in range(1524, 1582):
-        return 39
-    if n == 1600:
-        return 40
-    if n == 1725:
-        return 41
-    if n in range(1770, 1833):
-        return 42
-    if n == 1869:
-        return 43
+    for i in range(10):
+        if n in range(1167 + 88 * i, 1255 + 88 * i):
+            return 34 + i
 
 
 if __name__ == '__main__':
@@ -51,3 +34,6 @@ if __name__ == '__main__':
     print(first(-1))  # Expected: 14
     print(first(0))  # Expected: 16
     print(first(2505))  # Expected 18
+
+    print()
+    print(last(1167))
