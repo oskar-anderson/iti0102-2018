@@ -20,16 +20,14 @@ def last(n: int):
     """Last."""
     if n == 1431:
         return 37
-    if n == 1445:
+    if n in range(1445, 1487):
         return 38
-    if n == 1486:
-        return 38
-    if n == 1524:
-        return 39
-    if n == 1581:
+    if n in range(1524, 1582):
         return 39
     if n == 1600:
         return 40
+    if n in range(1770, 1778):
+        return 42
 
 
 if __name__ == '__main__':
