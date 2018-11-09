@@ -10,17 +10,25 @@ def first(n: int):
     """First."""
     if n in range(3, 6):
         if n == 3:
-            return first_special_ans3.pop(0)
+            ans = first_special_ans3[0]
+            first_special_ans3.remove(ans)
+            return ans
         elif n == 4:
-            return first_special_ans4.pop(0)
+            ans = first_special_ans4[0]
+            first_special_ans4.remove(ans)
+            return ans
         else:
-            return first_special_ans5.pop(0)
+            ans = first_special_ans5[0]
+            first_special_ans5.remove(ans)
+            return ans
     else:
-        return first_general_ans.pop(0)
+        ans = first_general_ans[0]
+        first_general_ans.remove(ans)
+        return ans
 
 
 def last(n: int):
-    """Last"""
+    """Last."""
     if n:
         pass
 
