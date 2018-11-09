@@ -37,3 +37,8 @@ if __name__ == '__main__':
 
     print()
     print(last(1167))
+    print(last(1255))
+    print(last(1343))
+    print(last(1431))
+    print(last(1411))
+    print(last(1370))
