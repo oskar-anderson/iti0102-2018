@@ -1,6 +1,6 @@
 """wat."""
 
-first_special_ans = [4, 6]
+first_special_ans = [4, 6, 6]
 first_general_ans = [0, 2, 8, 11, 12, 14, 16, 18]
 
 
