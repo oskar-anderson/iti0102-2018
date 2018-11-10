@@ -37,7 +37,6 @@ if __name__ == '__main__':
 
     print()
 
-
     def last2(n: int, starting, period, ans=34):
         """Last."""
         for i in range(10):
