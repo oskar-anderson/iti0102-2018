@@ -19,7 +19,7 @@ def first(n: int):
 def last(n: int):
     """Last."""
     for i in range(10):
-        if n in range(1167 + 88 * i, 1255 + 88 * i):
+        if n in range(1096 + 84 * i, 1180 + 84 * i):
             return 34 + i
 
 
@@ -36,9 +36,32 @@ if __name__ == '__main__':
     print(first(2505))  # Expected 18
 
     print()
-    print(last(1167))
-    print(last(1255))
-    print(last(1343))
-    print(last(1431))
+
+
+    def last2(n: int, starting, period, ans=34):
+        """Last."""
+        for i in range(10):
+            if n in range(starting + period * i, starting + period + period * i):
+                return ans + i
+
+    for s in range(1060, 1190):
+        for interval in range(60, 100):
+            if last2(1167, s, interval) == 34 and (last2(1253, s, interval)) == 35\
+                    and(last2(1296, s, interval)) == 36\
+                    and (last2(1370, s, interval)) == 37 and (last2(1431, s, interval)) == 37\
+                    and (last2(1445, s, interval)) == 38 and (last2(1498, s, interval)) == 38\
+                    and (last2(1524, s, interval)) == 39 and (last2(1581, s, interval)) == 39\
+                    and (last2(1600, s, interval) == 40)\
+                    and (last2(1725, s, interval)) == 41 and (last2(1770, s, interval)) == 42\
+                    and (last2(1832, s, interval)) == 42 and (last2(1882, s, interval)) == 43\
+                    and (last2(1929, s, interval)) == 43:
+                print(s, interval)
+
+    print()
+    print(last(1165))
+    print(last(1253))
+    print(last(1341))
+    print(last(1429))
+
     print(last(1411))
     print(last(1370))
