@@ -3,13 +3,11 @@ from typing import Any
 
 
 class StackOverflowException(Exception):
-    """Create a new exception."""
-    pass
+    """Create a new exception called "StackOverflowException"."""
 
 
 class StackUnderflowException(Exception):
-    """Create a new exception."""
-    pass
+    """Create a new exception called "StackUnderflowException"."""
 
 
 class Stack:
