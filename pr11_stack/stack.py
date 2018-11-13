@@ -1,11 +1,14 @@
+"""Create a stack class."""
 from typing import Any
 
 
 class StackOverflowException(Exception):
+    """Create a new exception."""
     pass
 
 
 class StackUnderflowException(Exception):
+    """Create a new exception."""
     pass
 
 
@@ -27,13 +30,13 @@ class Stack:
 
         If stack has no more room, raises StackOverflowException.
         """
-        print(f"Capacity: {self.capacity}")
-        print(f"Element to add: {item}")
+        # print(f"Capacity: {self.capacity}")
+        # print(f"Element to add: {item}")
         if len(self.stack_list) >= self.capacity:
             raise StackOverflowException()
         else:
             self.stack_list.insert(0, item)
-            print(f"New list: {self.stack_list}")
+            # print(f"New list: {self.stack_list}")
 
     def pop(self) -> Any:
         """
@@ -44,7 +47,7 @@ class Stack:
         if len(self.stack_list) == 0:
             raise StackUnderflowException()
         else:
-            print(f"Popped item: {self.stack_list[0]}")
+            # print(f"Popped item: {self.stack_list[0]}")
             return self.stack_list.pop(0)
 
     def peek(self) -> Any:
@@ -61,9 +64,11 @@ class Stack:
             return self.stack_list[0]
 
     def is_empty(self) -> bool:
+        """Return True/False depending on if stack is empty or not."""
         return True if len(self.stack_list) == 0 else False
 
     def is_full(self) -> bool:
+        """Return True/False depending on if stack is full or not."""
         return True if self.capacity == len(self.stack_list) else False
 
     def __str__(self) -> str:
@@ -76,10 +81,10 @@ class Stack:
             "Stack(capacity={capacity})"
         """
         if Stack.peek(self) is not None:
-            print(f"Stack(capacity={self.capacity}, top_element={Stack.peek(self)})")
+            # print(f"Stack(capacity={self.capacity}, top_element={Stack.peek(self)})")
             return f"Stack(capacity={self.capacity}, top_element={Stack.peek(self)})"
         else:
-            print(f"Stack(capacity={self.capacity})")
+            # print(f"Stack(capacity={self.capacity})")
             return f"Stack(capacity={self.capacity})"
 
 
