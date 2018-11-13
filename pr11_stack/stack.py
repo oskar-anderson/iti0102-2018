@@ -126,7 +126,6 @@ if __name__ == '__main__':
 
     print()
     print("First part is done, should get 4 points for that.")
-    print()
 
     # check peek function
     peek_stack = Stack(stack_capacity)
