@@ -28,13 +28,13 @@ class Stack:
 
         If stack has no more room, raises StackOverflowException.
         """
-        # print(f"Capacity: {self.capacity}")
-        # print(f"Element to add: {item}")
+        print(f"Capacity: {self.capacity}")
+        print(f"Element to add: {item}")
         if len(self.stack_list) >= self.capacity:
             raise StackOverflowException()
         else:
             self.stack_list.insert(0, item)
-            # print(f"New list: {self.stack_list}")
+            print(f"New list: {self.stack_list}")
 
     def pop(self) -> Any:
         """
@@ -45,7 +45,7 @@ class Stack:
         if len(self.stack_list) == 0:
             raise StackUnderflowException()
         else:
-            # print(f"Popped item: {self.stack_list[0]}")
+            print(f"Popped item: {self.stack_list[0]}")
             return self.stack_list.pop(0)
 
     def peek(self) -> Any:
@@ -55,10 +55,10 @@ class Stack:
         If stack is empty returns None.
         """
         if len(self.stack_list) == 0:
-            # print(f"Stack is empty: {self.stack_list}")
+            print(f"Stack is empty: {self.stack_list}")
             return None
         else:
-            # print(f"Most recently added element: {self.stack_list[0]}")
+            print(f"Most recently added element: {self.stack_list[0]}")
             return self.stack_list[0]
 
     def is_empty(self) -> bool:
@@ -79,10 +79,10 @@ class Stack:
             "Stack(capacity={capacity})"
         """
         if Stack.peek(self) is not None:
-            # print(f"Stack(capacity={self.capacity}, top_element={Stack.peek(self)})")
+            print(f"Stack(capacity={self.capacity}, top_element={Stack.peek(self)})")
             return f"Stack(capacity={self.capacity}, top_element={Stack.peek(self)})"
         else:
-            # print(f"Stack(capacity={self.capacity})")
+            print(f"Stack(capacity={self.capacity})")
             return f"Stack(capacity={self.capacity})"
 
 
