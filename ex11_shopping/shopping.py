@@ -51,7 +51,7 @@ class Customer:
         self.name = name
         self.age = age
         self.money = money
-        self.bought_items = []
+        self.items = []
         print(f"Name: {self.name}, age: {self.age}, money: {self.money}")
 
     def add_item(self, product: Product, amount: int) -> None:
@@ -62,8 +62,8 @@ class Customer:
         :param amount: amount
         """
         for i in range(amount):
-            self.bought_items.append(product)
-        print(f"Bought items:{self.bought_items}")
+            self.items.append(product)
+        print(f"Bought items:{self.items}")
 
     def pay(self, money_to_pay: int) -> None:
         """
@@ -85,28 +85,28 @@ class Customer:
 
         :return: string
         """
-        formatted_bought_items = []
-        duplicates_removed = set(self.bought_items)
+        formatted_items = []
+        duplicates_removed = set(self.items)
         for i in range(len(duplicates_removed)):
             product_key = duplicates_removed.pop()
-            product_amount = self.bought_items.count(product_key)
+            product_amount = self.items.count(product_key)
             if product_amount == 1:
-                formatted_bought_items.append(product_key)
+                formatted_items.append(product_key)
             else:
                 end_length = (str(product_key).find(", price"))
                 product_key = str(product_key)[9:end_length] + "(" + str(product_amount) + ")"
                 # print(product_key)
-                formatted_bought_items.append(product_key)
-        # print(formatted_bought_items)
+                formatted_items.append(product_key)
+        # print(formatted_items)
         symbols_to_strip = "\'[]"
-        # formatted_bought_items = str(formatted_bought_items).strip(symbols_to_strip)  # water, 'chocolate(2)  why?
+        # formatted_items = str(formatted_items).strip(symbols_to_strip)  # water, 'chocolate(2)  why?
         while True:
-            formatted_bought_items = str(formatted_bought_items).strip(symbols_to_strip)
-            if formatted_bought_items.find("'") == -1:
+            formatted_items = str(formatted_items).strip(symbols_to_strip)
+            if formatted_items.find("'") == -1:
                 break
-            remove_character = formatted_bought_items.find("'")
-            formatted_bought_items = formatted_bought_items[:remove_character] + formatted_bought_items[remove_character + 1:]
-        return f"{self.name}'s items: {formatted_bought_items}; money: {self.money}."
+            remove_character = formatted_items.find("'")
+            formatted_items = formatted_items[:remove_character] + formatted_items[remove_character + 1:]
+        return f"{self.name}'s items: {formatted_items}; money: {self.money}."
 
 
 class Store:
@@ -191,27 +191,27 @@ class Store:
         :return: string
         """
         # return f"Store items: {self.products}; store money: {self.money}."
-        formatted_bought_items = []
+        formatted_items = []
         duplicates_removed = set(self.products)
         for i in range(len(duplicates_removed)):
             product_key = duplicates_removed.pop()
             product_amount = self.products.count(product_key)
             if product_amount == 1:
-                formatted_bought_items.append(product_key)
+                formatted_items.append(product_key)
             else:
                 end_length = (str(product_key).find(", price"))
                 product_key = str(product_key)[9:end_length] + "(" + str(product_amount) + ")"
                 print(product_key)
-                formatted_bought_items.append(product_key)
-        print(formatted_bought_items)
+                formatted_items.append(product_key)
+        print(formatted_items)
         symbols_to_strip = "\'[]"
         while True:
-            formatted_bought_items = str(formatted_bought_items).strip(symbols_to_strip)
-            remove_character = formatted_bought_items.find("'")
-            formatted_bought_items = formatted_bought_items[:remove_character] + formatted_bought_items[remove_character + 1:]
-            if formatted_bought_items.find("'") == -1:
+            formatted_items = str(formatted_items).strip(symbols_to_strip)
+            remove_character = formatted_items.find("'")
+            formatted_items = formatted_items[:remove_character] + formatted_items[remove_character + 1:]
+            if formatted_items.find("'") == -1:
                 break
-        return f"Store items: {formatted_bought_items}; store money: {self.money}."
+        return f"Store items: {formatted_items}; store money: {self.money}."
 
 
 if __name__ == "__main__":
