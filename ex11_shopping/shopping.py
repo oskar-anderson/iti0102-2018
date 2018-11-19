@@ -105,8 +105,7 @@ class Customer:
             if formatted_bought_items.find("'") == -1:
                 break
             remove_character = formatted_bought_items.find("'")
-            formatted_bought_items = formatted_bought_items[:remove_character] + formatted_bought_items[
-                                                                                 remove_character + 1:]
+            formatted_bought_items = formatted_bought_items[:remove_character] + formatted_bought_items[remove_character + 1:]
         return f"{self.name}'s items: {formatted_bought_items}; money: {self.money}."
 
 
@@ -129,9 +128,9 @@ class Store:
         :return: message
         """
         print(f"Products in store: {self.products}")
-        if store.check_product_availability(product, amount) is None:   # store is Store() in tester?
+        if self.check_product_availability(product, amount) is None:   # store is Store() in tester?
             pass
-        if store.allowed_to_buy(product, customer) is None:
+        if self.allowed_to_buy(product, customer) is None:
             pass
         if customer.pay(product.price * amount):
             pass
@@ -158,8 +157,8 @@ class Store:
         if product.name in ["beer", "tobacco"] and customer.age < 18:
             # print(product.name)
             # print(customer.age)
-            raise ProductCannotBeSold(f"You are too young to buy Product: {product.name}!")
-            # raise ProductCannotBeSold(f"You are too young to buy {product.name}!")
+            # raise ProductCannotBeSold(f"You are too young to buy Product: {product.name}!")
+            raise ProductCannotBeSold(f"You are too young to buy {product.name}!")
 
     def check_product_availability(self, product: Product, amount: int):
         """
@@ -182,7 +181,6 @@ class Store:
         Adding product to store.
 
         :param product:  product name
-        sel
         """
         self.products.append(product)
 
@@ -210,8 +208,7 @@ class Store:
         while True:
             formatted_bought_items = str(formatted_bought_items).strip(symbols_to_strip)
             remove_character = formatted_bought_items.find("'")
-            formatted_bought_items = formatted_bought_items[:remove_character] + formatted_bought_items[
-                                                                                 remove_character + 1:]
+            formatted_bought_items = formatted_bought_items[:remove_character] + formatted_bought_items[remove_character + 1:]
             if formatted_bought_items.find("'") == -1:
                 break
         return f"Store items: {formatted_bought_items}; store money: {self.money}."
