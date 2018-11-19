@@ -91,21 +91,11 @@ class Customer:
             product_key = duplicates_removed.pop()
             product_amount = self.items.count(product_key)
             if product_amount == 1:
-                formatted_items.append(product_key)
+                formatted_items.append(product_key.name)
             else:
-                end_length = (str(product_key).find(", price"))
-                product_key = str(product_key)[9:end_length] + "(" + str(product_amount) + ")"
-                # print(product_key)
+                product_key = product_key.name + f"({str(product_amount)})"
                 formatted_items.append(product_key)
-        # print(formatted_items)
-        symbols_to_strip = "\'[]"
-        # formatted_items = str(formatted_items).strip(symbols_to_strip)  # water, 'chocolate(2)  why?
-        while True:
-            formatted_items = str(formatted_items).strip(symbols_to_strip)
-            if formatted_items.find("'") == -1:
-                break
-            remove_character = formatted_items.find("'")
-            formatted_items = formatted_items[:remove_character] + formatted_items[remove_character + 1:]
+        formatted_items = ", ".join(formatted_items)
         return f"{self.name}'s items: {formatted_items}; money: {self.money}."
 
 
@@ -128,17 +118,14 @@ class Store:
         :return: message
         """
         print(f"Products in store: {self.products}")
-        if self.check_product_availability(product, amount) is None:   # store is Store() in tester?
+        if self.check_product_availability(product, amount) is None:
             pass
         if self.allowed_to_buy(product, customer) is None:
             pass
         if customer.pay(product.price * amount):
             pass
-        # if customer.money < product.price * amount:
-        #    raise ProductCannotBeSold("You do not have enough money to pay for chosen product!")
         self.amount += amount
         self.products.remove(product)
-        # print(self.products)
         customer.add_item(product, amount)
         self.money += product.price * amount
         return "Thank you for the purchase!"
@@ -155,8 +142,6 @@ class Store:
         :param customer: customer who makes the purchase
         """
         if product.name in ["beer", "tobacco"] and customer.age < 18:
-            # print(product.name)
-            # print(customer.age)
             # raise ProductCannotBeSold(f"You are too young to buy Product: {product.name}!")
             raise ProductCannotBeSold(f"You are too young to buy {product.name}!")
 
@@ -190,27 +175,17 @@ class Store:
 
         :return: string
         """
-        # return f"Store items: {self.products}; store money: {self.money}."
         formatted_items = []
         duplicates_removed = set(self.products)
         for i in range(len(duplicates_removed)):
             product_key = duplicates_removed.pop()
             product_amount = self.products.count(product_key)
             if product_amount == 1:
-                formatted_items.append(product_key)
+                formatted_items.append(product_key.name)
             else:
-                end_length = (str(product_key).find(", price"))
-                product_key = str(product_key)[9:end_length] + "(" + str(product_amount) + ")"
-                print(product_key)
+                product_key = product_key.name + f"({str(product_amount)})"
                 formatted_items.append(product_key)
-        print(formatted_items)
-        symbols_to_strip = "\'[]"
-        while True:
-            formatted_items = str(formatted_items).strip(symbols_to_strip)
-            remove_character = formatted_items.find("'")
-            formatted_items = formatted_items[:remove_character] + formatted_items[remove_character + 1:]
-            if formatted_items.find("'") == -1:
-                break
+        formatted_items = ", ".join(formatted_items)
         return f"Store items: {formatted_items}; store money: {self.money}."
 
 
@@ -231,7 +206,7 @@ if __name__ == "__main__":
     for _ in range(3):
         store.add_product(choco)
         store.add_product(pretzel)
-    print(store)   # Products: [beer, water, chocolate, pretzel, chocolate, pretzel, chocolate, pretzel] from store
+    print(store)
 
     print()
     print(store.buy(beer, 1, john))  # -> Thank you for the purchase!
