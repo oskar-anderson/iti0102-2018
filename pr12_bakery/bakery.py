@@ -101,9 +101,9 @@ class Bakery:
                 self.budget += 2 * len(name)
                 self.min_experience_level += 1
                 self.pastries.append([name, self.recipes[name]])
-                name = Pastry(name, self.recipes[name])
-                # print(name)
-                return name
+                pastry = Pastry(name, self.recipes[name])
+                print(pastry)
+                return pastry
             else:
                 print("No bakers!")
         else:
