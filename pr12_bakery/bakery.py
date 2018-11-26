@@ -27,7 +27,7 @@ class Pastry:
 
     def __repr__(self):
         """Enable print."""
-        return f"{self.name}"
+        return self.name
 
 
 class Bakery:
@@ -129,7 +129,6 @@ class Bakery:
                     sorted_pastries.append(pastry_product[0])
                     pastries_list.remove(pastry_product)
                     break
-        print(sorted_pastries[0])
         return sorted_pastries
 
     def get_bakers(self) -> list:
