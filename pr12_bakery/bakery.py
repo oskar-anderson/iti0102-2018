@@ -56,7 +56,6 @@ class Bakery:
         print(baker)
         try:
             self.bakers.remove(baker)
-            del baker
         except ValueError:
             pass
 
