@@ -4,26 +4,34 @@ from copy import deepcopy
 
 
 class Baker:
+    """Bakers."""
     def __init__(self, name: str, experience_level: int, money: int):
+        """Class constructor."""
         self.name = name
         self.experience_level = experience_level
         self.money = money
 
     def __repr__(self):
+        """Enable print."""
         return f"Baker: {self.name}({self.experience_level})"
 
 
 class Pastry:
+    """Pastries."""
     def __init__(self, name: str, complexity_level: int):
+        """Class constructor."""
         self.name = name
         self.complexity_level = complexity_level
 
     def __repr__(self):
+        """Enable print."""
         return self.name
 
 
 class Bakery:
+    """Bakeries."""
     def __init__(self, name: str, min_experience_level: int, budget: int):
+        """Class constructor."""
         self.name = name
         self.min_experience_level = min_experience_level
         self.budget = budget
@@ -32,6 +40,7 @@ class Bakery:
         self.recipes = {}
 
     def add_baker(self, baker: Baker) -> Baker:
+        """Add baker to bakers list."""
         if baker.experience_level >= self.min_experience_level:
             self.bakers.append(baker)
             print(f"{baker} added.")
@@ -40,10 +49,13 @@ class Bakery:
             print("Exp level too low!")
 
     def remove_baker(self, baker: Baker):
+        """Remove baker from bakers list."""
         if baker in self.bakers:
             self.bakers.remove(baker)
 
     def add_recipe(self, name: str):
+        """Add recipe to recipe list if there are bakers in the bakery, bakery can afford to buy recipe and recipe
+        not already acquired."""
         if len(self.bakers) >= 1 and self.budget >= len(name) and name not in self.recipes:
             self.budget -= len(name)
             print(f"Current budget: {self.budget}")
@@ -61,6 +73,7 @@ class Bakery:
             print("Conditions not met!")
 
     def make_order(self, name: str) -> Pastry:
+        """Make pastry, assuming the bakery has the recipe and a qualified baker."""
         if name in self.recipes:
             # print(f"Recipe xp: {self.recipes[name]}")
             qualified_bakers = []
@@ -75,9 +88,13 @@ class Bakery:
             if len(qualified_bakers) != 0:
                 servicing_baker = qualified_bakers[-1]
                 print(f"Servicing baker: {servicing_baker}")
+                # print(servicing_baker.experience_level)
                 servicing_baker.experience_level += len(name)
+                # print(servicing_baker.experience_level)
                 self.budget += 2 * len(name)
+                # print(servicing_baker.money)
                 servicing_baker.money += 2 * len(name)
+                # print(servicing_baker.money)
                 self.min_experience_level += 1
                 self.pastries.append([name, self.recipes[name]])
                 pastry = Pastry(name, self.recipes[name])
@@ -88,6 +105,7 @@ class Bakery:
             print("No such recipe!")
 
     def get_recipes(self) -> dict:
+        """Return list of bakery recipes."""
         return self.recipes
         # recipe_dict = {}
         # for name, complexity_level in self.recipes.items():
@@ -95,6 +113,7 @@ class Bakery:
         # return recipe_dict
 
     def get_pastries(self) -> list:
+        """Sort and return pastries in descending order."""
         sorted_pastries = []
         pastries_list = deepcopy(self.pastries)
         print(pastries_list)
@@ -112,8 +131,9 @@ class Bakery:
         return sorted_pastries
 
     def get_bakers(self) -> list:
+        """Sort and return bakers in descending order."""
         sorted_bakers = []
-        print(f"Original bakers list:{self.bakers}")
+        # print(f"Original bakers list:{self.bakers}")
         bakers_list = deepcopy(self.bakers)
         for i in range(len(bakers_list)):
             highest_xp_level = -inf
@@ -128,7 +148,8 @@ class Bakery:
         return sorted_bakers
 
     def __repr__(self):
-        return f"Bakery {self.name}: {len(self.bakers)} Baker(s)"
+        """Enable print."""
+        return f"Bakery {self.name}: {len(self.bakers)} baker(s)"
 
 
 if __name__ == '__main__':
@@ -154,6 +175,10 @@ if __name__ == '__main__':
     bakery1.add_baker(polly)
     bakery1.add_baker(sam)
     bakery1.add_baker(emma)
+
+#    print(bakery1.get_bakers())
+#    bakery1.remove_baker(emma)
+#    print(bakery1.get_bakers())
 
     # Trying to make order when no recipes are in bakery
 
