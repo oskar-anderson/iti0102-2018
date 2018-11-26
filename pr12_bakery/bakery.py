@@ -53,13 +53,17 @@ class Bakery:
 
     def remove_baker(self, baker: Baker):
         """Remove baker from bakers list."""
-        if baker in self.bakers:
+        print(baker)
+        try:
             self.bakers.remove(baker)
+        except ValueError:
+            pass
 
     def add_recipe(self, name: str):
         """
-        Add recipe to recipe list if there are bakers in the bakery, bakery can afford to buy recipe and recipe
-        not already acquired.
+        Add recipe to recipe list if conditions are met.
+
+        Conditions: there are bakers in the bakery, bakery can afford to buy recipe and recipe not already acquired.
         """
         if len(self.bakers) >= 1 and self.budget >= len(name) and name not in self.recipes:
             self.budget -= len(name)
@@ -83,7 +87,6 @@ class Bakery:
             # print(f"Recipe xp: {self.recipes[name]}")
             qualified_bakers = []
             lowest_experience = inf
-            # print(self.bakers)
             for baker in self.bakers:
                 if self.recipes[name] <= baker.experience_level < lowest_experience:
                     qualified_bakers.append(baker)
@@ -94,11 +97,12 @@ class Bakery:
                 servicing_baker = qualified_bakers[-1]
                 print(f"Servicing baker: {servicing_baker}")
                 servicing_baker.experience_level += len(name)
-                self.budget += 2 * len(name)
                 servicing_baker.money += 2 * len(name)
+                self.budget += 2 * len(name)
                 self.min_experience_level += 1
                 self.pastries.append([name, self.recipes[name]])
                 pastry = Pastry(name, self.recipes[name])
+                print(pastry)
                 return pastry
             else:
                 print("No bakers!")
@@ -108,10 +112,6 @@ class Bakery:
     def get_recipes(self) -> dict:
         """Return list of bakery recipes."""
         return self.recipes
-        # recipe_dict = {}
-        # for name, complexity_level in self.recipes.items():
-        #     recipe_dict[name] = complexity_level
-        # return recipe_dict
 
     def get_pastries(self) -> list:
         """Sort and return pastries in descending order."""
@@ -178,7 +178,8 @@ if __name__ == '__main__':
     bakery1.add_baker(emma)
 
 #    print(bakery1.get_bakers())
-#    bakery1.remove_baker(emma)
+#    bakery1.remove_baker(sam)
+#    bakery1.remove_baker(sam)
 #    print(bakery1.get_bakers())
 
     # Trying to make order when no recipes are in bakery
@@ -235,3 +236,8 @@ if __name__ == '__main__':
     print()
     print(bakery2.get_bakers())  # [Baker: Megane(25), Baker: Megane(18), Baker: John(11)]
     # Magane was chosen to be the baker as the most closest experience (which is also greater than complexity) was 17.
+    print()
+    bakery2.make_order("biscuits")
+    bakery2.make_order("muffin")
+    bakery2.make_order("cupcake")
+    print(bakery2.get_pastries())
