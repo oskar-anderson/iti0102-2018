@@ -27,7 +27,7 @@ class Pastry:
 
     def __repr__(self):
         """Enable print."""
-        return self.name
+        return f"{self.name}"
 
 
 class Bakery:
@@ -56,6 +56,7 @@ class Bakery:
         print(baker)
         try:
             self.bakers.remove(baker)
+            del baker
         except ValueError:
             pass
 
@@ -101,9 +102,9 @@ class Bakery:
                 self.budget += 2 * len(name)
                 self.min_experience_level += 1
                 self.pastries.append([name, self.recipes[name]])
-                pastry = Pastry(name, self.recipes[name])
-                print(pastry)
-                return pastry
+                name = Pastry(name, self.recipes[name])
+                # print(name)
+                return name
             else:
                 print("No bakers!")
         else:
@@ -129,6 +130,7 @@ class Bakery:
                     sorted_pastries.append(pastry_product[0])
                     pastries_list.remove(pastry_product)
                     break
+        print(sorted_pastries[0])
         return sorted_pastries
 
     def get_bakers(self) -> list:
@@ -236,6 +238,7 @@ if __name__ == '__main__':
     print()
     print(bakery2.get_bakers())  # [Baker: Megane(25), Baker: Megane(18), Baker: John(11)]
     # Magane was chosen to be the baker as the most closest experience (which is also greater than complexity) was 17.
+
     print()
     bakery2.make_order("biscuits")
     bakery2.make_order("muffin")
