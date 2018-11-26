@@ -5,6 +5,7 @@ from copy import deepcopy
 
 class Baker:
     """Bakers."""
+
     def __init__(self, name: str, experience_level: int, money: int):
         """Class constructor."""
         self.name = name
@@ -18,6 +19,7 @@ class Baker:
 
 class Pastry:
     """Pastries."""
+
     def __init__(self, name: str, complexity_level: int):
         """Class constructor."""
         self.name = name
@@ -30,6 +32,7 @@ class Pastry:
 
 class Bakery:
     """Bakeries."""
+
     def __init__(self, name: str, min_experience_level: int, budget: int):
         """Class constructor."""
         self.name = name
@@ -54,8 +57,10 @@ class Bakery:
             self.bakers.remove(baker)
 
     def add_recipe(self, name: str):
-        """Add recipe to recipe list if there are bakers in the bakery, bakery can afford to buy recipe and recipe
-        not already acquired."""
+        """
+        Add recipe to recipe list if there are bakers in the bakery, bakery can afford to buy recipe and recipe
+        not already acquired.
+        """
         if len(self.bakers) >= 1 and self.budget >= len(name) and name not in self.recipes:
             self.budget -= len(name)
             print(f"Current budget: {self.budget}")
@@ -88,13 +93,9 @@ class Bakery:
             if len(qualified_bakers) != 0:
                 servicing_baker = qualified_bakers[-1]
                 print(f"Servicing baker: {servicing_baker}")
-                # print(servicing_baker.experience_level)
                 servicing_baker.experience_level += len(name)
-                # print(servicing_baker.experience_level)
                 self.budget += 2 * len(name)
-                # print(servicing_baker.money)
                 servicing_baker.money += 2 * len(name)
-                # print(servicing_baker.money)
                 self.min_experience_level += 1
                 self.pastries.append([name, self.recipes[name]])
                 pastry = Pastry(name, self.recipes[name])
