@@ -64,6 +64,7 @@ class Gym:
             self.members.append(member)
             member.gyms_member_belongs_in.append(self.name)
             return member
+        return None
 
     def can_add_member(self, member: Member) -> bool:
         """Return True if member can be added to gym's members, else return False."""
