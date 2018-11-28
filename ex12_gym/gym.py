@@ -122,7 +122,7 @@ class City:
 
     def can_build_gym(self) -> bool:
         """Return True if gym can be added to city, else return False."""
-        if self.max_gym_number > len(self.gyms):    # test puts in 10 with limit 10 should return False?
+        if self.max_gym_number > len(self.gyms) + 1:
             return True
         else:
             return False
@@ -265,7 +265,7 @@ if __name__ == "__main__":
     city2.build_gym(gym2)
     city2.destroy_gym()
 
-    for i in range(9):
+    for i in range(10):
         city2.build_gym(Gym("Super Gym", 10))
 
     print(city2.can_build_gym())  # False -> Cannot build gym, city is full of them
