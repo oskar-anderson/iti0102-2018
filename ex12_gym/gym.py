@@ -68,7 +68,7 @@ class Gym:
 
     def can_add_member(self, member: Member) -> bool:
         """Return True if member can be added to gym's members, else return False."""
-        if isinstance(member, Member) is True and member not in self.members and member.trainers is not None:
+        if isinstance(member, Member) is True and member not in self.members:
             if member.trainers.color is not None and member.trainers.stamina >= 0:
                 return True
         return False
@@ -100,7 +100,7 @@ class Gym:
         for member in self.members:
             total_age += member.age
         average_age = total_age / len(self.members)
-        return format(average_age, '.2f')
+        return round(average_age, 2)
 
     def __repr__(self):
         """Enamble printing."""
@@ -239,8 +239,10 @@ if __name__ == "__main__":
 
     member1 = Member("Ago Luberg", 35, trainers1)
     member2 = Member("Ahti Lohk", 35, trainers2)
+    member3 = Member("Ahti Lohk", 35, trainers2)
 
     gym1.add_member(member1)
+    gym1.add_member(member2)
     gym1.add_member(member2)
 
     print(gym1.get_members_number())  # 2
