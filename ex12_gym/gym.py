@@ -100,7 +100,7 @@ class Gym:
         for member in self.members:
             total_age += member.age
         average_age = total_age / len(self.members)
-        return float(format(average_age, '.2f'))  # Removes 2nd decimal place if it is 0.
+        return format(average_age, '.2f')
 
     def __repr__(self):
         """Enamble printing."""
