@@ -119,10 +119,11 @@ class City:
         if self.can_build_gym():
             self.gyms.append(gym)
             return gym
+        return None
 
     def can_build_gym(self) -> bool:
         """Return True if gym can be added to city, else return False."""
-        if self.max_gym_number > len(self.gyms) + 1:
+        if self.max_gym_number > len(self.gyms):
             return True
         else:
             return False
