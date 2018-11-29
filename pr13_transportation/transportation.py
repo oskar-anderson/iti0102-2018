@@ -16,7 +16,7 @@ def get_nearby_stops(api_base, lat, lng):
     """
     final_url = f"{api_base}/stops/{lat}/{lng}"
     list_of_stops = requests.get(final_url).json()
-    return sorted(list_of_stops, key=lambda k: k["distance"])
+    return sorted(list_of_stops, key=lambda k: (len(k["distance"]), k["distance"]))
 
 
 def get_nearest_stop(api_base, lat, lng):
@@ -31,7 +31,7 @@ def get_nearest_stop(api_base, lat, lng):
     final_url = f"{api_base}/stops/{lat}/{lng}"
     list_of_stops = requests.get(final_url).json()
     try:
-        return sorted(list_of_stops, key=lambda k: k["distance"])[0]
+        return sorted(list_of_stops, key=lambda k: (len(k["distance"]), k["distance"]))[0]
     except IndexError:
         return None
 
@@ -68,6 +68,7 @@ def get_next_departure(api_base, region, stop_id):
 
 
 if __name__ == '__main__':
+    print(get_nearest_stop(API_BASE, 59.3968083, 24.6625157))
     print(get_nearby_stops(API_BASE, 59.3977111, 24.660198))
     print(get_nearest_stop(API_BASE, 59.3977111, 24.660198))
     print(get_next_departures(API_BASE, REGION, get_nearest_stop(API_BASE, 59.3977111, 24.660198)["id"]))
