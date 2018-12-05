@@ -42,7 +42,7 @@ class Hand:
                 self.aces_turned_to_one = len(re.findall(regex, str(self.cards)))
 
             for element in self.cards:
-                print(["AS", "AD", "AC", "AH"].count(element))  # 0 even if element is ace.
+                print(["AS", "AD", "AC", "AH"].count(element))  # 0 even if element is ace
                 for check in ["AS", "AD", "AC", "AH"]:
                     print(element)  # AC
                     print(check)   # AC
