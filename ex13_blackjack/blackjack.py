@@ -121,20 +121,19 @@ class BlackjackController:
                 break
             if self.view.ask_next_move(state) == "S":
                 print("Player holds")
+                break_again = False
                 while player.score >= dealer.score:
                     dealer.add_card(self.deck.draw())
                     if dealer.score > 21:
                         state = {"dealer": dealer, "player": player}
                         self.view.player_won(state)
+                        break_again = True
                         break
-                if dealer.score > 21:
-                    state = {"dealer": dealer, "player": player}
-                    self.view.player_won(state)
+                if break_again:
                     break
-                else:
-                    state = {"dealer": dealer, "player": player}
-                    self.view.player_lost(state)
-                    break
+                state = {"dealer": dealer, "player": player}
+                self.view.player_lost(state)
+                break
             else:
                 print("Player hits")
                 player.add_card(self.deck.draw())
