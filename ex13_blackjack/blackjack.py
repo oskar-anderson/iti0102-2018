@@ -9,11 +9,13 @@ class Card:
     """Simple dataclass for holding card information."""
 
     def __init__(self, value: str, suit: str, code: str):
+        """Class constructor."""
         self.value = value
         self.suit = suit
         self.code = code
 
     def __repr__(self):
+        """Enable printing."""
         return self.code
 
 
@@ -21,6 +23,7 @@ class Hand:
     """Simple class for holding hand information."""
 
     def __init__(self):
+        """Class constructor."""
         self.score = 0
         self.cards = []
         self.aces_turned_to_one = 0
