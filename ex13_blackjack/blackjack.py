@@ -2,7 +2,6 @@
 from textwrap import dedent
 
 import requests
-import sys
 import re
 
 
@@ -112,12 +111,11 @@ class BlackjackController:
         dealer.add_card(self.deck.draw())
         print(f"Dealer score: {dealer.score}")
         print(f"Player score: {player.score}")
-        if player.score == 21:
-            state = {"dealer": dealer, "player": player}
-            self.view.player_won(state)
-            sys.exit()
         while True:
             state = {"dealer": dealer, "player": player}
+            if player.score == 21:
+                self.view.player_won(state)
+                break
             if self.view.ask_next_move(state) == "S":
                 print("Player holds")
                 while player.score >= dealer.score:
@@ -125,21 +123,22 @@ class BlackjackController:
                     if dealer.score > 21:
                         state = {"dealer": dealer, "player": player}
                         self.view.player_won(state)
-                        sys.exit()
-                state = {"dealer": dealer, "player": player}
-                self.view.player_lost(state)
-                sys.exit()
+                        break
+                if dealer.score > 21:
+                    state = {"dealer": dealer, "player": player}
+                    self.view.player_won(state)
+                    break
+                else:
+                    state = {"dealer": dealer, "player": player}
+                    self.view.player_lost(state)
+                    break
             else:
                 print("Player hits")
                 player.add_card(self.deck.draw())
                 if player.score > 21:
                     state = {"dealer": dealer, "player": player}
                     self.view.player_lost(state)
-                    sys.exit()
-                if player.score == 21:
-                    state = {"dealer": dealer, "player": player}
-                    self.view.player_won(state)
-                    sys.exit()
+                    break
 
 
 class BlackjackView:
