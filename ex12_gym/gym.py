@@ -7,10 +7,12 @@ class Trainers:
     """Trainers."""
 
     def __init__(self, stamina: int, color: str):
+        """Class constructor."""
         self.stamina = stamina
         self.color = color
 
     def __repr__(self):
+        """Enamble printing."""
         return f"Trainers: [{self.stamina}, {self.color}]"
 
 
@@ -18,29 +20,36 @@ class Member:
     """Members."""
 
     def __init__(self, name: str, age: int, trainers: Trainers):
+        """Class constructor."""
         self.name = name
         self.age = age
         self.trainers = trainers
+        self.gyms_member_belongs_in = []
 
     def get_all_gyms(self) -> list:
-        pass
+        """Return list of gyms a member is in."""
+        return self.gyms_member_belongs_in
 
     def __repr__(self):
+        """Enable printing."""
         return f"{self.name}, {self.age}: {self.trainers}"
 
     def get_gyms(self) -> list:
-        pass
+        """Return list of gyms a member is in. Same as get_all_gyms."""
+        return self.gyms_member_belongs_in
 
 
 class Gym:
     """Gym."""
 
     def __init__(self, name: str, max_members_number: int):
+        """Class constructor."""
         self.name = name
         self.max_members_number = max_members_number
         self.members = []
 
     def add_member(self, member: Member) -> Member:
+        """Add member to gym's members list (and gym to member's gyms list) if possible. Uses can_add_member."""
         if self.can_add_member(member) is True:
             if len(self.members) == self.max_members_number:
                 min_stamina = inf
@@ -53,59 +62,75 @@ class Gym:
                         self.remove_member(self.members[x - number_of_removes])
                         number_of_removes += 1
             self.members.append(member)
+            member.gyms_member_belongs_in.append(self.name)
             return member
+        return None
 
     def can_add_member(self, member: Member) -> bool:
-        if isinstance(member, Member) is True and member not in self.members and member.trainers is not None:
+        """Return True if member can be added to gym's members, else return False."""
+        if isinstance(member, Member) is True and member not in self.members:
             if member.trainers.color is not None and member.trainers.stamina >= 0:
                 return True
         return False
 
     def remove_member(self, member: Member):
+        """Remove member from gym's member list and gym from member's gym list."""
         if member in self.members:
+            member.gyms_member_belongs_in.remove(self.name)
             self.members.remove(member)
 
     def get_total_stamina(self) -> int:
+        """Return total stamina of gym's members stamina."""
         total_stamina = 0
         for member in self.members:
             total_stamina += member.trainers.stamina
         return total_stamina
 
     def get_members_number(self) -> int:
+        """Return number of members in gym."""
         return len(self.members)
 
     def get_all_members(self) -> list:
+        """Return list of gym members."""
         return self.members
 
     def get_average_age(self) -> float:
+        """Return gym's members average age."""
         total_age = 0
         for member in self.members:
             total_age += member.age
-        return total_age / len(self.members)
+        average_age = total_age / len(self.members)
+        return round(average_age, 2)
 
     def __repr__(self):
-        return f"Gym {self.name} : {len(self.members)} member(s)"  # {members_number}
+        """Enamble printing."""
+        return f"Gym {self.name} : {len(self.members)} member(s)"
 
 
 class City:
     """City."""
 
     def __init__(self, max_gym_number: int):
+        """Class constructor."""
         self.max_gym_number = max_gym_number
         self.gyms = []
 
     def build_gym(self, gym: Gym) -> Gym:
+        """Add gym to city if possible. Return that gym."""
         if self.can_build_gym():
             self.gyms.append(gym)
             return gym
+        return None
 
     def can_build_gym(self) -> bool:
-        if self.max_gym_number > len(self.gyms):    # test puts in 9 with limit 10 and 10th should return False?
+        """Return True if gym can be added to city, else return False."""
+        if self.max_gym_number > len(self.gyms):
             return True
         else:
             return False
 
     def destroy_gym(self):
+        """Remove gym(s) with lowest number of members."""
         min_members_count = inf
         for gym in self.gyms:
             if min_members_count < len(gym.members):
@@ -120,6 +145,7 @@ class City:
                 self.gyms.remove(gym)
 
     def get_max_members_gym(self) -> list:
+        """Return gym(s) with max members in the city."""
         max_members_count = -inf
         for gym in self.gyms:
             if max_members_count < len(gym.members):
@@ -132,6 +158,7 @@ class City:
         return max_members_gym
 
     def get_max_stamina_gyms(self) -> list:
+        """Return gym(s) with max average member stamina."""
         gym_stamina_values = []
         for gym in self.gyms:
             individual_gym_stamina = []
@@ -146,12 +173,15 @@ class City:
         return max_gym_stamina
 
     def get_max_average_ages(self) -> list:
+        """Return gym(s) with min average age members."""
         return self.get_min_or_max_average_ages(max)
 
     def get_min_average_ages(self) -> list:
+        """Return gym(s) with max average age members."""
         return self.get_min_or_max_average_ages(min)
 
     def get_min_or_max_average_ages(self, max_or_min) -> list:
+        """Combine methods get_max_average_ages and get_min_average_ages."""
         max_or_min_average_age_value_list = []
         max_or_min_average_age_list = []
         for gym in self.gyms:
@@ -167,12 +197,35 @@ class City:
         return max_or_min_average_age_list
 
     def get_gyms_by_trainers_color(self, color: str) -> list:
-        pass
+        """Return gym(s) where member(s) have trainers with given color in descending order."""
+        return self.get_gyms_by_trainers_color_or_by_name(color, "color")
 
     def get_gyms_by_name(self, name: str) -> list:
-        pass
+        """Return gym(s) where person(s) with "name" is/are present in descending order."""
+        return self.get_gyms_by_trainers_color_or_by_name(name, "name")
+
+    def get_gyms_by_trainers_color_or_by_name(self, color_or_name, looking_for):
+        """Combine methods get_gyms_by_name and get_gyms_by_trainers_color."""
+        unsorted_list_of_tuples = []
+        for gym in self.gyms:
+            number_of_times_parameter_in_gym = 0
+            for x in range(len(gym.members)):
+                if looking_for == "name":
+                    if gym.members[x].name == color_or_name:
+                        number_of_times_parameter_in_gym += 1
+                elif looking_for == "color":
+                    if gym.members[x].trainers.color == color_or_name:
+                        number_of_times_parameter_in_gym += 1
+            if number_of_times_parameter_in_gym != 0:
+                unsorted_list_of_tuples.append((gym, number_of_times_parameter_in_gym))
+        sorted_gyms_tuples = sorted(unsorted_list_of_tuples, key=lambda number: number[1], reverse=True)
+        sorted_gyms_by_trainers_remove_tuple = []
+        for x in range(len(sorted_gyms_tuples)):
+            sorted_gyms_by_trainers_remove_tuple.append(sorted_gyms_tuples[x][0])
+        return sorted_gyms_by_trainers_remove_tuple
 
     def get_all_gyms(self) -> list:
+        """Return all gyms in given city."""
         return self.gyms
 
 
@@ -186,8 +239,10 @@ if __name__ == "__main__":
 
     member1 = Member("Ago Luberg", 35, trainers1)
     member2 = Member("Ahti Lohk", 35, trainers2)
+    member3 = Member("Ahti Lohk", 35, trainers2)
 
     gym1.add_member(member1)
+    gym1.add_member(member2)
     gym1.add_member(member2)
 
     print(gym1.get_members_number())  # 2
@@ -214,12 +269,12 @@ if __name__ == "__main__":
     city2.build_gym(gym2)
     city2.destroy_gym()
 
-    for i in range(9):
+    for i in range(10):
         city2.build_gym(Gym("Super Gym", 10))
 
     print(city2.can_build_gym())  # False -> Cannot build gym, city is full of them
     print()
-    #######################################################################################
+    ######################################################################################
 
     city3 = City(100)
 
@@ -235,6 +290,7 @@ if __name__ == "__main__":
     print(gym4.add_member(Member("Bob", 18, Trainers(50, "black"))))
     print(gym4.add_member(Member("Emma", 20, Trainers(70, "red"))))
     print(gym4.add_member(Member("Ken", 25, Trainers(40, "grey"))))
+    print(gym4.get_average_age())
 
     print()
     print(gym5.add_member(Member("Merili", 18, Trainers(100, "pink"))))
@@ -258,6 +314,8 @@ if __name__ == "__main__":
     # People Fitness has 1.
     print(city3.get_gyms_by_name("Bob"))
     # [Gym Gym Eesti : 4 member(s), Gym Sparta : 2 member(s)] => Gym Eesti has 2 members with name Bob, Sparta has 1.
+
+    # Does Gym Sparta have 2 or 3 members?
 
     print()
     print(city3.get_all_gyms())
