@@ -15,8 +15,6 @@ def segment_number(first_number, last_number):
     :param last_number: the highest possible candidate
     :return: list of numbers
     """
-    if first_number > last_number:
-        return []
     dividables = []
     for i in range(abs(first_number - (last_number + 1))):
         if (first_number + i) % 5 == 0 and (first_number + i) % 3 != 0:
