@@ -4,6 +4,7 @@
 def segment_number(first_number, last_number):
     """
     Return list with elements dividable by 5 but not dividable by 3 between (inclusive) two arguments.
+
     Return list of numbers where only numbers between first_number
     and last_number (both inclusive) which divide by 5 but do not divide by 3
     are used.
@@ -14,10 +15,13 @@ def segment_number(first_number, last_number):
     :param last_number: the highest possible candidate
     :return: list of numbers
     """
+    if first_number > last_number:
+        return []
     dividables = []
-    for i in range(abs(first_number - last_number) + 1):
+    for i in range(abs(first_number - (last_number + 1))):
         if (first_number + i) % 5 == 0 and (first_number + i) % 3 != 0:
             dividables.append(first_number + i)
+    # print(dividables)
     return dividables
 
 
@@ -69,12 +73,14 @@ def should_get_up_early(is_weekday, really_tired, first_class_is_programming):
     :param first_class_is_programming: is the first class a programming class, boolean
     :return: True if you should get up early, otherwise False
     """
-    return is_weekday or not really_tired and not first_class_is_programming
-#    if is_weekday:
-#        if really_tired and first_class_is_programming:
-#            return False
-#        return True
-#    return False
+    print(is_weekday or not really_tired and not first_class_is_programming)
+    if is_weekday:
+        if not really_tired:
+            return True
+        if really_tired and first_class_is_programming:
+            return True
+        return False
+    return False
 
 
 def pear_fear(pears, people):
@@ -225,6 +231,7 @@ if __name__ == '__main__':
 
     assert segment_number(1, 11) == [5, 10]
     assert segment_number(1, 4) == []
+    assert segment_number(-25, 29) == [-25, -20, -10, -5, 5, 10, 20, 25]
     assert segment_number(-20, 20) == [-20, -10, -5, 5, 10, 20]
 
     assert add_or_subtract([1, 2, 0, 3]) == 0
@@ -233,6 +240,9 @@ if __name__ == '__main__':
 
     assert should_get_up_early(True, True, True) is True
     assert should_get_up_early(False, True, False) is False
+    assert should_get_up_early(True, True, False) is False
+    assert should_get_up_early(False, True, True) is False
+    assert should_get_up_early(True, False, True) is True
 
     assert pear_fear(10, 3) == 5
     assert pear_fear(10, 5) == 2
