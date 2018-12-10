@@ -195,7 +195,7 @@ class World:
         """
         if not self.available_pokemons:
             raise NoAvailablePokemonsInWorldException("Could not find any pokemons.")
-        pokemon_index = randint(0, len(self.available_pokemons))    # inclusive
+        pokemon_index = randint(0, len(self.available_pokemons) - 1)    # inclusive
         self.available_pokemons[pokemon_index].owner = person
         print(f"Pokemon index: {pokemon_index}, {self.available_pokemons[pokemon_index]}")
         person.add_pokemon(self.available_pokemons[pokemon_index])
@@ -230,14 +230,14 @@ class World:
         :return: Pokemon which wins.
         """
         if person1.persons_pokemon.get_power() > person2.persons_pokemon.get_power():
-            self.remove_pokemon_from_world(person2.persons_pokemon)
             destroyed_pokemons_name = person2.persons_pokemon.name
-            person2.remove_pokemon()    # move to
+            self.remove_pokemon_from_world(person2.persons_pokemon)
+            person2.remove_pokemon()
             return f"There was a battle between {person1.persons_pokemon.name} and {destroyed_pokemons_name} and " \
                    f"the winner was {person1.name}"
         else:
-            self.remove_pokemon_from_world(person1.persons_pokemon)
             destroyed_pokemons_name = person1.persons_pokemon.name
+            self.remove_pokemon_from_world(person1.persons_pokemon)
             person1.remove_pokemon()
             return f"There was a battle between {destroyed_pokemons_name} and {person2.persons_pokemon.name} and " \
                    f"the winner was {person2.name}"
