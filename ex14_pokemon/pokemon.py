@@ -158,7 +158,7 @@ class World:
             for pokemon_type in pokemons["types"]:
                 pokemon_types.append(pokemon_type["type"]["name"])
 
-            print(f"Pokemon index: {i}")
+            print(f"Pokemon index: {i + 1}")
             print(pokemons["name"].upper())
             print("Base XP: " + str(pokemons["base_experience"]))
             print("Defense: " + str(pokemons["stats"][1]["base_stat"]))
@@ -166,14 +166,13 @@ class World:
             print("Pokemon type(s): " + str(pokemon_types))
             print()
 
-            i = Pokemon(pokemons["name"].upper(),
-                        pokemons["base_experience"],
-                        pokemons["stats"][1]["base_stat"],
-                        pokemons["stats"][2]["base_stat"],
-                        pokemon_types)
-            self.pokemons.append(i)
-            self.available_pokemons.append(i)
-        print(self.pokemons)
+            pokemon = Pokemon(pokemons["name"].upper(),
+                              pokemons["base_experience"],
+                              pokemons["stats"][1]["base_stat"],
+                              pokemons["stats"][2]["base_stat"],
+                              pokemon_types)
+            self.pokemons.append(pokemon)
+            self.available_pokemons.append(pokemon)
 
     def get_pokemons_by_type(self):
         """
