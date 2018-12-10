@@ -165,14 +165,13 @@ class World:
             print("Pokemon type(s): " + str(pokemon_types))
             print()
 
-            pokemon_name = str(pokemons["name"]).upper()
-            pokemon = Pokemon(pokemon_name,
-                              pokemons["base_experience"],
-                              pokemons["stats"][1]["base_stat"],
-                              pokemons["stats"][2]["base_stat"],
-                              pokemon_types)
-            self.pokemons.append(pokemons["name"])
-            self.available_pokemons.append(pokemons["name"])
+            i = Pokemon(pokemons["name"].upper(),
+                        pokemons["base_experience"],
+                        pokemons["stats"][1]["base_stat"],
+                        pokemons["stats"][2]["base_stat"],
+                        pokemon_types)
+            self.pokemons.append(i)
+            self.available_pokemons.append(i)
         print(self.pokemons)
 
     def get_pokemons_by_type(self):
