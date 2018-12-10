@@ -1,4 +1,4 @@
-"""Pokemon game"""
+"""Pokemon game."""
 import requests
 from collections import defaultdict
 from random import randint
@@ -7,11 +7,13 @@ from math import inf
 
 class CannotAddPokemonException(Exception):
     """Custom exception."""
+
     pass
 
 
 class NoAvailablePokemonsInWorldException(Exception):
     """Custom exception."""
+
     pass
 
 
@@ -34,7 +36,6 @@ class Person:
         Add pokemon to Person.
 
         :param pokemon: Pokemon to add.
-        :return:
         """
         if not isinstance(pokemon, Pokemon):
             raise CannotAddPokemonException("Must be instance of Pokemon!")
@@ -85,7 +86,7 @@ class Data:
         :param url: Address where to make the GET request.
         :return: Response data.
         """
-        pass
+        return requests.get(url).json()
 
 
 class Pokemon:
@@ -149,19 +150,21 @@ class World:
         """
         Add Pokemons to world, GET data from the API.
         """
-        for i in range(1, no_of_pokemons + 1):
-            pokemons = Data.get_all_pokemons_data(f"https://pokeapi.co/api/v2/pokemon/{i}/")
-            print(i)
-            print(pokemons["name"])
-            print(pokemons["base_experience"])
-            print(pokemons["stats"][1]["base_stat"])    # defense
-            print(pokemons["stats"][2]["base_stat"])    # attack
+        pokemon_links = Data.get_all_pokemons_data("https://pokeapi.co/api/v2/pokemon/")
+        for i in range(no_of_pokemons):
+            url = pokemon_links["results"][i]["url"]
+            pokemons = Data.get_additional_data(url)
+            print(f"Pokemon index: {i + 1}")
+            print(pokemons["name"].upper())
+            print("Base XP: " + str(pokemons["base_experience"]))
+            print("Defense: " + str(pokemons["stats"][1]["base_stat"]))
+            print("Attack: " + str(pokemons["stats"][2]["base_stat"]))
             pokemon_types = []
             for pokemon_type in pokemons["types"]:
                 pokemon_types.append(pokemon_type["type"]["name"])
-            print(pokemon_types)
+            print("Pokemon type(s): " + str(pokemon_types))
             print()
-            pokemons["name"] = Pokemon(pokemons["name"].upper(),
+            pokemons["name"] = Pokemon(str(pokemons["name"]).upper(),
                                        pokemons["base_experience"],
                                        pokemons["stats"][1]["base_stat"],
                                        pokemons["stats"][2]["base_stat"],
@@ -223,12 +226,14 @@ class World:
             self.remove_pokemon_from_world(person2.persons_pokemon)
             destroyed_pokemons_name = person2.persons_pokemon.name
             person2.remove_pokemon()
-            return f"There was a battle between {person1.persons_pokemon.name} and {destroyed_pokemons_name} and the winner was {person1.name}"
+            return f"There was a battle between {person1.persons_pokemon.name} and {destroyed_pokemons_name} and " \
+                   f"the winner was {person1.name}"
         else:
             self.remove_pokemon_from_world(person1.persons_pokemon)
             destroyed_pokemons_name = person1.persons_pokemon.name
             person1.remove_pokemon()
-            return f"There was a battle between {destroyed_pokemons_name} and {person2.persons_pokemon.name} and the winner was {person2.name}"
+            return f"There was a battle between {destroyed_pokemons_name} and {person2.persons_pokemon.name} and " \
+                   f"the winner was {person2.name}"
 
     def group_pokemons(self):
         """
@@ -243,7 +248,7 @@ class World:
             "water": ["water", "ice"],
             "air": ["flying", "fairy", "ghost"],
             "other": ["normal", "fighting", "psychic", "steel"]
-         }
+            }
         grouped_pokemons = defaultdict(list)
         for pokemon in self.pokemons:
             for group in pokemon_general_groups:
@@ -308,6 +313,7 @@ class World:
 
 
 class Main:
+    """No idea why this is a class."""
     if __name__ == '__main__':
         world = World("Poke land")
         world.add_pokemons(128)
