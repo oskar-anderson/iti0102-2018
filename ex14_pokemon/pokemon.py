@@ -157,7 +157,7 @@ class World:
             for pokemon_type in pokemons["types"]:
                 pokemon_types.append(pokemon_type["type"]["name"])
 
-            print(f"Pokemon index: {i + 1}")
+            print(f"Pokemon index: {i}")
             print(pokemons["name"].upper())
             print("Base XP: " + str(pokemons["base_experience"]))
             print("Defense: " + str(pokemons["stats"][1]["base_stat"]))
@@ -197,6 +197,7 @@ class World:
             raise NoAvailablePokemonsInWorldException("Could not find any pokemons.")
         pokemon_index = randint(0, len(self.available_pokemons))    # inclusive
         self.available_pokemons[pokemon_index].owner = person
+        print(f"Pokemon index: {pokemon_index}, {self.available_pokemons[pokemon_index]}")
         person.add_pokemon(self.available_pokemons[pokemon_index])
         self.remove_available_pokemon(self.available_pokemons[pokemon_index])
 
@@ -214,8 +215,9 @@ class World:
 
         :param pokemon: Pokemon to be removed.
         """
-        pokemon.owner = None
-        self.pokemons.remove(pokemon)
+        pokemon.owner.persons_pokemon = None
+        if pokemon in self.pokemons:
+            self.pokemons.remove(pokemon)
         if pokemon in self.available_pokemons:
             self.available_pokemons.remove(pokemon)
 
@@ -252,8 +254,7 @@ class World:
             "fire": ["fire", "electric"],
             "water": ["water", "ice"],
             "air": ["flying", "fairy", "ghost"],
-            "other": ["normal", "fighting", "psychic", "steel"]
-            }
+            "other": ["normal", "fighting", "psychic", "steel"]}
         grouped_pokemons = defaultdict(list)
         for pokemon in self.pokemons:
             for group in pokemon_general_groups:
