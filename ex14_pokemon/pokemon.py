@@ -248,13 +248,13 @@ class World:
 
         :return: Dictionary of grouped Pokemons.
         """
-        pokemon_general_groups = ["earth", "fire", "water", "air", "other"]
+        pokemon_general_groups = ["EARTH", "FIRE", "WATER", "AIR", "OTHER"]
         pokemon_groups = {
-            "earth": ["poison", "grass", "bug", "ground", "rock"],
-            "fire": ["fire", "electric"],
-            "water": ["water", "ice"],
-            "air": ["flying", "fairy", "ghost"],
-            "other": ["normal", "fighting", "psychic", "steel"]}
+            "EARTH": ["poison", "grass", "bug", "ground", "rock"],
+            "FIRE": ["fire", "electric"],
+            "WATER": ["water", "ice"],
+            "AIR": ["flying", "fairy", "ghost"],
+            "OTHER": ["normal", "fighting", "psychic", "steel"]}
         grouped_pokemons = defaultdict(list)
         for pokemon in self.pokemons:
             for group in pokemon_general_groups:
@@ -344,3 +344,4 @@ class Main:
         print(world.sort_by_type_experience())
         print(world.group_pokemons())
         print(world.get_pokemons_by_type())
+        print()
