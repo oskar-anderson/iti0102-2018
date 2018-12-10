@@ -3,6 +3,7 @@ import requests
 from collections import defaultdict
 from random import randint
 from math import inf
+from itertools import chain
 
 
 class CannotAddPokemonException(Exception):
@@ -289,7 +290,7 @@ class World:
         print(f"Random order:{pokemons_by_type}")
         for pokemons in pokemons_by_type:
             pokemons.sort(key=lambda k: k.experience, reverse=True)
-        return pokemons_by_type
+        return list(chain.from_iterable(pokemons_by_type))
 
     def get_most_experienced_pokemon(self):
         """Get the Pokemon(s) which has the maximum experience level."""
