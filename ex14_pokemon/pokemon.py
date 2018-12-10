@@ -107,6 +107,7 @@ class Pokemon:
         self.attack = attack
         self.defence = defence
         self.types = types
+        self.owner = ""
 
     def get_power(self):
         """
@@ -147,28 +148,29 @@ class World:
         self.available_pokemons = []
 
     def add_pokemons(self, no_of_pokemons):
-        """
-        Add Pokemons to world, GET data from the API.
-        """
+        """Add Pokemons to world, GET data from the API."""
         pokemon_links = Data.get_all_pokemons_data("https://pokeapi.co/api/v2/pokemon/")
         for i in range(no_of_pokemons):
             url = pokemon_links["results"][i]["url"]
             pokemons = Data.get_additional_data(url)
+            pokemon_types = []
+            for pokemon_type in pokemons["types"]:
+                pokemon_types.append(pokemon_type["type"]["name"])
+
             print(f"Pokemon index: {i + 1}")
             print(pokemons["name"].upper())
             print("Base XP: " + str(pokemons["base_experience"]))
             print("Defense: " + str(pokemons["stats"][1]["base_stat"]))
             print("Attack: " + str(pokemons["stats"][2]["base_stat"]))
-            pokemon_types = []
-            for pokemon_type in pokemons["types"]:
-                pokemon_types.append(pokemon_type["type"]["name"])
             print("Pokemon type(s): " + str(pokemon_types))
             print()
-            pokemons["name"] = Pokemon(str(pokemons["name"]).upper(),
-                                       pokemons["base_experience"],
-                                       pokemons["stats"][1]["base_stat"],
-                                       pokemons["stats"][2]["base_stat"],
-                                       pokemon_types)
+
+            pokemon_name = str(pokemons["name"]).upper()
+            pokemon = Pokemon(pokemon_name,
+                              pokemons["base_experience"],
+                              pokemons["stats"][1]["base_stat"],
+                              pokemons["stats"][2]["base_stat"],
+                              pokemon_types)
             self.pokemons.append(pokemons["name"])
             self.available_pokemons.append(pokemons["name"])
         print(self.pokemons)
@@ -195,6 +197,7 @@ class World:
         if not self.available_pokemons:
             raise NoAvailablePokemonsInWorldException("Could not find any pokemons.")
         pokemon_index = randint(0, len(self.available_pokemons))    # inclusive
+        self.available_pokemons[pokemon_index].owner = person
         person.add_pokemon(self.available_pokemons[pokemon_index])
         self.remove_available_pokemon(self.available_pokemons[pokemon_index])
 
@@ -212,7 +215,10 @@ class World:
 
         :param pokemon: Pokemon to be removed.
         """
+        pokemon.owner = None
         self.pokemons.remove(pokemon)
+        if pokemon in self.available_pokemons:
+            self.available_pokemons.remove(pokemon)
 
     def fight(self, person1: Person, person2: Person):
         """
@@ -225,7 +231,7 @@ class World:
         if person1.persons_pokemon.get_power() > person2.persons_pokemon.get_power():
             self.remove_pokemon_from_world(person2.persons_pokemon)
             destroyed_pokemons_name = person2.persons_pokemon.name
-            person2.remove_pokemon()
+            person2.remove_pokemon()    # move to
             return f"There was a battle between {person1.persons_pokemon.name} and {destroyed_pokemons_name} and " \
                    f"the winner was {person1.name}"
         else:
@@ -314,6 +320,7 @@ class World:
 
 class Main:
     """No idea why this is a class."""
+
     if __name__ == '__main__':
         world = World("Poke land")
         world.add_pokemons(128)
