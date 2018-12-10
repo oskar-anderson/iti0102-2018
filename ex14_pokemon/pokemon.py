@@ -215,7 +215,7 @@ class World:
 
         :param pokemon: Pokemon to be removed.
         """
-        pokemon.owner.persons_pokemon = None
+        pokemon.owner = None
         if pokemon in self.pokemons:
             self.pokemons.remove(pokemon)
         if pokemon in self.available_pokemons:
