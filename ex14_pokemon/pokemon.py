@@ -269,25 +269,30 @@ class World:
 
         :return: List of sorted Pokemons.
         """
-        pokemon_type_order = ["poison", "grass", "bug", "ground", "rock", "electric", "water", "ice",
-                              "flying", "fairy", "ghost", "normal", "fighting", "psychic", "steel"]
-        pokemons_by_type = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
-        fire_under_100 = []
-        fire_over_100 = []
-        for pokemon in self.pokemons:
-            if pokemon.types[0] == "fire" and pokemon.experience > 100:
-                fire_over_100.append(pokemon)
-            elif pokemon.types[0] == "fire" and pokemon.experience <= 100:
-                fire_under_100.append(pokemon)
-        for pokemon_type in pokemon_type_order:
+        if not self.pokemons:
+            return []
+        try:
+            pokemon_type_order = ["poison", "grass", "bug", "ground", "rock", "electric", "water", "ice",
+                                  "flying", "fairy", "ghost", "normal", "fighting", "psychic", "steel"]
+            pokemons_by_type = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+            fire_under_100 = []
+            fire_over_100 = []
             for pokemon in self.pokemons:
-                if pokemon.types[0] == pokemon_type:
-                    pokemons_by_type[pokemon_type_order.index(pokemon_type)].append(pokemon)
-        pokemons_by_type.insert(0, fire_under_100)
-        pokemons_by_type.insert(7, fire_over_100)
-        print(f"Random order:{pokemons_by_type}")
-        for pokemons in pokemons_by_type:
-            pokemons.sort(key=lambda k: k.experience, reverse=True)
+                if pokemon.types[0] == "fire" and pokemon.experience > 100:
+                    fire_over_100.append(pokemon)
+                elif pokemon.types[0] == "fire" and pokemon.experience <= 100:
+                    fire_under_100.append(pokemon)
+            for pokemon_type in pokemon_type_order:
+                for pokemon in self.pokemons:
+                    if pokemon.types[0] == pokemon_type:
+                        pokemons_by_type[pokemon_type_order.index(pokemon_type)].append(pokemon)
+            pokemons_by_type.insert(0, fire_under_100)
+            pokemons_by_type.insert(7, fire_over_100)
+            print(f"Random order:{pokemons_by_type}")
+            for pokemons in pokemons_by_type:
+                pokemons.sort(key=lambda k: k.experience, reverse=True)
+        except AttributeError:
+            pokemons_by_type = []
         return pokemons_by_type
 
     def get_most_experienced_pokemon(self):
