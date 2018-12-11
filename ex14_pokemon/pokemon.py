@@ -2,7 +2,7 @@
 import requests
 from collections import defaultdict
 from random import randint
-from itertools import chain
+# from itertools import chain
 
 
 class CannotAddPokemonException(Exception):
@@ -108,6 +108,7 @@ class Pokemon:
         self.defence = defence
         self.types = types
         self.owner = None
+        self.sorting_helper = None
 
     def get_power(self):
         """
@@ -267,27 +268,31 @@ class World:
 
         :return: List of sorted Pokemons.
         """
-        pokemon_type_order = ["poison", "grass", "bug", "ground", "rock", "electric", "water", "ice",
+    #    pokemon_type_order = ["poison", "grass", "bug", "ground", "rock", "electric", "water", "ice",
+    #                          "flying", "fairy", "ghost", "normal", "fighting", "psychic", "steel"]
+    #    pokemons_by_type = [[] for i in range(15)]
+    #    for pokemon_type in pokemon_type_order:
+    #        for pokemon in self.pokemons:
+    #            if pokemon.types[0] == pokemon_type:
+    #                pokemons_by_type[pokemon_type_order.index(pokemon_type)].append(pokemon)
+    #    pokemons_by_type.insert(0, [pokemon for pokemon in self.pokemons if pokemon.types[0] == "fire" and
+    #                                pokemon.experience <= 100])
+    #    pokemons_by_type.insert(6, [pokemon for pokemon in self.pokemons if pokemon.types[0] == "fire" and
+    #                                pokemon.experience > 100])
+    #    for pokemons in pokemons_by_type:
+    #        pokemons.sort(key=lambda x: -x.experience)
+    #    return list(chain.from_iterable(pokemons_by_type))
+
+        pokemon_type_order = ["poison", "grass", "bug", "ground", "rock", "fire", "electric", "water", "ice",
                               "flying", "fairy", "ghost", "normal", "fighting", "psychic", "steel"]
-        pokemons_by_type = []
-        for i in range(15):
-            pokemons_by_type.append([])
-        fire_under_100 = []
-        fire_over_100 = []
         for pokemon in self.pokemons:
-            if pokemon.types[0] == "fire" and pokemon.experience > 100:
-                fire_over_100.append(pokemon)
-            elif pokemon.types[0] == "fire" and pokemon.experience <= 100:
-                fire_under_100.append(pokemon)
-        for pokemon_type in pokemon_type_order:
-            for pokemon in self.pokemons:
-                if pokemon.types[0] == pokemon_type:
-                    pokemons_by_type[pokemon_type_order.index(pokemon_type)].append(pokemon)
-        pokemons_by_type.insert(0, fire_under_100)
-        pokemons_by_type.insert(6, fire_over_100)
-        for pokemons in pokemons_by_type:
-            pokemons.sort(key=lambda x: -x.experience)
-        return list(chain.from_iterable(pokemons_by_type))
+            if pokemon.types[0] == "fire" and pokemon.experience <= 100:
+                pokemon.sorting_helper = 0
+            else:
+                pokemon.sorting_helper = 1
+        return sorted(self.pokemons, key=lambda x: (x.sorting_helper,
+                                                    pokemon_type_order.index(x.types[0]),
+                                                    -x.experience))
 
     def get_most_experienced_pokemon(self):
         """Get the Pokemon(s) which has the maximum experience level."""
