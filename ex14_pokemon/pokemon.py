@@ -2,7 +2,6 @@
 import requests
 from collections import defaultdict
 from random import randint
-from math import inf
 from itertools import chain
 
 
@@ -268,11 +267,11 @@ class World:
 
         :return: List of sorted Pokemons.
         """
-        if not self.pokemons:
-            return []
         pokemon_type_order = ["poison", "grass", "bug", "ground", "rock", "electric", "water", "ice",
                               "flying", "fairy", "ghost", "normal", "fighting", "psychic", "steel"]
-        pokemons_by_type = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+        pokemons_by_type = []
+        for i in range(15):
+            pokemons_by_type.append([])
         fire_under_100 = []
         fire_over_100 = []
         for pokemon in self.pokemons:
@@ -286,38 +285,22 @@ class World:
                     pokemons_by_type[pokemon_type_order.index(pokemon_type)].append(pokemon)
         pokemons_by_type.insert(0, fire_under_100)
         pokemons_by_type.insert(6, fire_over_100)
-        print(f"Random order:{pokemons_by_type}")
         for pokemons in pokemons_by_type:
-            pokemons.sort(key=lambda k: k.experience, reverse=True)
+            pokemons.sort(key=lambda x: -x.experience)
         return list(chain.from_iterable(pokemons_by_type))
 
     def get_most_experienced_pokemon(self):
         """Get the Pokemon(s) which has the maximum experience level."""
-        highest_xp = -inf
-        experienced_pokemons = []
-        if not self.pokemons:
-            return []
-        for pokemon in self.pokemons:
-            if pokemon.experience == highest_xp:
-                experienced_pokemons.append(pokemon)
-            elif pokemon.experience > highest_xp:  # combining these methods requires another method for the comparison.
-                experienced_pokemons = [pokemon]
-                highest_xp = pokemon.experience
-        return experienced_pokemons
+        return self.get_min_or_max_experience_pokemon(max)
 
     def get_min_experience_pokemon(self):
         """Get the Pokemon(s) which has the minimum experience level."""
-        lowest_xp = inf
-        experienced_pokemons = [inf]
-        if not self.pokemons:
-            return []
-        for pokemon in self.pokemons:
-            if pokemon.experience == lowest_xp:
-                experienced_pokemons.append(pokemon)
-            elif pokemon.experience < lowest_xp:
-                experienced_pokemons = [pokemon]
-                lowest_xp = pokemon.experience
-        return experienced_pokemons
+        return self.get_min_or_max_experience_pokemon(min)
+
+    def get_min_or_max_experience_pokemon(self, min_or_max):
+        """Get the Pokemon(s) which has the minimum/maximum experience level."""
+        return [pokemon for pokemon in self.pokemons if pokemon.experience == (min_or_max(self.pokemons, key=lambda
+                x: x.experience)).experience]
 
 
 class Main:
