@@ -5,6 +5,7 @@ class Person:
     """Represent a person."""
 
     def __init__(self, first_name, last_name, email, gender, age):
+        """Person constructor"""
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
@@ -12,12 +13,14 @@ class Person:
         self.age = age
 
     def __repr__(self):
+        """object representation"""
         return f"{self.first_name}"
 
 
 def get_oldest_person(person_list):
     """
     Return the person with the highest age.
+
     If multiple people are of the given age, return the first in the list.
 
     :param person_list: input list
@@ -29,6 +32,7 @@ def get_oldest_person(person_list):
 def get_person_with_shortest_name(person_list):
     """
     Return the person with the shortest name (first name + last name).
+
     If there are multiple, return the first in the list.
 
     :param person_list:
@@ -65,7 +69,7 @@ def get_people_with_government_emails(person_list):
     :param person_list: input list
     :return: a list of Person objects with an government email.
     """
-    return list(filter(lambda x: ".gov" in x.email, person_list))
+    return list(filter(lambda x: x.email[-4:] == ".gov", person_list))
 
 
 def sort_list_by_email_length(person_list):
