@@ -149,11 +149,11 @@ class Solitaire:
 
     @staticmethod
     def convert_str_of_int_to_int(command):
-        """Converts string of int to int if possible."""
+        """Convert string of int to int if possible. Return converted command/nonconvertible command, True/False."""
         try:
             return int(command), True
         except ValueError:
-            return None, False
+            return command, False
 
     def play(self):
         """
@@ -163,19 +163,22 @@ class Solitaire:
         Use input() for player input.
         Available commands are described in rules().
         """
+        command_number_too_high = False
         while True:
             self.print_game()
             command = input("Next move:")
             command, conversion_success = self.convert_str_of_int_to_int(command)
-            if 0 <= command < self.columns and conversion_success:
-                self.move_card(command)
-            elif command == "d":
+            if conversion_success:
+                command_number_too_high = True
+                if 0 <= command < self.columns:
+                    self.move_card(command)
+            if command == "d":
                 self.waste.append(self.stock.pop(-1))
             elif command == "r":
                 self.rules()
             elif command == "q":
                 break
-            if command not in ["d", "r", "q", None]:
+            if command not in ["d", "r", "q"] and not conversion_success or command_number_too_high:
                 print("Invalid input")
             if self.has_won():
                 print("Congratulations, you won!")
