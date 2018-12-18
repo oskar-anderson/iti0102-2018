@@ -13,9 +13,6 @@ class Solitaire:
     but the methods should work with other valid values as well.
     """
 
-    columns = 7
-    cards_in_column = 7
-
     def __init__(self):
         """
         Constructor, do the setup here.
