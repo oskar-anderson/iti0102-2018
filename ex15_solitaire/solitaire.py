@@ -13,6 +13,9 @@ class Solitaire:
     but the methods should work with other valid values as well.
     """
 
+    cards_in_column = 1
+    columns = 1
+
     def __init__(self):
         """
         Constructor, do the setup here.
@@ -42,6 +45,12 @@ class Solitaire:
         Example: 8 is adjacent to 7 and 9. Ace is only adjacent to 2.
         King is only adjacent to Queen.
         """
+        card_in_last_columns_check = False
+        for column in self.tableau:
+            if column and column[-1] == card:
+                card_in_last_columns_check = True
+        if not card_in_last_columns_check:
+            return False
         value_list = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"]
         if str(card)[1] == "A" and str(self.waste[-1])[1] == "2" or str(card)[1] == "K" and str(self.waste[-1])[1] == "Q":
             return True
@@ -78,7 +87,7 @@ class Solitaire:
 
     def has_won(self) -> bool:
         """Check for the winning position - no cards left in tableau."""
-        print("Victory: " + str(self.tableau == [[]for x in range(self.columns)]))
+        # print("Victory: " + str(self.tableau == [[]for x in range(self.columns)]), self.tableau, [[]for x in range(self.columns)])
         if self.tableau == [[]for x in range(self.columns)]:
             return True
         return False
