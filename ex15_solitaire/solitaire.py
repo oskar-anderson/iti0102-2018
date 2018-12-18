@@ -82,7 +82,7 @@ class Solitaire:
 
     def has_won(self) -> bool:
         """Check for the winning position - no cards left in tableau."""
-        if not self.tableau:
+        if self.tableau == [[]for x in range(self.columns)]:
             return True
         return False
 
@@ -94,7 +94,8 @@ class Solitaire:
         """
         if not self.stock and self.available_moves:
             return True
-        return False
+        else:
+            return False
 
     def available_moves(self) -> bool:
         """Check for possible moves in all tableau columns. Return True if any exist."""
@@ -155,10 +156,8 @@ class Solitaire:
         Use input() for player input.
         Available commands are described in rules().
         """
-        valid_input = True
         while True:
-            if valid_input:
-                self.print_game()
+            self.print_game()
             command = input("Next move:")
             try:
                 if 0 <= int(command) < self.columns:
@@ -174,13 +173,10 @@ class Solitaire:
                 break
             if not number_check and command not in ["d", "r", "q"]:
                 print("Invalid input")
-                valid_input = False
-            else:
-                valid_input = True
-            if self.has_won() and valid_input:
+            if self.has_won():
                 print("Congratulations, you won!")
                 break
-            if self.has_lost() and valid_input:
+            if self.has_lost():
                 print("Game over, You lost!")
                 break
 
