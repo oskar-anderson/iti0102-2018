@@ -148,6 +148,14 @@ class Solitaire:
                   (q) - quit
                   """))
 
+    @staticmethod
+    def convert_str_of_int_to_int(command):
+        """Converts string of int to int if possible."""
+        try:
+            return int(command), True
+        except ValueError:
+            return None, False
+
     def play(self):
         """
         Play a game of Golf Solitaire.
@@ -159,19 +167,16 @@ class Solitaire:
         while True:
             self.print_game()
             command = input("Next move:")
-            try:
-                if 0 <= int(command) < self.columns:
-                    self.move_card(int(command))
-                number_check = True
-            except ValueError:   # str could not be made into int
-                number_check = False
-            if command == "d":
+            command, conversion_success = self.convert_str_of_int_to_int(command)
+            if 0 <= command < self.columns and conversion_success:
+                self.move_card(command)
+            elif command == "d":
                 self.waste.append(self.stock.pop(-1))
             elif command == "r":
                 self.rules()
             elif command == "q":
                 break
-            if not number_check and command not in ["d", "r", "q"]:
+            if not conversion_success and command not in ["d", "r", "q"]:
                 print("Invalid input")
             if self.has_won():
                 print("Congratulations, you won!")
