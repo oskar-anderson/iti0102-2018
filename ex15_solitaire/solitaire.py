@@ -173,13 +173,13 @@ class Solitaire:
                 self.move_card(command)
             if conversion_success and 0 > command > self.columns:
                 command_number_too_high = True
-            if command == "d":
+            if command == "d" and not self.stock:
                 self.waste.append(self.stock.pop(-1))
             elif command == "r":
                 self.rules()
             elif command == "q":
                 break
-            if not conversion_success or command_number_too_high:
+            if not conversion_success or command_number_too_high or command == "d" and not self.stock:
                 print("Invalid input")
                 valid_input = False
             if self.has_won() and valid_input:
