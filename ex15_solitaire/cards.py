@@ -94,8 +94,7 @@ class Card:
             b = ('[', ']')
         if not self.face_up:
             return f"{b[0]}##{b[1]}"
-        return (f"{b[0]}{Card.RANKS[self._rank]}" +
-                f"{Card.SYMBOLS[self.suit] if self.symbols else Card.SUITS[self.suit]}{b[1]}")
+        return f"{b[0]}{Card.RANKS[self._rank]}" + f"{Card.SYMBOLS[self.suit] if self.symbols else Card.SUITS[self.suit]}{b[1]}"
 
 
 class Deck:

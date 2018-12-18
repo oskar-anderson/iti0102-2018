@@ -94,8 +94,7 @@ class Solitaire:
         """
         if not self.stock and self.available_moves:
             return True
-        else:
-            return False
+        return False
 
     def available_moves(self) -> bool:
         """Check for possible moves in all tableau columns. Return True if any exist."""
@@ -176,7 +175,7 @@ class Solitaire:
                 self.rules()
             elif command == "q":
                 break
-            if not conversion_success and command not in ["d", "r", "q"]:
+            if command not in ["d", "r", "q", None]:
                 print("Invalid input")
             if self.has_won():
                 print("Congratulations, you won!")
