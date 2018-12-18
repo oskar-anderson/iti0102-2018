@@ -14,7 +14,7 @@ class Solitaire:
     """
 
     columns = 7
-    cards_in_column = 5
+    cards_in_column = 7
 
     def __init__(self):
         """
@@ -46,7 +46,6 @@ class Solitaire:
         King is only adjacent to Queen.
         """
         value_list = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"]
-        print(value_list[1:-1])
         if str(card)[1] == "A" and str(self.waste[-1])[1] == "2" or str(card)[1] == "K" and str(self.waste[-1])[1] == "Q":
             return True
         elif str(card)[1] in value_list[1:-1]:
@@ -82,6 +81,7 @@ class Solitaire:
 
     def has_won(self) -> bool:
         """Check for the winning position - no cards left in tableau."""
+        print("Victory: " + str(self.tableau == [[]for x in range(self.columns)]))
         if self.tableau == [[]for x in range(self.columns)]:
             return True
         return False
@@ -163,27 +163,29 @@ class Solitaire:
         Use input() for player input.
         Available commands are described in rules().
         """
-        command_number_too_high = False
         while True:
+            command_number_too_high = False
+            valid_input = True
             self.print_game()
             command = input("Next move:")
             command, conversion_success = self.convert_str_of_int_to_int(command)
-            if conversion_success:
+            if conversion_success and 0 <= command < self.columns:
+                self.move_card(command)
+            if conversion_success and 0 > command > self.columns:
                 command_number_too_high = True
-                if 0 <= command < self.columns:
-                    self.move_card(command)
             if command == "d":
                 self.waste.append(self.stock.pop(-1))
             elif command == "r":
                 self.rules()
             elif command == "q":
                 break
-            if command not in ["d", "r", "q"] and not conversion_success or command_number_too_high:
+            if not conversion_success or command_number_too_high:
                 print("Invalid input")
-            if self.has_won():
-                print("Congratulations, you won!")
+                valid_input = False
+            if self.has_won() and valid_input:
+                print("You won!")
                 break
-            if self.has_lost():
+            if self.has_lost() and valid_input:
                 print("Game over, You lost!")
                 break
 
