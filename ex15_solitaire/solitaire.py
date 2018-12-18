@@ -173,7 +173,7 @@ class Solitaire:
                 self.move_card(command)
             if conversion_success and 0 > command > self.columns:
                 command_number_too_high = True
-            if command == "d" and not self.stock:
+            if command == "d" and self.stock:
                 self.waste.append(self.stock.pop(-1))
             elif command == "r":
                 self.rules()
