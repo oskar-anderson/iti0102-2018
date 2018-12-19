@@ -168,6 +168,7 @@ class Solitaire:
         Available commands are described in rules().
         """
         while True:
+            valid_input = True
             self.print_game()
             command = input("Next move:")
             command, conversion_success = self.convert_str_of_int_to_int(command)
@@ -181,15 +182,15 @@ class Solitaire:
                 break
             if not conversion_success or command == "d" and not self.stock:
                 print("Invalid input")
-            if self.has_won():
+                valid_input = False
+            if self.has_won() and valid_input:
                 print("You won!")
                 break
-            if self.has_lost():
+            if self.has_lost() and valid_input:
                 print("Game over, You lost!")
                 break
 
 
 if __name__ == '__main__':
-    print(4 > 3 > 5)
     s = Solitaire()
     s.play()
