@@ -49,6 +49,7 @@ class Solitaire:
         for column in self.tableau:
             if column and column[-1] == card:
                 card_in_last_columns_check = True
+                break
         if not card_in_last_columns_check:
             return False
         value_list = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"]
@@ -68,11 +69,7 @@ class Solitaire:
         Does not validate the move.
         :param col: index of column
         """
-        if self.tableau[col]:
-            if self.can_move(self.tableau[col][-1]):
-                self.waste.append(self.tableau[col].pop(-1))
-        else:
-            print("That column is empty!")
+        self.waste.append(self.tableau[col].pop(-1))
 
     def deal_from_stock(self):
         """
@@ -175,7 +172,7 @@ class Solitaire:
             self.print_game()
             command = input("Next move:")
             command, conversion_success = self.convert_str_of_int_to_int(command)
-            if conversion_success and 0 <= command < self.columns:
+            if conversion_success and 0 <= command < self.columns and self.can_move(self.tableau[command][-1]):
                 self.move_card(command)
             if conversion_success and 0 > command > self.columns:
                 command_number_too_high = True
@@ -197,5 +194,6 @@ class Solitaire:
 
 
 if __name__ == '__main__':
+    print(4 > 3 > 5)
     s = Solitaire()
     s.play()
