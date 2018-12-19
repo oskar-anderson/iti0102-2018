@@ -86,7 +86,7 @@ class Solitaire:
 
     def has_won(self) -> bool:
         """Check for the winning position - no cards left in tableau."""
-        if self.tableau == [[]for x in range(self.columns)]:
+        if len(re.findall(r"(\[[A-z\d][a-z]\])", str(self.tableau))) == 0:
             return True
         return False
 
