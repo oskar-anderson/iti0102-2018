@@ -179,7 +179,7 @@ class Solitaire:
                 continue
             elif command == "q":
                 break
-            else:
+            if not conversion_success or command == "d" and not self.stock:
                 print("Invalid input")
                 continue
             if self.has_won():
