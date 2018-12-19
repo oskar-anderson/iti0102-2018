@@ -168,21 +168,19 @@ class Solitaire:
         Available commands are described in rules().
         """
         while True:
-            command_number_too_high = False
+            invalid_command_number = False
             self.print_game()
             command = input("Next move:")
             command, conversion_success = self.convert_str_of_int_to_int(command)
             if conversion_success and 0 <= command < self.columns and self.can_move(self.tableau[command][-1]):
                 self.move_card(command)
-            if conversion_success and 0 < command > self.columns:   # 0 < 9 > 7
-                command_number_too_high = True
             if command == "d" and self.stock:
                 self.waste.append(self.stock.pop(-1))
             elif command == "r":
                 self.rules()
             elif command == "q":
                 break
-            if not conversion_success or command_number_too_high or command == "d" and not self.stock:
+            if not conversion_success or command == "d" and not self.stock:
                 print("Invalid input")
             if self.has_won():
                 print("You won!")
