@@ -180,7 +180,7 @@ class Solitaire:
                 self.rules()
             elif command == "q":
                 break
-            else:
+            if not conversion_success or command == "d" and not self.stock:
                 print("Invalid input")
                 valid_input = False
             if self.has_won() and valid_input:
