@@ -29,7 +29,7 @@ class Solitaire:
         self.deck.shuffle_deck()
         self.tableau = [[self.deck.deal_card() for cards in range(self.cards_in_column)] for x in range(self.columns)]  # -> list of (columns[lists] (where each list -> cards_in_column * Card instances))
         self.waste = [self.deck.deal_card()]  # -> list of Card instances
-        self.stock = [self.deck.deal_card() for cards in range(3 - (self.columns * self.cards_in_column + 1))]  # ->
+        self.stock = [self.deck.deal_card() for cards in range(52 - (self.columns * self.cards_in_column + 1))]  # ->
         # list of Card instances
         # print(self.tableau)
         # print(self.waste)
@@ -179,7 +179,7 @@ class Solitaire:
                 continue
             elif command == "q":
                 break
-            if not conversion_success or command == "d" and not self.stock:
+            else:
                 print("Invalid input")
                 continue
             if self.has_won():
