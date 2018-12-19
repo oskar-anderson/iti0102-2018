@@ -60,7 +60,7 @@ class Solitaire:
             index = value_list.index(str(card)[1])
             if str(self.waste[-1])[1] == value_list[index - 1] or str(self.waste[-1])[1] == value_list[index + 1]:
                 return True
-        print("That move can not be made!")
+        print("That move can not be made!")  # Will also be printed if stock is empty and lose cond is being checked.
         return False
 
     def move_card(self, col: int):
@@ -85,7 +85,6 @@ class Solitaire:
 
     def has_won(self) -> bool:
         """Check for the winning position - no cards left in tableau."""
-        # print("Victory: " + str(self.tableau == [[]for x in range(self.columns)]), self.tableau, [[]for x in range(self.columns)])
         if self.tableau == [[]for x in range(self.columns)]:
             return True
         return False
@@ -96,16 +95,15 @@ class Solitaire:
 
         Losing position: no cards left in stock and no possible moves.
         """
-        if not self.stock and not self.available_moves:
+        if len(self.stock) == 0 and not self.available_moves():
             return True
         return False
 
     def available_moves(self) -> bool:
         """Check for possible moves in all tableau columns. Return True if any exist."""
         for column in self.tableau:
-            if column:
-                if self.can_move(column[-1]):
-                    return True
+            if column and self.can_move(column[-1]):
+                return True
         return False
 
     def print_game(self):
@@ -168,6 +166,7 @@ class Solitaire:
         Available commands are described in rules().
         """
         while True:
+            # print(self.stock)
             self.print_game()
             command = input("Next move:").lower()
             command, conversion_success = self.convert_str_of_int_to_int(command)
