@@ -2,6 +2,7 @@
 from itertools import zip_longest
 from textwrap import dedent
 from cards import Deck
+import re
 
 
 class Solitaire:
@@ -29,8 +30,8 @@ class Solitaire:
         self.deck.shuffle_deck()
         self.tableau = [[self.deck.deal_card() for cards in range(self.cards_in_column)] for x in range(self.columns)]  # -> list of (columns[lists] (where each list -> cards_in_column * Card instances))
         self.waste = [self.deck.deal_card()]  # -> list of Card instances
-        self.stock = [self.deck.deal_card() for cards in range(52 - (self.columns * self.cards_in_column + 1))]  # ->
-        # list of Card instances
+        self.stock = [self.deck.deal_card() for cards in range(len(re.findall(r"(\[[A-z\d][a-z]\])", str(self.deck))))]
+        # -> list of Card instances
         # print(self.tableau)
         # print(self.waste)
         # print(self.stock)
