@@ -174,7 +174,7 @@ class Solitaire:
             command, conversion_success = self.convert_str_of_int_to_int(command)
             if conversion_success and 0 <= command < self.columns and self.can_move(self.tableau[command][-1]):
                 self.move_card(command)
-            if command == "d" and self.stock:
+            if command == "d":
                 self.waste.append(self.stock.pop(-1))
             elif command == "r":
                 self.rules()
