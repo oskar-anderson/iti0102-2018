@@ -168,7 +168,6 @@ class Solitaire:
         Available commands are described in rules().
         """
         while True:
-            invalid_command_number = False
             self.print_game()
             command = input("Next move:")
             command, conversion_success = self.convert_str_of_int_to_int(command)
