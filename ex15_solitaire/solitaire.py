@@ -51,6 +51,7 @@ class Solitaire:
                 card_in_last_columns_check = True
                 break
         if not card_in_last_columns_check:
+            print("Card not last in any column!")
             return False
         value_list = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"]
         if str(card)[1] == "A" and str(self.waste[-1])[1] == "2" or str(card)[1] == "K" and str(self.waste[-1])[1] == "Q":
@@ -168,13 +169,12 @@ class Solitaire:
         """
         while True:
             command_number_too_high = False
-            valid_input = True
             self.print_game()
             command = input("Next move:")
             command, conversion_success = self.convert_str_of_int_to_int(command)
             if conversion_success and 0 <= command < self.columns and self.can_move(self.tableau[command][-1]):
                 self.move_card(command)
-            if conversion_success and 0 > command > self.columns:
+            if conversion_success and 0 < command > self.columns:   # 0 < 9 > 7
                 command_number_too_high = True
             if command == "d" and self.stock:
                 self.waste.append(self.stock.pop(-1))
@@ -184,11 +184,10 @@ class Solitaire:
                 break
             if not conversion_success or command_number_too_high or command == "d" and not self.stock:
                 print("Invalid input")
-                valid_input = False
-            if self.has_won() and valid_input:
+            if self.has_won():
                 print("You won!")
                 break
-            if self.has_lost() and valid_input:
+            if self.has_lost():
                 print("Game over, You lost!")
                 break
 
