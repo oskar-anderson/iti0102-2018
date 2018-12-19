@@ -146,6 +146,10 @@ class Deck:
         """Check if the deck has any cards."""
         return not self.cards
 
+    def return_cards_list(self):
+        """Return self.cards list."""
+        return self.cards
+
     def __str__(self):
         """Represent the whole deck as rows of length 4 when printed."""
         return "\n".join(map(' '.join, zip_longest(*[map(str, self.cards)] * 4, fillvalue="")))
