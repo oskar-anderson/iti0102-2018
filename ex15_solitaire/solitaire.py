@@ -2,7 +2,6 @@
 from itertools import zip_longest
 from textwrap import dedent
 from cards import Deck
-import re
 
 
 class Solitaire:
