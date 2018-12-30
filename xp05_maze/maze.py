@@ -248,6 +248,32 @@ class MazeSolver:
         print()
         print()
 
+    def reset_map(self, configuration, maze_str):
+        """Reset the maze"""
+        if configuration is None:
+            configuration = {
+                ' ': 1,
+                '#': -1,
+                '.': 2,
+                '-': 5,
+                'w': 10
+            }
+        self.configuration = configuration
+        self.maze_str = maze_str
+        self.maze_map = []
+        self.maze_tile_object_map = []
+        self.tiles_to_check_next_no_modification = []
+        self.min_changing_character_value_2_or_higher = None
+        self.tiles_to_check = []
+        self.tile_to_check = None
+        self.tiles_to_check_next = []
+        self.tiles_not_to_visit_again = []
+        self.end_doors = []
+        self.start_doors = []
+        self.path_found = False
+        self.end_tile = None
+
+
     def get_shortest_path(self, start, goal):
         """
         Return shortest path and the total cost of it.
@@ -264,7 +290,7 @@ class MazeSolver:
         :param goal: Goal cell (y, x)
         :return: shortest_path, cost
         """
-
+        self.reset_map(self.configuration, self.maze_str)
         self.make_map_list()
         self.tiles_to_objects()
         self.print_maze_tile_object_map()
@@ -306,6 +332,7 @@ class MazeSolver:
 
         :return: shortest_path, cost
         """
+        self.reset_map(self.configuration, self.maze_str)
         self.make_map_list()
         self.tiles_to_objects()
         ans = self.pathfinder("exit")
@@ -322,9 +349,9 @@ if __name__ == '__main__':
 ########
 """
     solver = MazeSolver(maze)
-    # assert solver.solve() == ([(3, 0), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7)], 6)
-    # assert solver.get_shortest_path((3, 0), (3, 1)) == ([(3, 0), (3, 1)], 1)
-    # assert solver.get_shortest_path((3, 0), (2, 0)) == (None, -1)
+    assert solver.solve() == ([(3, 0), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7)], 6)
+    assert solver.get_shortest_path((3, 0), (3, 1)) == ([(3, 0), (3, 1)], 1)
+    assert solver.get_shortest_path((3, 0), (2, 0)) == (None, -1)
 
     maze = """
 #####
@@ -334,7 +361,7 @@ if __name__ == '__main__':
 #####
     """
     solver = MazeSolver(maze)
-    # assert solver.solve() == ([(2, 0), (2, 1), (1, 1), (1, 2), (1, 3), (2, 3), (3, 3), (3, 4)], 6)
+    assert solver.solve() == ([(2, 0), (2, 1), (1, 1), (1, 2), (1, 3), (2, 3), (3, 3), (3, 4)], 6)
 
     maze = """
 #####
