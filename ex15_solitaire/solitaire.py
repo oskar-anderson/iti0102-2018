@@ -1,8 +1,8 @@
 """Golf solitaire."""
 from itertools import zip_longest
 from textwrap import dedent
-
 from cards import Deck
+import re
 
 
 class Solitaire:
@@ -30,7 +30,8 @@ class Solitaire:
         self.deck.shuffle_deck()
         self.tableau = [[self.deck.deal_card() for cards in range(self.cards_in_column)] for x in range(self.columns)]  # -> list of (columns[lists] (where each list -> cards_in_column * Card instances))
         self.waste = [self.deck.deal_card()]  # -> list of Card instances
-        self.stock = [self.deck.deal_card() for cards in range(52 - (self.columns * self.cards_in_column + 1))]  # -> list of Card instances
+        self.stock = [self.deck.deal_card() for cards in range(len(re.findall(r"(\[[A-z\d][a-z]\])", str(self.deck))))]
+        # -> list of Card instances
         # print(self.tableau)
         # print(self.waste)
         # print(self.stock)
@@ -51,6 +52,7 @@ class Solitaire:
                 card_in_last_columns_check = True
                 break
         if not card_in_last_columns_check:
+            print("Card not last in any column!")
             return False
         value_list = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"]
         if str(card)[1] == "A" and str(self.waste[-1])[1] == "2" or str(card)[1] == "K" and str(self.waste[-1])[1] == "Q":
@@ -59,7 +61,7 @@ class Solitaire:
             index = value_list.index(str(card)[1])
             if str(self.waste[-1])[1] == value_list[index - 1] or str(self.waste[-1])[1] == value_list[index + 1]:
                 return True
-        print("That move can not be made!")
+        print("That move can not be made!")  # Will also be printed if stock is empty and lose cond is being checked.
         return False
 
     def move_card(self, col: int):
@@ -84,8 +86,7 @@ class Solitaire:
 
     def has_won(self) -> bool:
         """Check for the winning position - no cards left in tableau."""
-        # print("Victory: " + str(self.tableau == [[]for x in range(self.columns)]), self.tableau, [[]for x in range(self.columns)])
-        if self.tableau == [[]for x in range(self.columns)]:
+        if len(re.findall(r"(\[[A-z\d][a-z]\])", str(self.tableau))) == 0:
             return True
         return False
 
@@ -95,16 +96,15 @@ class Solitaire:
 
         Losing position: no cards left in stock and no possible moves.
         """
-        if not self.stock and self.available_moves:
+        if len(self.stock) == 0 and not self.available_moves():
             return True
         return False
 
     def available_moves(self) -> bool:
         """Check for possible moves in all tableau columns. Return True if any exist."""
         for column in self.tableau:
-            if column:
-                if self.can_move(column[-1]):
-                    return True
+            if column and self.can_move(column[-1]):
+                return True
         return False
 
     def print_game(self):
@@ -167,33 +167,30 @@ class Solitaire:
         Available commands are described in rules().
         """
         while True:
-            command_number_too_high = False
-            valid_input = True
+            # print(self.stock)
             self.print_game()
-            command = input("Next move:")
+            command = input("Next move:").lower()
             command, conversion_success = self.convert_str_of_int_to_int(command)
             if conversion_success and 0 <= command < self.columns and self.can_move(self.tableau[command][-1]):
                 self.move_card(command)
-            if conversion_success and 0 > command > self.columns:
-                command_number_too_high = True
-            if command == "d" and self.stock:
+            elif command == "d" and self.stock:
                 self.waste.append(self.stock.pop(-1))
             elif command == "r":
                 self.rules()
+                continue
             elif command == "q":
                 break
-            if not conversion_success or command_number_too_high or command == "d" and not self.stock:
+            else:
                 print("Invalid input")
-                valid_input = False
-            if self.has_won() and valid_input:
+                continue
+            if self.has_won():
                 print("You won!")
                 break
-            if self.has_lost() and valid_input:
+            if self.has_lost():
                 print("Game over, You lost!")
                 break
 
 
 if __name__ == '__main__':
-    print(4 > 3 > 5)
     s = Solitaire()
     s.play()
