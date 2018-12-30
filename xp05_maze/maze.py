@@ -378,4 +378,3 @@ if __name__ == '__main__':
     # multiple paths possible, let's just assert the cost
     assert solver.get_shortest_path((3, 0), (1, 4))[1] == 5
     assert solver.get_shortest_path((5, 0), (5, 4)) == (None, -1)
-
