@@ -335,9 +335,7 @@ class MazeSolver:
         self.reset_map(self.configuration, self.maze_str)
         self.make_map_list()
         self.tiles_to_objects()
-        ans = self.pathfinder("exit")
-        self.print_maze_tile_object_map()
-        return ans
+        return self.pathfinder("exit")
 
 
 if __name__ == '__main__':
