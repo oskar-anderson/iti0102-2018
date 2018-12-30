@@ -98,12 +98,9 @@ if __name__ == "__main__":
     hammond = Person("George", "Hammond", "george.hammond@usaf.gov", "Male", 65)  # 6 + 7 == 13
     ryac = Person("Ryac", "Tealcson", "ryac@chulak.sg", "Male", 12)  # 4 + 8 == 12
     cassie = Person("Cassandra", "Fraiser", "cassandra@gmail.sg", "Female", 16)  # 9 + 7 == 16
-
     person_list1 = [jack, sam, hammond, ryac, cassie]
-
     # siin näidetes on return-väärtustele viidatud kui objektidele, mitte sõnedele - tagastatav väärtus sõne kujul ei ole tähtis
     # (selguse mõttes võite endale kirjutada __repr__ funktsiooni, kui tahtate näha, mis objekti funktsioon tagastab)
-
     print(get_oldest_person(person_list1))  # hammond
     print(get_person_with_shortest_name(person_list1))  # jack
     print(get_all_underage_people(person_list1))  # [ryac, cassie]
