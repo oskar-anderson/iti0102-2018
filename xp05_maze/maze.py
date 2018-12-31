@@ -129,6 +129,53 @@ class MazeSolver:
         print(f"Starting position(s): {self.start_doors}")
         print()
 
+    def pathfinder(self, run_until_exit_or_hole_map):
+        """Main pathfinding function. Find shortest path from starting tile to end tile.
+
+        Take starting tile(s) as tile(s) to check and start checking tiles adjacent to them.
+        Check that adjacent tiles are not out of bounds.
+        If any adjacent tile is not out of bounds call tile_checker function.
+        If tile_checker finds a path call return_path.
+        If tiles_to_check is empty no path could be found. Return (None, -1)
+        """
+        while len(self.tiles_to_check) != 0:
+            # and self.maze_tile_object_map[self.tiles_to_check[0].row][self.tiles_to_check[0].column].is_end is False:
+            print(f"Tiles to check list: {self.tiles_to_check}")
+            print(f"Tiles to check next list: {self.tiles_to_check_next}")
+            self.tile_to_check = self.tiles_to_check.pop(0)
+            print(f"Tile being checked: {self.tile_to_check}")
+            if self.tile_to_check.row - 1 != -1 and len(
+                    self.maze_tile_object_map[self.tile_to_check.row - 1]) >= self.tile_to_check.column:  # N
+                row, column = self.tile_to_check.row - 1, self.tile_to_check.column
+                self.tile_checker(self.maze_tile_object_map[row][column], run_until_exit_or_hole_map)
+                if self.path_found:
+                    break
+            if self.tile_to_check.column + 1 < len(self.maze_tile_object_map[self.tile_to_check.row]):  # E
+                row, column = self.tile_to_check.row, self.tile_to_check.column + 1
+                self.tile_checker(self.maze_tile_object_map[row][column], run_until_exit_or_hole_map)
+                if self.path_found:
+                    break
+            if self.tile_to_check.row + 1 < len(self.maze_tile_object_map) and len(
+                    self.maze_tile_object_map[self.tile_to_check.row + 1]) >= self.tile_to_check.column:  # S
+                row, column = self.tile_to_check.row + 1, self.tile_to_check.column
+                self.tile_checker(self.maze_tile_object_map[row][column], run_until_exit_or_hole_map)
+                if self.path_found:
+                    break
+            if self.tile_to_check.column - 1 != -1:  # W
+                row, column = self.tile_to_check.row, self.tile_to_check.column - 1
+                self.tile_checker(self.maze_tile_object_map[row][column], run_until_exit_or_hole_map)
+                if self.path_found:
+                    break
+            if len(self.tiles_to_check) == 0:
+                self.tiles_to_check = deepcopy(self.tiles_to_check_next)
+                self.tiles_to_check_next_no_modification = deepcopy(self.tiles_to_check_next)
+                self.tiles_to_check_next = []
+        if len(self.tiles_to_check) == 0 and not self.path_found:
+            print("(None, -1)")
+            return None, -1
+        else:
+            return self.return_path()
+
     def return_path(self):
         """Return maze path from start to end."""
         row, column = self.end_tile.row, self.end_tile.column
