@@ -339,6 +339,7 @@ class MazeSolver:
 
 
 if __name__ == '__main__':
+    # tester was down
     maze = """
 ########
 #      #
