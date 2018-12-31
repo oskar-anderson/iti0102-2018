@@ -1,26 +1,3 @@
-from copy import deepcopy
-from math import inf
-
-
-class Tile:
-    def __init__(self, row, column, character, is_end=False, character_value=0, changing_character_value=0,
-                 cost_to_here=inf):
-        self.row = row
-        self.column = column
-        self.character = character
-        self.is_end = is_end
-        self.character_value = character_value
-        self.changing_character_value = changing_character_value
-        self.cost_to_here = cost_to_here
-        self.column_to_here = None
-        self.row_to_here = None
-
-    def __repr__(self):
-        return f"[Tile loc: ({self.row}:{self.column}), character value: {self.changing_character_value}/" \
-               f"{self.character_value}, path here: ({self.row_to_here}:{self.column_to_here}), " \
-               f"cost here: {self.cost_to_here}]"
-
-
 class MazeSolver:
     def __init__(self, maze_str: str, configuration: dict = None):
         """
@@ -73,25 +50,6 @@ class MazeSolver:
                 '-': 5,
                 'w': 10
             }
-        self.configuration = configuration
-        self.maze_str = maze_str
-        self.maze_map = []  # maze_str will be made into a list, which will in turn be used to make maze_tile_object_map
-        self.maze_tile_object_map = []
-        self.tiles_to_check_next_no_modification = []
-        # currently unused but could be great for mazes with high slowness tiles.
-        # could store all tiles_to_check's fitting adjacent tiles.
-        # useful for filtering out all tiles with changing_character_value 2 or higher,
-        self.min_changing_character_value_2_or_higher = None
-        # and then taking the minimum changing_character_value and saving it to min_changing_character_value_2_or_higher
-        self.tiles_to_check = []  # pops tiles out until empty then copies tiles from tiles_to_check_next
-        self.tile_to_check = None  # popped tile
-        self.tiles_to_check_next = []  # tiles to check next, each time this is copied path cost increases by 1
-        self.tiles_not_to_visit_again = []  # tiles with character_values 0, otherwise 2 adjacent such tiles will cause
-        # an infinite loop
-        self.end_doors = []
-        self.start_doors = []  # Stores maze starting door objects
-        self.path_found = False  # determines if path exists or not
-        self.end_tile = None    # stores first end tile object that is reached
 
     def get_shortest_path(self, start, goal):
         """
@@ -109,35 +67,7 @@ class MazeSolver:
         :param goal: Goal cell (y, x)
         :return: shortest_path, cost
         """
-        self.reset_map(self.configuration, self.maze_str)
-        self.make_map_list()
-        self.tiles_to_objects()
-        self.print_maze_tile_object_map()
-        self.pathfinder("hole_map")
-        row, column = goal[0], goal[1]
-        path_end_to_start = [(row, column)]
-        cost = self.maze_tile_object_map[row][column].character_value
-        while True:
-            row, column = self.maze_tile_object_map[row][column].row_to_here, self.maze_tile_object_map[row][column].column_to_here
-            if row is not None and (row != start[0]) + (column != start[1]) != 0:
-                cost += self.maze_tile_object_map[row][column].character_value
-                path_end_to_start.append((row, column))
-            elif row is not None:
-                cost += self.maze_tile_object_map[row][column].character_value
-                path_end_to_start.append((row, column))
-                break
-            else:
-                break
-        path_start_to_end = path_end_to_start[::-1]
-        if not (abs(start[0] - goal[0]) + abs(start[1] - goal[1])) + 1 == len(path_start_to_end):
-            return None, -1
-        if cost == -1:
-            path_start_to_end = (None, cost)
-        else:
-            path_start_to_end = (path_start_to_end, cost)
-        # print(f"Path start to end: {path_start_to_end}")
-        self.print_maze_tile_object_map()
-        return path_start_to_end
+        pass
 
     def solve(self):
         """
@@ -151,10 +81,7 @@ class MazeSolver:
 
         :return: shortest_path, cost
         """
-        self.reset_map(self.configuration, self.maze_str)
-        self.make_map_list()
-        self.tiles_to_objects()
-        return self.pathfinder("exit")
+        pass
 
 
 if __name__ == '__main__':
