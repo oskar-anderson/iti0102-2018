@@ -98,8 +98,8 @@ class MazeSolver:
         self.maze_map = self.maze_str.splitlines()
         self.maze_map.remove("")
         # print(self.maze_map)
-        print("List of maze map:" + "\n" + "\n".join(self.maze_map))
-        print()
+        # print("List of maze map:" + "\n" + "\n".join(self.maze_map))
+        # print()
 
     def tiles_to_objects(self):
         """Make all maze tiles to objects and add them to maze list.
@@ -125,9 +125,9 @@ class MazeSolver:
                     tile.changing_character_value = self.configuration[tile.character]
                 row_tiles.append(tile)
             self.maze_tile_object_map.append(row_tiles)
-        print(self.maze_tile_object_map)
-        print(f"Starting position(s): {self.start_doors}")
-        print()
+        # print(self.maze_tile_object_map)
+        # print(f"Starting position(s): {self.start_doors}")
+        # print()
 
     def pathfinder(self, run_until_exit_or_hole_map):
         """Main pathfinding function. Find shortest path from starting tile to end tile.
@@ -140,10 +140,10 @@ class MazeSolver:
         """
         while len(self.tiles_to_check) != 0:
             # and self.maze_tile_object_map[self.tiles_to_check[0].row][self.tiles_to_check[0].column].is_end is False:
-            print(f"Tiles to check list: {self.tiles_to_check}")
-            print(f"Tiles to check next list: {self.tiles_to_check_next}")
+            # print(f"Tiles to check list: {self.tiles_to_check}")
+            # print(f"Tiles to check next list: {self.tiles_to_check_next}")
             self.tile_to_check = self.tiles_to_check.pop(0)
-            print(f"Tile being checked: {self.tile_to_check}")
+            # print(f"Tile being checked: {self.tile_to_check}")
             if self.tile_to_check.row - 1 != -1 and len(
                     self.maze_tile_object_map[self.tile_to_check.row - 1]) >= self.tile_to_check.column:  # N
                 row, column = self.tile_to_check.row - 1, self.tile_to_check.column
@@ -171,7 +171,7 @@ class MazeSolver:
                 self.tiles_to_check_next_no_modification = deepcopy(self.tiles_to_check_next)
                 self.tiles_to_check_next = []
         if len(self.tiles_to_check) == 0 and not self.path_found:
-            print("(None, -1)")
+            # print("(None, -1)")
             return None, -1
         else:
             return self.return_path()
@@ -188,7 +188,7 @@ class MazeSolver:
                 break
         path_start_to_end = path_end_to_start[::-1]
         path_start_to_end = (path_start_to_end, self.end_tile.cost_to_here)
-        print(f"Final result: {path_start_to_end}")
+        # print(f"Final result: {path_start_to_end}")
         return path_start_to_end
 
     def tile_checker(self, target_tile, run_until_exit_or_hole_map):
@@ -210,13 +210,13 @@ class MazeSolver:
             if target_tile.is_end and run_until_exit_or_hole_map == "exit":  # Reached the end.
                 self.end_tile = target_tile
                 self.path_found = True
-                print(target_tile)
-                print("Path found!")
-                self.print_maze_tile_object_map()
+                # print(target_tile)
+                # print("Path found!")
+                # self.print_maze_tile_object_map()
             elif target_tile not in self.tiles_to_check and target_tile not in self.end_doors:
                 self.tiles_not_to_visit_again.append(target_tile)
                 self.tiles_to_check.insert(0, target_tile)
-            print(target_tile)
+            # print(target_tile)
         elif target_tile.changing_character_value == 1 and target_tile.cost_to_here >= self.tile_to_check.cost_to_here + 1:
             # Move to tile, add that tile to be checked next cycle.
             target_tile.cost_to_here = self.tile_to_check.cost_to_here + target_tile.character_value
@@ -224,22 +224,22 @@ class MazeSolver:
             target_tile.column_to_here = self.tile_to_check.column
             if target_tile not in self.tiles_to_check_next:
                 self.tiles_to_check_next.append(target_tile)
-            print(target_tile)
+            # print(target_tile)
         elif target_tile.changing_character_value > 1 and target_tile.cost_to_here >= self.tile_to_check.cost_to_here + target_tile.character_value:
             # Slow tile, first adjacent tile to this will be checked until a path to end is found or until slow tile can pass previous check.
-            if target_tile.row_to_here is not None and self.tile_to_check.row != target_tile.row_to_here and self.tile_to_check.column != target_tile.column_to_here:
-                print(f"Tile is being checked by inefficient route! Tile {target_tile}")
-            else:
-                target_tile.row_to_here = self.tile_to_check.row
-                target_tile.column_to_here = self.tile_to_check.column
-                target_tile.changing_character_value -= 1
-                if self.tile_to_check not in self.tiles_to_check_next:
-                    self.tiles_to_check_next.append(self.tile_to_check)
-                print(target_tile)
+            # if target_tile.row_to_here is not None and self.tile_to_check.row != target_tile.row_to_here and self.tile_to_check.column != target_tile.column_to_here:
+                # print(f"Tile is being checked by inefficient route! Tile {target_tile}")
+            # else:
+            target_tile.row_to_here = self.tile_to_check.row
+            target_tile.column_to_here = self.tile_to_check.column
+            target_tile.changing_character_value -= 1
+            if self.tile_to_check not in self.tiles_to_check_next:
+                self.tiles_to_check_next.append(self.tile_to_check)
+            # print(target_tile)
         # else a quicker path to target tile already exists or tile is a wall, tile will be ignored.
 
     def print_maze_tile_object_map(self):
-        """Print maze tile objects in a readable format."""
+        """# print maze tile objects in a readable format."""
         for row in range(len(self.maze_tile_object_map)):
             print()
             for column in range(len(self.maze_tile_object_map[row])):
