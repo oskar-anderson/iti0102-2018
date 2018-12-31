@@ -129,6 +129,16 @@ class MazeSolver:
         print(f"Starting position(s): {self.start_doors}")
         print()
 
+    def print_maze_tile_object_map(self):
+        """Print maze tile objects in a readable format."""
+        for row in range(len(self.maze_tile_object_map)):
+            print()
+            for column in range(len(self.maze_tile_object_map[row])):
+                print(self.maze_tile_object_map[row][column],
+                      end=" " * (abs(90 - len(str(self.maze_tile_object_map[row][column])))))
+        print()
+        print()
+
     def reset_map(self, configuration, maze_str):
         """Reset the maze"""
         if configuration is None:
