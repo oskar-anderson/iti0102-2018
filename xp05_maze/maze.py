@@ -236,7 +236,7 @@ class MazeSolver:
                 if self.tile_to_check not in self.tiles_to_check_next:
                     self.tiles_to_check_next.append(self.tile_to_check)
                 print(target_tile)
-        # quicker path to target tile already exists, tile will be ignored.
+        # else a quicker path to target tile already exists or tile is a wall, tile will be ignored.
 
     def print_maze_tile_object_map(self):
         """Print maze tile objects in a readable format."""
