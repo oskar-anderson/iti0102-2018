@@ -1,0 +1,37 @@
+
+						<li><a id="varaseimadEksamiajadForm:j_idt756:0:j_idt758" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.addSubmitParam('varaseimadEksamiajadForm',{'varaseimadEksamiajadForm:j_idt756:0:j_idt758':'varaseimadEksamiajadForm:j_idt756:0:j_idt758'}).submit('varaseimadEksamiajadForm');return false;PrimeFaces.onPost();">
+								<strong>08.08.2019</strong>
+								13:15
+								<strong>Jõhvi »</strong></a>
+						</li>
+						<li><a id="varaseimadEksamiajadForm:j_idt756:1:j_idt758" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.addSubmitParam('varaseimadEksamiajadForm',{'varaseimadEksamiajadForm:j_idt756:1:j_idt758':'varaseimadEksamiajadForm:j_idt756:1:j_idt758'}).submit('varaseimadEksamiajadForm');return false;PrimeFaces.onPost();">
+								<strong>06.09.2019</strong>
+								10:15
+								<strong>Võru »</strong></a>
+						</li>
+						<li><a id="varaseimadEksamiajadForm:j_idt756:2:j_idt758" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.addSubmitParam('varaseimadEksamiajadForm',{'varaseimadEksamiajadForm:j_idt756:2:j_idt758':'varaseimadEksamiajadForm:j_idt756:2:j_idt758'}).submit('varaseimadEksamiajadForm');return false;PrimeFaces.onPost();">
+								<strong>10.09.2019</strong>
+								10:15
+								<strong>Pärnu »</strong></a>
+						</li>
+						<li><a id="varaseimadEksamiajadForm:j_idt756:3:j_idt758" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.addSubmitParam('varaseimadEksamiajadForm',{'varaseimadEksamiajadForm:j_idt756:3:j_idt758':'varaseimadEksamiajadForm:j_idt756:3:j_idt758'}).submit('varaseimadEksamiajadForm');return false;PrimeFaces.onPost();">
+								<strong>10.09.2019</strong>
+								10:15
+								<strong>Kuressaare »</strong></a>
+						</li>
+						<li><a id="varaseimadEksamiajadForm:j_idt756:4:j_idt758" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.addSubmitParam('varaseimadEksamiajadForm',{'varaseimadEksamiajadForm:j_idt756:4:j_idt758':'varaseimadEksamiajadForm:j_idt756:4:j_idt758'}).submit('varaseimadEksamiajadForm');return false;PrimeFaces.onPost();">
+								<strong>11.09.2019</strong>
+								09:00
+								<strong>Rakvere »</strong></a>
+						</li>
+						<li><a id="varaseimadEksamiajadForm:j_idt756:5:j_idt758" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.addSubmitParam('varaseimadEksamiajadForm',{'varaseimadEksamiajadForm:j_idt756:5:j_idt758':'varaseimadEksamiajadForm:j_idt756:5:j_idt758'}).submit('varaseimadEksamiajadForm');return false;PrimeFaces.onPost();">
+								<strong>12.09.2019</strong>
+								11:30
+								<strong>Haapsalu »</strong></a>
+						</li>
+						<li><a id="varaseimadEksamiajadForm:j_idt756:6:j_idt758" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.addSubmitParam('varaseimadEksamiajadForm',{'varaseimadEksamiajadForm:j_idt756:6:j_idt758':'varaseimadEksamiajadForm:j_idt756:6:j_idt758'}).submit('varaseimadEksamiajadForm');return false;PrimeFaces.onPost();">
+								<strong>13.09.2019</strong>
+								09:00
+								<strong>Viljandi »</strong></a>
+						</li>
+				
